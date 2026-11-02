@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tampilan blok kode */
+pre[data-theme] {
+  overflow-x: auto;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* Tampilan teks kode */
+pre[data-theme] code {
+  font-family: "Fira Code", "Consolas", monospace;
+  font-weight: 400;
+}
+
+/* Tampilan baris kode */
+pre[data-theme] [data-line] {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* AREA KONTEN MATERI */
+.lesson-content {
+  color: #374151;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+/* HEADING */
+.lesson-content h1 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #111827;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.lesson-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.lesson-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #111827;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* PARAGRAF */
+.lesson-content p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* LINK */
+.lesson-content a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* LIST */
+.lesson-content ul,
+.lesson-content ol {
+  margin: 1rem 0;
+  padding-left: 1.75rem;
+}
+
+.lesson-content ul {
+  list-style-type: disc;
+}
+
+.lesson-content ol {
+  list-style-type: decimal;
+}
+
+.lesson-content li {
+  margin: 0.4rem 0;
+}
+
+/* KODE INLINE */
+.lesson-content :not(pre) > code {
+  border-radius: 0.3rem;
+  background: #f3f4f6;
+  padding: 0.2rem 0.4rem;
+  color: #db2777;
+  font-size: 0.9em;
+}
+
+/* BLOK KODE */
+.lesson-content pre {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* GAMBAR */
+.lesson-content img {
+  margin: 1.5rem auto;
+  max-width: 100%;
+  border-radius: 0.75rem;
+}
+
+/* TABEL */
+.lesson-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.lesson-content th,
+.lesson-content td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.lesson-content th {
+  background: #f9fafb;
+  font-weight: 600;
+}

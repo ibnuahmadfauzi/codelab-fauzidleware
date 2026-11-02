@@ -1,0 +1,9 @@
+{
+  "title": "Belajar JavaScript",
+  "slug": "javascript",
+  "description": "Pelajari dasar-dasar JavaScript mulai dari pengenalan, variabel, tipe data, hingga manipulasi DOM.",
+  "level": "Beginner",
+  "category": "Web Development",
+  "author": "Fauzidleware",
+  "published": true
+}
