@@ -1,0 +1,159 @@
+---
+title: "Tipe Data Dalam JavaScript"
+description: "Memahami jenis data yang digunakan dalam JavaScript."
+order: 3
+---
+
+Setelah belajar pada tahap ini kita bisa menjelaskan pengertian dari tipe data, mengenali tipe data dasar JavaScript, bisa menggunakan array dan object, serta bisa memeriksa tipe data menggunakan `typeof`.
+
+## Pengertian Tipe Data
+
+**Tipe data** adalah jenis nilai yang disimpan atau digunakan dalam sebuah program. Setiap data memiliki karakteristik dan fungsi masing-masing. Contohnya:
+
+- Nama orang merupakan data **teks**
+- Umur merupakan data **angka**
+- Status kelulusan dapat berupa nilai true atau false yang merupakan data **boolean**
+
+JavaScript memiliki beberapa tipe data yang umum digunakan.
+
+## Jenis-Jenis Tipe Data
+
+### String
+
+**String** merupakan tipe data yang digunakan untuk menyimpan data berupa teks. Contohnya:
+
+```javascript
+let nama = "Ibnu Ahmad Fauzi";
+let jurusan = "Teknik Informatika";
+let fakultas = "Teknologi Informasi";
+let nim = "19104410028";
+```
+
+String dapat ditulis menggunakan tanda kutip satu, kutip dua, ataupun backtick.
+
+### Number
+
+**Number** digunakan untuk menyimpan angka, baik bilangan bulat maupun desimal. Contohnya:
+
+```javascript
+let umur = 26;
+let tinggiBadan = 170.5;
+const tahunLahir = 1998;
+```
+
+### Boolean
+
+**Boolean** adalah tipe data yang hanya memiliki dua nilai, yaitu `true` dan `false`. Contohnya:
+
+```javascript
+let sudahLogin = true;
+let sudahLulus = false;
+```
+
+### Undefined
+
+**Undefined** menunjukkan variabel yang sudah dideklarasikan tetapi belum diberikan nilai. Contohnya:
+
+```javascript
+let alamat;
+console.log(alamat); // hasilnya undefined
+```
+
+### Null
+
+**Null** digunakan untuk menunjukkan bahwa suatu variabel sengaja tidak memiliki nilai objek. Contohnya:
+
+```javascript
+let dataSiswa = null;
+console.log(dataSiswa); // hasilnya null
+```
+
+### Array
+
+**Array** digunakan untuk menyimpan beberapa nilai dalam satu variabel. Contohnya:
+
+```javascript
+let buah = ["Apel", "Jeruk", "Mangga"];
+
+console.log(buah);
+console.log(buah[0]);
+console.log(buah[1]);
+```
+
+Index array dimulai dari angka 0. Yang artinya dari data array di atas:
+
+| Index ke- | Nilai  |
+| --------- | ------ |
+| 0         | Apel   |
+| 1         | Jeruk  |
+| 2         | Mangga |
+
+### Object
+
+**Object** digunakan untuk menyimpan data dalam bentuk pasangan properti dan nilai. Dengan penulisan `<properi>:<nilai>`, seperti berikut ini:
+
+```javascript
+let siswa = {
+  nama: "Andi",
+  kelas: "XI RPL",
+  umur: 17,
+};
+
+console.log(siswa.nama);
+console.log(siswa.kelas);
+```
+
+## Memeriksa Tipe Data dengan `typeof`
+
+JavaScript menyediakan operator `typeof` untuk mngetahui tipe data suatu nilai.
+
+```javascript
+let nama = "Andi";
+let umur = 17;
+let aktif = true;
+
+console.log(typeof nama); // string
+console.log(typeof umur); // number
+console.log(typeof aktif); // boolean
+```
+
+Perlu diperhatikan bahwa `typeof null` menghasilkan `"object"` karena perilaku bawaan dari JavaScript.
+
+## Latihan
+
+Masih melanjutkan dengan projek aplikasi data mahasiswa sebelumnya.
+
+![Ilustrasi JavaScript](/images/javascript/pengenalan-javascript-6.png)
+
+Seperti penerapan secara umum, bahwa yang pasti dalam satu kampus ada lebih dari satu mahasiswa. Namun dengan menggunakan variabel biasa kita hanya bisa memasukkan satu nama mahasiswa ke satu variabel.
+
+Sekarang tugasnya adalah bungkus data mahasiswa dalam bentuk **Object** dan setiap data object berada di dalam data **Array**, gimana bingung ?. wkwk
+
+Silahkan dicoba dulu lalu jika sudah coba cocokkan hasilnya dengan penyelesaian dibawah ini. Selamat mencoba 😉
+
+## Hasil Latihan
+
+Silahkan dicocokkan hasilnya dengan kode di bawah ini:
+
+```javascript
+// Membuat data array
+let dataMahasiswa = [
+  // data object pertama
+  {
+    nama: "Ibnu Ahmad Fauzi",
+    jurusan: "Teknik Informatika",
+    fakultas: "Teknologi Informasi",
+    nim: "19104410028",
+  },
+];
+
+// menampilkan hasilnya
+console.log("=================================");
+console.log("DATA MAHASISWA");
+console.log("=================================");
+console.log("Nama     : " + dataMahasiswa[0].nama);
+console.log("Jurusan  : " + dataMahasiswa[0].jurusan);
+console.log("Fakultas : " + dataMahasiswa[0].fakultas);
+console.log("NIM      : " + dataMahasiswa[0].nim);
+console.log("=================================");
+```

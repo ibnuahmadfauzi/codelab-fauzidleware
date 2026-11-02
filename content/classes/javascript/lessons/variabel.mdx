@@ -1,47 +1,119 @@
 ---
-title: "Variabel JavaScript"
+title: "Variabel Dalam JavaScript"
 description: "Memahami cara menyimpan data menggunakan variabel."
 order: 2
 ---
 
-# Variabel JavaScript
+Setelah mempelajari materi **Variabel Dalam JavaScript** kita bisa menjelaskan pengertian variabel, memahami fungsi variabel dalam program, menggunakan berbagai jenis variabel, membuat dan mengubah nilai variabel, serta menerapkan variabel dalam program sederhana.
 
-Variabel adalah tempat untuk menyimpan data dalam program.
+## Pengertian Variabel
 
-JavaScript memiliki tiga cara utama untuk mendeklarasikan variabel:
+**Variabel** adalah tempat untuk menyimpan data sementara yang dapat digunakan kembali selama program berjalan. Semisal dalam sebuah aplikasi kampus kita membutuhkan tempat untuk menyimpan data:
 
-## 1. Menggunakan let
+- Nama mahasiswa
+- Fakultas mahasiswa
+- Jurusan mahasiswa
+- NIM mahasiswa
 
-Digunakan ketika nilai variabel dapat berubah.
+Data-data tersebut dapat disimpan menggunakan variabel.
+
+## Cara Membuat Variabel
+
+JavaScript memiliki tiga kata kunci untuk mendeklarasikan variabel, yaitu `var`, `let`, dan `const`.
+
+### Menggunakan `var`
+
+`var` merupakan cara lama untuk pembuatan variabel. Berikut contoh penggunaannya:
 
 ```javascript
-let nama = "Ibnu";
-
-nama = "Fauzi";
-
+var nama = "Ibnu";
 console.log(nama);
 ```
 
-## 2. Menggunakan const
+### Menggunakan `let`
 
-Digunakan ketika variabel tidak akan diberi nilai ulang.
-
-```javascript
-const umur = 26;
-
-console.log(umur);
-```
-
-## 3. Menggunakan var
-
-Merupakan cara deklarasi variabel pada JavaScript lama.
+`let` digunakan untuk membuat variabel yang nilainya dapat diubah ketika program berjalan. Contohnya:
 
 ```javascript
-var kota = "Blitar";
+let nama = "Ibnu";
+console.log("Nama :" + nama);
 
-console.log(kota);
+nama = "Ibnu Fauzi";
+console.log("Nilai Nama Baru : " + nama);
 ```
 
-## Kesimpulan
+Hasilnya:
 
-Gunakan `const` sebagai pilihan awal jika nilai tidak perlu diubah, dan `let` jika nilainya perlu berubah.
+![Ilustrasi JavaScript](/images/javascript/variabel-1.png)
+
+### Menggunakan `const`
+
+`const` digunakan untuk membuat variabel yang tidak dapat diberi nilai ulang. Contohnya:
+
+```javascript
+const nama = "Ibnu";
+console.log("Nama :" + nama);
+
+nama = "Ibnu Fauzi";
+console.log("Nilai Nama Baru : " + nama);
+```
+
+Dari kode di atas hasilnya jadi seperti ini:
+
+![Ilustrasi JavaScript](/images/javascript/variabel-2.png)
+
+Output yang pertama bisa keluar, tapi saat membaca output yang kedua terjadi error karena memang kata kunci `const` tidak bisa diatur ulang nilainya.
+
+### Perbedaan `var`, `let`, dan `const`
+
+| Kata Kunci | Nilai dapat diubah?      | Cakupan  |
+| ---------- | ------------------------ | -------- |
+| `var`      | Ya                       | Function |
+| `let`      | Ya                       | Block    |
+| `const`    | Tidak dapat diatur ulang | Block    |
+
+Dalam penulisan JavaScript modern, sebaiknya menggunakan `let` ketika nilai bisa diubah-ubah dan `const` ketika nilai variabel tidak perlu diatur ulang atau diubah, hindari penggunaan `var`.
+
+### Aturan Penamaan Variabel
+
+Beberapa aturan penamaan variabel:
+
+- Nama variabel tidak boleh diawali angka
+- Tidak boleh menggunakan spasi
+- Tidak boleh menggunakan kata kunci JavaScript
+- Nama variabel membedakan huruf besar dan kecil
+- Gunakan nama yang mudah dipahami
+
+Contoh:
+
+```javascript
+let nama = "Ibnu";
+let nilai = 80;
+let status = "Lulus";
+```
+
+## Latihan
+
+Masih ingat dengan latihan program menampilkan data mahasiswa pada materi sebelumnya.
+
+![Ilustrasi JavaScript](/images/javascript/pengenalan-javascript-6.png)
+
+Sekarang tugasnya silahkan gunakan variabel untuk menyimpan masing-masing data mahasiswa lalu tampilkan dengan hasil yang sama.
+
+## Hasil Latihan
+
+```javascript
+let nama = "Ibnu Ahmad Fauzi";
+let jurusan = "Teknik Informatika";
+let fakultas = "Teknologi Informasi";
+let nim = "19104410028";
+
+console.log("=================================");
+console.log("DATA MAHASISWA");
+console.log("=================================");
+console.log("Nama     : " + nama);
+console.log("Jurusan  : " + jurusan);
+console.log("Fakultas : " + fakultas);
+console.log("NIM      : " + nim);
+console.log("=================================");
+```

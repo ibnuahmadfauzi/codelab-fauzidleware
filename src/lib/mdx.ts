@@ -5,6 +5,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import GithubSlugger from "github-slugger";
+import remarkGfm from "remark-gfm";
 
 interface LessonFrontmatter {
   title: string;
@@ -124,10 +125,13 @@ export async function getLesson(classSlug: string, lessonSlug: string) {
   );
 
   try {
+    // Membaca file MDX
     const source = await fs.readFile(filePath, "utf8");
 
+    // Mengambil isi Markdown tanpa frontmatter
     const { content: markdownContent } = matter(source);
 
+    // Membuat daftar isi (TOC)
     const slugger = new GithubSlugger();
 
     const headings = markdownContent
@@ -152,11 +156,13 @@ export async function getLesson(classSlug: string, lessonSlug: string) {
       })
       .filter((heading) => heading !== null);
 
+    // Mengompilasi MDX menjadi komponen React
     const { content, frontmatter } = await compileMDX<LessonFrontmatter>({
-      source,
+      source: source,
       options: {
         parseFrontmatter: true,
         mdxOptions: {
+          remarkPlugins: [remarkGfm],
           rehypePlugins: [
             rehypeSlug,
             [
