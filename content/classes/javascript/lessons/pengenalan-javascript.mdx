@@ -4,13 +4,28 @@ description: "Mengenal bahasa pemrograman JavaScript."
 order: 1
 ---
 
-# Pengenalan JavaScript
+Setelah mempelajari materi **Pengenalan JavaScript** paling tidak nanti bisa menjelaskan pengertian JavaScript, paham fungsi JavaScript dalam pengembangan website, bisa menjelaskan hubungan antara JavaScript dengan HTML dan CSS, mengetahui cara menjalankan kode JavaScript, serta bisa membuat program sederhana dengan JavaScript.
 
-Selamat datang di kelas **Belajar JavaScript**!
+## Pengertian JavaScript
 
-JavaScript adalah bahasa pemrograman yang digunakan untuk membuat halaman web menjadi interaktif.
+Jika HTML digunakan untuk membangun struktur dasar halaman web dan CSS digunakan untuk mempercantik tampilan halaman web, **JavaScript** merupakan bahasa pemrograman yang digunakan untuk membuat halaman website menjadi lebih interaktif dan dinamis. Contohnya:
 
-## Apa yang Bisa Dilakukan JavaScript?
+- Menampilkan pesan ketika tombol diklik
+- Mengubah teks pada halaman website
+- Melakukan perhitungan secara otomatis
+- Memvalidasi formulir
+- Membuat menu interaktif
+- Mengambil dan menampilkan data dari server
+
+## Hubungan HTML, CSS, dan JavaScript
+
+Ketiga teknologi ini memiliki fungsi yang berbeda, namun saling melengkapi satu sama lain.
+
+Seperti yang sudah saya jelaskan sedikit di atas:
+
+- **HTML** atau _HyperText Markup Language_ digunakan untuk membuat struktur halaman web dan bagaimana elemen ditampilkan. Contohnya HTML digunakan untuk membuat sebuah elemen tombol.
+- **CSS** atau **Cascading Style Sheets** digunakan untuk mempercantik tampilan web atau memberi style tambahan pada elemen. Contohnya sebelum ini kita sudah membuat tombol polos dengan HTML, dengan bantuan CSS kita bisa membuat tampilan tombol lebih menarik seperti mengubah warna, background, efek bayangan, efek ketika kursor masuk ke dalam tombol, dsb.
+- **JavaScript** digunakan untuk menambah interaksi dari elemen-elemen web nya. Contohnya ketika sebuah tombol diklik akan menampilkan aksi seperti muncul pesan popup di halaman web atau memberi aksi seperti mengubah teks yang ada di halaman web.
 
 Dengan JavaScript, kita dapat:
 
@@ -19,18 +34,115 @@ Dengan JavaScript, kita dapat:
 - Memanipulasi elemen HTML.
 - Membuat aplikasi web.
 
-## Contoh Kode JavaScript
+## Cara Menjalankan JavaScript
+
+Ada beberapa cara untuk menjalankan JavaScript. Yaitu:
+
+- Langsung menggunakan di **Console** browser yang ada di **Developer Tools**
+- Menggunakan skema embed di internal file HTML
+- Menggunakan skema eksteral dengan file sendiri yang memiliki ekstensi **.js** lalu memanggil file tersebut ke dalam HTML
+
+### Melalui browser
+
+Browser seperti **Google Chrome** menyediakan **Developer Tools** yang dapat digunakan untuk menjalankan kode JavaScript.
+
+Langkah-langkah:
+
+- Buka Google Chrome
+- Tekan tombol `F12`
+- Pilih tab Console
+- Ketik kode JavaScript
+- Tekan Enter
+
+![Ilustrasi JavaScript](/images/javascript/pengenalan-javascript-1.png)
+
+Perhatikan pada gambar di atas:
+
+1. Tab **Console**
+2. Tempat kita menulis kode-kode JavaScript
+
+Coba ketik masing-masing baris berikut ini ke dalam **Console**:
+
+```bash
+> let nilaiKe1 = 50;
+> let nilaiKe2 = 88;
+> nilaiKe1 * nilaiKe2;
+```
+
+Hasilnya terlihat seperti berikut ini:
+
+![Ilustrasi JavaScript](/images/javascript/pengenalan-javascript-2.png)
+
+Penggunaan JavaScript di Console Browser seperti contoh di atas hanya dilakukan untuk mengujian saja atau melakukan debugging.
+
+### Menggunakan Cara Internal
+
+Cara internal ini digunakan ketika menyisipkan langsung kode-kode JavaScript ke dalam dokumen HTML. Kode-kode JavaScript dituliskan di dalam elemen `<script> . . . </script>`, seperti contoh berikut ini:
 
 ```javascript
-const nama = "Codelab";
-
-console.log("Selamat belajar di " + nama);
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log("Ini adalah output dari JavaScript");
+      console.log("Output ini ditampilkan menggunakan cara Internal");
+    </script>
+  </body>
+</html>
 ```
 
 Hasil kode tersebut:
 
-```text
-Selamat belajar di Codelab
+![Ilustrasi JavaScript](/images/javascript/pengenalan-javascript-3.png)
+
+### Menggunakan Cara Eksternal
+
+Cara eksternal adalah membuat file mandiri dengan ekstensi **.js** dan memanggil file tersebut sebagai nilai dari atribu `src=" "` dalam elemen `<script>`.
+
+Contohnya saya membuat file baru dengan nama **script.js** yang saya taruh satu lokasi dengan file HTML nya.
+
+![Ilustrasi JavaScript](/images/javascript/pengenalan-javascript-4.png)
+
+Lalu saya isi file **script.js** dengan kode JavaScript seperti berikut ini:
+
+```javascript
+console.log("Ini adalah output dari JavaScript");
+console.log("Output ini ditampilkan menggunakan cara Eksternal");
 ```
 
-Selamat belajar dan jangan takut mencoba!
+Lalu file HTML saya ubah bagian elemen `<script>` nya dengan menghapus isinya dan menambahkan atribut `src="script.js"`
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+Dengan begitu kode JavaScript bisa digunakan untuk lebih dari satu file HTML. Coba lihat hasilnya di Console Browser
+
+![Ilustrasi JavaScript](/images/javascript/pengenalan-javascript-5.png)
+
+Pada praktik-praktik di atas kita sudah berhasil membuat program JavaScript pertama yaitu menampilkan output di Console Browser.
+
+- `console.log( )` digunakan untuk menampilkan informasi ke Console
+- Teks yang ditampilkan harus diapit tanda kutip
+- Setiap perintah dapat diakiri dengan titik koma (`;`)
+
+## Latihan
+
+1. Buat program yang menampilkan data mahasiswa melalui console browser
+2. Buat data diapit menggunakan tanda petik single dan petik double, lalu perhatikan perbedaannya
+3. Buat baris kode diakhiri titik koma dan tanpa diakhiri titik koma, lalu perhatikan hasilnya
