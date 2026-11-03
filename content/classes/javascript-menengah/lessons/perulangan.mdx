@@ -1,0 +1,372 @@
+---
+title: "Perulangan dalam JavaScript (Looping)"
+description: "Memahami perulangan dan penggunaannya dalam JavaScript."
+order: 2
+---
+
+Dengan mempelajari materi ini, paling tidak kita tau apa itu perulangan, bisa menggunakan berbagai macam jenis perulangan, dan menerapkan perulangan untuk menyelesaikan berbagai permasalahan sederhana dalam pemrograman.
+
+## Pengertian Perulangan (Looping)
+
+**Perulangan (Looping)** adalah salah satu konsep dalam pemrograman yang digunakan untuk menjalankan sekumpulan perintah secara berulang selama kondisi tertentu terpenuhi.
+
+Dalam pemrograman, terkadang kita perlu menjalankan perintah yang sama berkali-kali. Daripada menuliskan kode secara berulang, kita dapat menggunakan perulangan agar program menjadi lebih efisien.
+
+Contohnya secara manual kita mau menampilkan teks "Saya sedang belajar JavaScript" sebanyak 10 kali, kita bisa melakukannya seperti ini:
+
+```javascript
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+console.log("Saya sedang belajar JavaScript");
+```
+
+Dengan perulangan kita cukup menuliskan seperti ini:
+
+```javascript
+for (let i = 1; i <= 10; i++) {
+  console.log("Saya sedang belajar JavaScript");
+}
+```
+
+Kedua kode di atas menghasilkan output yang sama. Serta penggunaan perulangan membuat kode lebih ringkas dan mudah dikembangkan.
+
+## Mengenal Perulangan For
+
+`for` merupakan jenis perulangan yang biasanya digunakan ketika jumlah pengulangan sudah diketahui atau dapat ditentukan sejak awal.
+
+### Struktur Dasar For
+
+```javascript
+for (inisialisasi; kondisi; perubahan) {
+  // Kode yang akan diulang
+}
+```
+
+Terdapat tiga bagian penting dalam struktur `for`:
+
+- **Inisialisasi**: menentukan nilai awal variabel perulangan
+- **Kondisi**: menentukan apakah perulangan masih boleh dijalankan
+- **Perubahan**: mengubah nilai variabel pada setiap putaran
+
+### Contoh Perulangan For
+
+```javascript
+for (let i = 1; i <= 5; i++) {
+  console.log("Perulangan ke-" + i);
+}
+```
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-1.png)
+
+Penjelasan:
+
+- `let i = 1` berarti perulangan dimulai dari angka 1
+- `i <= 5` berarti perulangan berlangsung selama nilai `i` kurang dari atau sama dengan 5
+- `i++` berarti nilai `i` bertambah satu setiap kali perulangan selesai
+- ketika nilai `i` menjadi 6, kondisi tidak terpenuhi sehingga perulangan berhenti
+
+### Contoh Penerapan Menampilkan Daftar Siswa
+
+```javascript
+const siswa = ["Andi", "Budi", "Citra", "Dina", "Eko"];
+
+for (let i = 0; i < siswa.length; i++) {
+  console.log(i + 1 + ". " + siswa[i]);
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-2.png)
+
+Penjelasan:
+
+- `siswa` merupakan array yang menyimpan lima nama
+- `siswa.length` digunakan untuk mengetahui jumlah elemen array
+- `i < siswa.length` memastikan perulangan berlangsung sesuai jumlah data
+- `siswa[i]` digunakan untuk mengambil data berdasarkan indeks
+
+## Mengenal Perulangan While
+
+`while` merupakan perulangan yang digunakan untuk menjalankan kode selama kondisi tertentu bernilai `true`. Berbeda dengan `for`, perulangan `while` tidak memiliki bagian inisialisasi dan perubahan dalam satu baris struktur. Oleh karena itu, keduanya biasanya ditulis secara terpisah.
+
+### Struktur Dasar While
+
+```javascript
+while (kondisi) {
+  // Kode yang akan diulang
+}
+```
+
+### Contoh Perulangan While
+
+```javascript
+let angka = 1;
+
+while (angka <= 5) {
+  console.log("Angka: " + angka);
+
+  angka++;
+}
+```
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-3.png)
+
+Penjelasan:
+
+1. Variabel `angka` dimulai dari 1
+2. Program memeriksa apakah `angka` kurang dari atau sama dengan 5
+3. Jika kondisi benar, program menampilkan nilai angka
+4. Nilai angka bertambah satu melalui `angka++`
+5. Proses berulang sampai kondisi bernilai `false`
+
+Pastikan nilai variabel yang digunakan dalam kondisi mengalami perubahan. Jika tidak, perulangan dapat berjalan terus menerus (infinite loop)
+
+### Contoh Penerapan Menghitung Total Tabungan
+
+Misalnya, seseorang menabung Rp. 10.000,- setiap hari selama tujuh hari.
+
+```javascript
+let hari = 1;
+let tabungan = 0;
+
+while (hari <= 7) {
+  tabungan += 10000;
+
+  console.log("Hari ke-" + hari + ": Rp" + tabungan);
+
+  hari++;
+}
+```
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-4.png)
+
+Melalui contoh tersebut, kita dapat melihat bagaimana perulangan digunakan untuk melakukan perhitungan secara berulang.
+
+## Mengenal Perulangan Do While
+
+`do while` merupakan perulangan yang menjalankan kode terlebih dahulu, kemudian memeriksa kondisi. Hal ini membuat `do while` sedikit berbeda dengan `for` dan `while`. Pada `for` dan `while`, kondisi diperiksa sebelum kode dijalankan. Sedangkan pada `do while`, kode dijalakan minimal satu kali sebelum kondisi diperiksa.
+
+### Struktur Dasar Do While
+
+```javascript
+do {
+  // Kode yang akan dijalankan
+} while (kondisi);
+```
+
+Perhatikan bahwa setelah `while (kondisi)` terdapat tanda titik koma (`;`).
+
+### Contoh Perulangan Do While
+
+```javascipt
+let angka = 10;
+
+do {
+    console.log("Perulangan dijalankan");
+} while (angka <= 5);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-5.png)
+
+Perhatikan walaupun dari awal kondisi nilai variabel angka sudah berkondisi `false` paling tidak perulangan tetap dijalankan satu kali.
+
+## Mengenal Break dan Continue
+
+Dalam perulangan, JavaScript menyediakan dua perintah yang dapat digunakan untuk mengatur jalannya proses perulangan, yaitu `break` dan `continue`.
+
+### Break
+
+`break` digunakan untuk menghentikan perulangan secara langsung meskipun kondisi perulangan masih bernilai `true`.
+
+Contohnya:
+
+```javascript
+for (let i = 1; i <= 10; i++) {
+  console.log(i);
+
+  if (i === 5) {
+    break;
+  }
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-6.png)
+
+- Perulangan dimulai dari angka 1
+- Program menampilkan angka secara berurutan
+- Ketika nilai `i` mencapai 5, kondisi `i === 5` terpenuhi
+- Perintah `break` menghentikan perulangan
+
+### Continue
+
+`continue` digunakan untuk melewati satu putaran perulangan dan melanjutkan ke putaran berikutnya. Contohnya:
+
+```javascript
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) {
+    continue;
+  }
+
+  console.log(i);
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-7.png)
+
+Penjelasan:
+
+- Perulangan berjalan dari angka 1 sampai 5.
+- Ketika nilai `i` adalah 3, program menjalankan `continue`.
+- Perintah `console.log()` dilewati pada putaran tersebut.
+- Perulangan tetap dilanjutkan sampai selesai.
+
+## Mengenal Nested Loop
+
+**Nested loop** adalah perulangan yang ditempatkan di dalam perulangan lainnya. Nested loop biasanya digunakan ketika kita perlu melakukan pengulangan dengan lebih dari satu tingkat, misalnya membuat pola angka, tabel, atau mengolah data berbentuk baris dan kolom.
+
+### Struktur Dasar Nested Loop
+
+```javascript
+for (inisialisasi1; kondisi1; perubahan1) {
+  for (inisialisasi2; kondisi2; perubahan2) {
+    // Kode perulangan bagian dalam
+  }
+}
+```
+
+Perulangan bagian luar akan menjalankan perulangan bagian dalam sampai selesai pada setiap putarannya.
+
+### Contoh Nested Loop Sederhana
+
+```javascript
+for (let i = 1; i <= 3; i++) {
+  console.log("Perulangan luar: " + i);
+
+  for (let j = 1; j <= 2; j++) {
+    console.log("Perulangan dalam: " + j);
+  }
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-8.png)
+
+Penjelasan:
+
+- Perulangan luar dimulai dari angka 1.
+- Setiap kali perulangan luar berjalan, perulangan dalam dijalankan sebanyak dua kali.
+- Setelah perulangan dalam selesai, perulangan luar melanjutkan ke angka berikutnya.
+- Proses berlangsung sampai perulangan luar selesai.
+
+### Contoh Membuat Pola Bintang
+
+Praktik nested loop untuk membuat pola bintang merupakan praktik jadul yang dulu sering saya lakukan dikampus, tapi menarik untuk kita coba lagi. Berikut contohnya:
+
+```javascript
+for (let i = 1; i <= 5; i++) {
+  let pola = "";
+
+  for (let j = 1; j <= i; j++) {
+    pola += "* ";
+  }
+
+  console.log(pola);
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/perulangan-9.png)
+
+Penjelasan:
+
+- Perulangan luar menentukan jumlah baris.
+- Perulangan dalam menentukan jumlah bintang pada setiap baris.
+- Variabel pola digunakan untuk menggabungkan karakter bintang.
+- Setiap baris ditampilkan menggunakan `console.log()`.
+
+## Latihan
+
+Latihan kali ini masih berhubungan dengan latihan pada materi percabangan yaitu game tebak angka. Berikut kode lengkapnya:
+
+```javascript
+let angkaCom = Math.floor(Math.random() * 10) + 1;
+let angkaPengguna = prompt("Masukkan Angka Anda");
+console.log("================================");
+console.log("HASIL PERMAINAN");
+console.log("================================");
+if (angkaPengguna >= 1 && angkaPengguna <= 10) {
+  if (angkaCom == angkaPengguna) {
+    console.log("Hebat, tebakanmu tepat!!");
+  } else if (angkaPengguna > angkaCom) {
+    console.log("Sayang sekali, terlalu banyak");
+  } else if (angkaPengguna < angkaCom) {
+    console.log("Sayang sekali, masih kurang banyak");
+  } else {
+    console.log("Kondisi tidak terdaftar");
+  }
+} else {
+  console.log("Input tidak valid");
+}
+console.log("================================");
+```
+
+Nah, tugasnya adalah membuat pemain memilik tiga nyawa. Artinya ketika tebakan salah, maka pemain ada kesempatan maksimal tiga kali menebak.
+
+Silahkan dicoba 😉
+
+## Hasil Latihan
+
+```javascript
+let angkaCom = Math.floor(Math.random() * 10) + 1;
+let menang = false;
+
+console.log("================================");
+console.log("HASIL PERMAINAN");
+console.log("================================");
+
+for (let i = 3; i >= 1; i--) {
+  let angkaPengguna = prompt("Masukkan Angka Anda");
+
+  if (angkaPengguna >= 1 && angkaPengguna <= 10) {
+    if (angkaCom == angkaPengguna) {
+      console.log("Komputer memilih angka " + angkaCom);
+      console.log("Hebat, tebakanmu tepat!!");
+
+      menang = true;
+      break;
+    } else if (angkaPengguna > angkaCom) {
+      alert("Sayang sekali, terlalu besar");
+    } else if (angkaPengguna < angkaCom) {
+      alert("Sayang sekali, masih kurang besar");
+    }
+  } else {
+    console.log("Input tidak valid");
+    break;
+  }
+}
+
+// Mengecek apakah pemain berhasil menang
+if (menang == false) {
+  console.log("Maaf nyawa sudah habis, kamu kalah");
+}
+
+console.log("================================");
+```
+
+Silahkan dicoba sendiri untuk hasil perulangannya.
