@@ -1,0 +1,556 @@
+---
+title: "Array dalam JavaScript"
+description: "Memahami array dan penggunaannya dalam JavaScript."
+order: 3
+---
+
+Masih ingat di materi JavaScript Dasar kita sudah belajar berbagai macam tipe data, dan salah satunya adalah **Array**. Pada materi ini kita akan bahas lebih dalam tentang tipe data ini serta metode yang bisa digunakan dan penerapannya dalam pemrograman.
+
+## Pengertian Array
+
+**Array** adalah tipe data yang digunakan untuk menyimpan beberapa nilai dalam satu variabel. Dengan array, kita tidak perlu membuat banyak varabel terpisah untuk menyimpan data yang masih berhubungan.
+
+Misalnya kita ingin menyimpan lima nama siswa. Tanpa array caranya adalah seperti berikut:
+
+```javascript
+let siswa1 = "Andi";
+let siswa2 = "Budi";
+let siswa3 = "Citra";
+let siswa4 = "Dinda";
+let siswa5 = "Eko";
+```
+
+Menggunakan array, caranya seperti berikutL
+
+```javascript
+let siswa = ["Andi", "Budi", "Citra", "Dinda", "Eko"];
+```
+
+### Membuat Array
+
+Array dibuat menggunakan tanda kurung siku `[]`. Setiap nilai di dalam array disebut elemen dan dipisahkan menggunakan tanda koma.
+
+```javascript
+let buah = ["Apel", "Mangga", "Jeruk"];
+
+let angka = [10, 20, 30, 40, 50];
+
+let campuran = ["Ibnu", 26, true, 3.14];
+
+console.log(buah);
+console.log(angka);
+console.log(campuran);
+```
+
+Output atau hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-1.png)
+
+Array dapat menyimpan berbagai jenis data, seperti string, number, boolean, bahkan object dan array lain.
+
+### Mengakses Elemen Array
+
+Setiap elemen array memiliki nomor indeks (index) yang dimulai dari angka `0`. Perhatikan contoh berikut:
+
+```javascript
+let buah = ["Apel", "Mangga", "Jeruk", "Pisang"];
+
+console.log(buah[0]);
+console.log(buah[1]);
+console.log(buah[2]);
+console.log(buah[3]);
+```
+
+Dari contoh data array di atas, visualisasi indeks array:
+
+| Apel     | Mangga   | Jeruk    | Pisang   |
+| -------- | -------- | -------- | -------- |
+| index[0] | index[1] | index[2] | index[3] |
+
+Jika kita mencoba mengakses indeks yang tidak tersedia, JavaScript akan menghasilkan `undefined`.
+
+### Mengubah Elemen Array
+
+Elemen array dapat diubah dengan menentukan indeks yang ingin diperbarui.
+
+```javascript
+let buah = ["Apel", "Mangga", "Jeruk"];
+console.log(buah);
+buah[1] = "Anggur";
+console.log(buah);
+```
+
+Pada contoh di atas, saya melakukan output dua kali, sebelum data indeks ke-1 diubah dan setelah data indeks ke-1 diubah, dan berikut hasil outputnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-2.png)
+
+Pada contoh tersebut, elemen dengan indeks `1`, yaitu `"Mangga"`, diubah menjadi `"Anggur"`.
+
+### Mengetahui Jumlah Elemen Array
+
+Gunakan properti `length` untuk mengetahui jumlah elemen di dalam array.
+
+```javascript
+let siswa = ["Andi", "Budi", "Citra", "Dinda"];
+
+console.log(siswa.length);
+```
+
+Output : 4
+
+Dan properti `length` juga bisa digunakan untuk mengakses elemen terakhir.
+
+```javascript
+let siswa = ["Andi", "Budi", "Citra", "Dinda"];
+
+console.log(siswa[siswa.length - 1]);
+```
+
+![Ilustrasi JavaScript](/images/javascript/array-3.png)
+
+Mengapa menggunakan `length - 1`? Karena jumlah elemen dimulai dari 1, sedangkan indeks array dimulai dari 0.
+
+## Menambahkan dan Menghapus Elemen Array
+
+JavaScript menyediakan beberapa metode untuk menambahkan dan menghapus elemen array.
+
+### push()
+
+Methode `push()` digunakan untuk menambahkan elemen baru pada bagian akhir array.
+
+```javascript
+let buah = ["Apel", "Mangga"];
+
+buah.push("Jeruk");
+
+console.log(buah);
+```
+
+Cek hasilnya harusnya ada tambahan data `"Jeruk"` di akhir array. Dan kita juga bisa menambahkan lebih dari satu elemen sekaligus:
+
+```javascript
+let buah = ["Apel", "Mangga"];
+
+buah.push("Jeruk", "Pisang", "Anggur");
+
+console.log(buah);
+```
+
+### pop()
+
+Metode `pop()` digunakan untuk menghapus elemen terakhir dari array.
+
+```javascript
+let buah = ["Apel", "Mangga", "Jeruk"];
+
+buah.pop();
+
+console.log(buah);
+```
+
+### unshift()
+
+Metode `unshift()` digunakan untuk menambahkan elemen baru pada bagian awal array.
+
+```javascript
+let buah = ["Mangga", "Jeruk"];
+
+buah.unshift("Apel");
+
+console.log(buah);
+```
+
+### shift()
+
+Metode `shift()` digunakan untuk menghapus elemen pertama dari array.
+
+```javascript
+let buah = ["Apel", "Mangga", "Jeruk"];
+
+buah.shift();
+
+console.log(buah);
+```
+
+## Metode Array untuk Mengolah Data
+
+Selain menambahkan dan menghapus elemen, JavaScript memiliki metode array uang membantu kita mengolah data secara lebih efisien. Metode yang sering digunaka antara lain `forEach()`, `map()`, `filter()`, `find()`, dan `reduce()`.
+
+### forEach()
+
+Metode `forEach()` melakukan perulangan untuk membaca setiap elemen array. Contohnya:
+
+```javascript
+let buah = ["Apel", "Mangga", "Jeruk"];
+
+buah.forEach(function (item) {
+  console.log(item);
+});
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-4.png)
+
+Artinya kita tidak perlu menggunakan perulangan manual untuk menampilkan seluruh data array.
+
+Penjelasan:
+
+- `forEach()` mengunjungi setiap elemen array
+- `item` merupakan parameter yang mewakili elemen yang sedang diproses
+- `console.log(item)` menampilkan setiap elemen
+
+Kita juga dapat menggunakan arrow function:
+
+```javascript
+let buah = ["Apel", "Mangga", "Jeruk"];
+
+buah.forEach((item) => {
+  console.log("Saya suka " + item);
+});
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-5.png)
+
+`forEach()` cocok ketika kita ingin melakukan suatu tindakan terhadap setiap elemen, tetapi tidak digunakan untuk menghasilkan array baru.
+
+### map()
+
+Metode `map()` digunakan untuk mengolah setiap elemen array dan menghasilkan array baru. Contohnya:
+
+```javascript
+let angka = [1, 2, 3, 4, 5];
+
+let hasil = angka.map(function (item) {
+  return item * 2;
+});
+
+console.log(hasil);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-6.png)
+
+Penjelasan:
+
+- `map()` memproses setiap elemen.
+- Setiap elemen dikalikan dengan 2.
+- `return` mengembalikan hasil pengolahan.
+- Hasilnya disimpan dalam array baru bernama hasil.
+
+Array asli tidak berubah jika callback `map()` hanya menghasilkan nilai baru dan tidak memodifikasi elemen aslinya.
+
+### filter()
+
+Metode `filter()` digunakan untuk menyaring elemen array berdasarkan kondisi tertentu. Contohnya:
+
+```javascript
+let angka = [10, 15, 20, 25, 30, 35];
+
+let angkaGenap = angka.filter((item) => item % 2 === 0);
+
+console.log(angkaGenap);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-7.png)
+
+Penjelasan:
+
+- `filter()` memeriksa setiap elemen.
+- Kondisi `item % 2 === 0` digunakan untuk mencari angka genap.
+- Elemen yang memenuhi kondisi dimasukkan ke array baru.
+
+### find()
+
+Metode `find()` digunakan untuk mencari elemen pertama yang memenuhi kondisi tertentu.
+
+Contohnya:
+
+```javascript
+let angka = [10, 20, 30, 40, 50];
+
+let hasil = angka.find((item) => item > 25);
+
+console.log(hasil);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-8.png)
+
+Mengapa hasilnya `30`?
+
+Karena `30` adalah elemen pertama yang memenuhi kondisi `item > 25`. Metode `find()` akan berhenti setelah menemukan elemen yang sesuai.
+
+Jika tidak ditemukan elemen yang memenuhi kondisi, hasilnya adalah `undefined`.
+
+### reduce()
+
+Metode `reduce()` digunakan untuk menggabungkan seluruh elemen array menjadi satu nilai berdasarkan proses perhitungan atau pengolahan tertentu. Contohnya untuk menghitung total angka:
+
+```javascript
+let angka = [10, 20, 30, 40];
+
+let total = angka.reduce((hasil, item) => {
+  return hasil + item;
+}, 0);
+
+console.log(total);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-9.png)
+
+Penjelasan:
+
+- `hasil` adalah nilai akumulasi sementara.
+- `item` adalah elemen array yang sedang diproses.
+- `0` adalah nilai awal akumulasi.
+- Setiap elemen ditambahkan ke nilai akumulasi.
+
+Gambaran:
+| Urutan | Proses |
+| :--- | :--- |
+| 1 | Nilai awal: 0 (akumulasi dimulai dari angka 0) |
+| 2 | 0 + 10 = 10 (elemen pertama diproses) |
+| 3 | 10 + 20 = 30 (elemen kedua diproses) |
+| 4 | 30 + 30 = 60 (elemen ketiga diproses) |
+| 5 | 60 + 40 = 100 (elemen terakhir diproses) |
+| **Hasil akhir** | **100** |
+
+### sort()
+
+Metode `sort()` digunakan untuk mengurutkan elemen array. Contoh mengurutkan nama:
+
+```javascript
+let nama = ["Citra", "Andi", "Budi", "Dinda"];
+
+nama.sort();
+
+console.log(nama);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-10.png)
+
+Secara default, `sort()` mengurutkan elemen berdasarkan urutan nilai string.
+
+Untuk mengurutkan angka, kita perlu menggunakan fungsi pembanding (comparator).
+
+Mengurutkan angka dari terkecil ke terbesar:
+
+```javascript
+let angka = [40, 10, 100, 5, 25];
+
+angka.sort((a, b) => a - b);
+
+console.log(angka);
+```
+
+`sort()` mengubah array aslinya. Jika ingin mengurutkan tanpa mengubah array asli, gunakan `toSorted()` pada lingkungan JavaScript yang mendukungnya, atau salin array terlebih dahulu:
+
+```javascript
+let angka = [40, 10, 100, 5, 25];
+
+let hasilUrut = [...angka].sort((a, b) => a - b);
+
+console.log("Array asli:", angka);
+console.log("Hasil urut:", hasilUrut);
+```
+
+## Menggunakan Array of Objects
+
+Dalam pengembangan aplikasi, array sering diguanakan untuk menyimpan kumpulan data yang memiliki beberapa properti. Salah satu bentuk yang sering digunakan adalah array of objects. Contohnya:
+
+```javascript
+let siswa = [
+  {
+    nama: "Andi",
+    nilai: 85,
+  },
+  {
+    nama: "Budi",
+    nilai: 70,
+  },
+  {
+    nama: "Citra",
+    nilai: 90,
+  },
+];
+
+console.log(siswa);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-11.png)
+
+Setiap elemen array tersebut merupakan sebuah object yang memiliki proerti `nama` dan `nilai`.
+
+### Mengakses Data Object dalam Array
+
+Kita dapat mengakses data berdasarkan indeks dan nama properti.
+
+```javascript
+let siswa = [
+  { nama: "Andi", nilai: 85 },
+  { nama: "Budi", nilai: 70 },
+  { nama: "Citra", nilai: 90 },
+];
+
+console.log(siswa[0].nama);
+console.log(siswa[1].nilai);
+console.log(siswa[2].nama);
+```
+
+![Ilustrasi JavaScript](/images/javascript/array-12.png)
+
+### Menampilkan Seluruh Data Siswa
+
+Kita dapat menggunakan `forEach()` untuk menampilkan seluruh data siswa.
+
+```javascript
+let siswa = [
+  { nama: "Andi", nilai: 85 },
+  { nama: "Budi", nilai: 70 },
+  { nama: "Citra", nilai: 90 },
+];
+
+siswa.forEach((item) => {
+  console.log("Nama: " + item.nama);
+  console.log("Nilai: " + item.nilai);
+  console.log("----------------");
+});
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-13.png)
+
+### Menyaring Data Siswa
+
+Misalnya, kita ingin menampilkan siswa yang memperoleh nilai minimal 75.
+
+```javascript
+let siswa = [
+  { nama: "Andi", nilai: 85 },
+  { nama: "Budi", nilai: 70 },
+  { nama: "Citra", nilai: 90 },
+  { nama: "Dinda", nilai: 65 },
+];
+
+let siswaLulus = siswa.filter((item) => item.nilai >= 75);
+
+console.log(siswaLulus);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-14.png)
+
+### Mengambil Nama Seluruh Siswa
+
+Misalnya, kita hanya membutuhkan daftar nama siswa tanpa nilai.
+
+```javascript
+let siswa = [
+  { nama: "Andi", nilai: 85 },
+  { nama: "Budi", nilai: 70 },
+  { nama: "Citra", nilai: 90 },
+];
+
+let daftarNama = siswa.map((item) => item.nama);
+
+console.log(daftarNama);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-15.png)
+
+Inilah salah satu manfaat `map()`: kita dapat mengubah bentuk data menjadi informasi yang dibutuhkan.
+
+## Latihan
+
+Sekarang kita akan menggabungkan beberapa konsep array yang sudah dipelajari. Latihannya ada sebuah aplikasi sederhana yang dgunakan untuk mengelola nilai siswa. Guru ingin mengetahui:
+
+1. Daftar seluruh siswa
+2. Siswa yang dinyatakan lulus
+3. Jumlah seluruh nilai
+4. Rata-rata nilai siswa
+5. Peringkat nilai dari tertinggi ke terendah
+
+Berikut data siswa yang sudah dibungkus array:
+
+```javascript
+let siswa = [
+  { nama: "Andi", nilai: 85 },
+  { nama: "Budi", nilai: 70 },
+  { nama: "Citra", nilai: 90 },
+  { nama: "Dinda", nilai: 65 },
+  { nama: "Eko", nilai: 80 },
+];
+```
+
+Selamat mencoba 😉
+
+## Hasil Latihan
+
+Berikut hasil dari aplikasi data siswa di atas:
+
+```javascript
+let siswa = [
+  { nama: "Andi", nilai: 85 },
+  { nama: "Budi", nilai: 70 },
+  { nama: "Citra", nilai: 90 },
+  { nama: "Dinda", nilai: 65 },
+  { nama: "Eko", nilai: 80 },
+];
+
+// Menampilkan seluruh siswa
+console.log("=== DAFTAR SISWA ===");
+
+siswa.forEach((item) => {
+  console.log(`${item.nama}: ${item.nilai}`);
+});
+
+// Menampilkan siswa yang lulus
+console.log("\n=== SISWA LULUS ===");
+
+let siswaLulus = siswa.filter((item) => item.nilai >= 75);
+
+siswaLulus.forEach((item) => {
+  console.log(`${item.nama}: ${item.nilai}`);
+});
+
+// Menghitung total nilai
+let totalNilai = siswa.reduce((total, item) => {
+  return total + item.nilai;
+}, 0);
+
+// Menghitung rata-rata
+let rataRata = totalNilai / siswa.length;
+
+console.log("\nTotal nilai:", totalNilai);
+console.log("Rata-rata:", rataRata);
+
+// Mengurutkan peringkat
+console.log("\n=== PERINGKAT SISWA ===");
+
+let peringkat = [...siswa].sort((a, b) => b.nilai - a.nilai);
+
+peringkat.forEach((item, index) => {
+  console.log(`${index + 1}. ${item.nama} - ${item.nilai}`);
+});
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/array-16.png)
