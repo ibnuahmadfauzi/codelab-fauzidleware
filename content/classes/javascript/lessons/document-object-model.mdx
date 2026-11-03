@@ -1,0 +1,267 @@
+---
+title: "Document Object Model dalam JavaScript"
+description: "Memahami DOM dan penggunaannya dalam JavaScript."
+order: 6
+---
+
+Dengan mempelajari materi ini paling tidak kita tau apa itu DOM, memahami hubungan antara DOM dengan JavaScript, mengunakan berbagai method untuk memanipulasi elemen HTML serta membuat halaman website interaktif sederhana.
+
+## Pengertian DOM
+
+**DOM** merupakan singkatan dari **Document Object Model**. DOM adalah representasi dokumen HTML dalam bentuk struktur objek yang dapat diakses dan dimanipulasi menggunakan JavaScript.
+
+Dengan DOM, JavaScript dapat mengubah teks pada halaman website, mengubah warna dan tampilan elemen, membuat dan menghapus elemen, serta menangani interaksi pengguna.
+
+Sebagai contoh, ketika pengguna menekan tombol "Ubah Teks", JavaScript dapat mengubah tulisan yang sebelumnya ditampilkan pada halaman website.
+
+## Memilih Elemen HTML
+
+Sebelum mengubah elemen HTML, kita harus memilih elemen yang ingin dimanipulasi.
+
+Beberapa method atau metode yang umum digunakan:
+
+| Metode                    | Fungsi                                   |
+| ------------------------- | ---------------------------------------- |
+| `getElementById()`        | Memilih elemen berdasarkan ID            |
+| `getElementByClassName()` | Memilih elemen berdasarkan class         |
+| `getElementByTagName()`   | Memilih elemen berdasarkan nama tag      |
+| `querySelector()`         | Memilih elemen pertama sesuai sector CSS |
+| `querySelectorAll()`      | Memilih semua elemen sesuai selector CSS |
+
+Contoh HTML:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="judul">Belajar JavaScript</h1>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+Contoh JavaScript:
+
+```javascript
+const judul = document.getElementById("judul");
+
+console.log(judul);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/dom-1.png)
+
+## Mengubah Konten HTML
+
+JavaScript dapat mengubah isi elemen HTML menggunakan `textContent` atau `innerHTML`.
+
+Contohnya masih melanjutkan kode yang tadi, karena kita sudah berhasil memilih elemen HTML dengan `getElementById()` kita bisa memodifikasi kontennya seperti berikut ini.
+
+```javascript
+const judul = document.getElementById("judul");
+judul.textContent = "Konten Diedit";
+console.log(judul);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/dom-2.png)
+
+Sebelumnya kan ada dua yang bisa digunakan, yaitu: `textContent` dan `innerHTML`. Dalam pemanfaatannya `textContent` hanya mengubah atau mengambil teks, sedangkan `innerHTML` mengubah dan mengambil isi HTML.
+
+Contohnya jika menggunakan `textContent` untuk modifikasi seperti ini:
+
+```javascript
+const judul = document.getElementById("judul");
+judul.textContent = "<u>Konten Diedit</u>";
+console.log(judul);
+```
+
+Hasilnya seperti ini:
+
+![Ilustrasi JavaScript](/images/javascript/dom-3.png)
+
+Namun jika menggunakan `innerHTML`:
+
+```javascript
+const judul = document.getElementById("judul");
+judul.innerHTML = "<u>Konten Diedit</u>";
+console.log(judul);
+```
+
+Hasilnya seperti ini:
+
+![Ilustrasi JavaScript](/images/javascript/dom-4.png)
+
+Jadi gunakan `textContent` jika hanya sekedar menampilkan konten dalam bentuk teks. Namun jika data juga berisi kumpulan elemen HTML seperti contohnya data sebuah artikel, maka tampilkan dengan `innerHTML` agar elemen HTML juga ikut diproses di browser.
+
+## Mengubah Tampilan Elemen
+
+JavaScript juga dapat mengubah tampilan elemen melalui properti style. Contohnya:
+
+```javascript
+const judul = document.getElementById("judul");
+judul.innerHTML = "<u>Konten Diedit</u>";
+
+judul.style.color = "salmon";
+judul.style.fontSize = "100px";
+judul.style.fontVariant = "small-caps";
+console.log(judul);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/dom-5.png)
+
+properti style yang digunakan sama dengan di CSS, namun hanya cara penulisannya yang perlu diperhatikan. Properti yang menggunakan dua atau lebih kata menggunakan penulisan **camelCase** dan nilai selalu dibungkus kutip sebagai data **String**.
+
+## Event dalam JavaScript
+
+Event adalah kejadian atau aktivitas yang dilakukan pengguna maupun browser. Contohnya:
+
+- klik tombol
+- mengetik pada kolom input
+- mengisi formulir
+- menggerakkan mouse
+
+JavaScript dapat merespons kejadian tersebut menggunakan event listener.
+
+Contoh ganti kode HTML nya jadi seperti ini dengan menambahkan satu tombol:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="tombol">Klik Saya</button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+Lalu ganti isi kode JavaScriptnya seperti ini:
+
+```javascript
+const tombol = document.getElementById("tombol");
+
+tombol.addEventListener("click", function () {
+  alert("Tombol berhasil diklik!");
+});
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/dom-6.png)
+
+Ketika tombol diklik, browser akan menampilkan pesan dengan popup.
+
+## Latihan
+
+Buat aplikasi count angka sederhana, dengan 3 tombol [Tambah], [Kurang], dan [Reset]. Nilai awal 0, jika pengguna klik tombol [Tambah] maka angka ditambah 1, jika pengguna klikt tombol [Kurang] maka angka dikurangi 1, namun jika pengguna klik tombol [Reset] angka akan berubah kembali ke 0 berapapun angka sebelumnya.
+
+Silahkan dikerjakan lalu coba cocokkan hasilnya dengan kode di bawah ini. Karena latihannya cukup kompleks, jadi wajar jika banyak perbedaan gaya penulisan kodenya.
+
+## Hasil Latihan
+
+Modifikasi halaman HTML menjadi seperti ini:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="angka"></h1>
+
+    <button id="tambah">Tambah</button>
+    <button id="kurang">Kurang</button>
+    <button id="reset">Reset</button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+Lalu modifikasi kode JavaScript seperti ini:
+
+```javascript
+// mengubah style agar lebih rapi
+let elementBody = document.getElementsByTagName("body");
+elementBody[0].style.textAlign = "center";
+
+let elementButton = document.querySelectorAll("button");
+// mengatur style tombol pertama
+elementButton[0].style.backgroundColor = "salmon";
+elementButton[0].style.border = "none";
+elementButton[0].style.padding = "5px 10px";
+elementButton[0].style.borderRadius = "3px";
+elementButton[0].style.fontSize = "20px";
+elementButton[0].style.fontWeight = "bold";
+elementButton[0].style.margin = "10px";
+elementButton[0].style.boxShadow = "2px 2px 2px 0px rgba(0, 0, 0, 0.3)";
+
+// mengatur style tombol kedua
+elementButton[1].style.backgroundColor = "salmon";
+elementButton[1].style.border = "none";
+elementButton[1].style.padding = "5px 10px";
+elementButton[1].style.borderRadius = "3px";
+elementButton[1].style.fontSize = "20px";
+elementButton[1].style.fontWeight = "bold";
+elementButton[1].style.margin = "10px";
+elementButton[1].style.boxShadow = "2px 2px 2px 0px rgba(0, 0, 0, 0.3)";
+
+// mengatur style tombol ketiga
+elementButton[2].style.backgroundColor = "salmon";
+elementButton[2].style.border = "none";
+elementButton[2].style.padding = "5px 10px";
+elementButton[2].style.borderRadius = "3px";
+elementButton[2].style.fontSize = "20px";
+elementButton[2].style.fontWeight = "bold";
+elementButton[2].style.margin = "10px";
+elementButton[2].style.boxShadow = "2px 2px 2px 0px rgba(0, 0, 0, 0.3)";
+
+// mengatur angka awal di elemen h1 agar menjadi 0
+let angka = 0;
+let elemenAngka = document.getElementById("angka");
+elemenAngka.textContent = angka;
+
+// event listener untuk aksi tombol tambah
+let tombolTambah = document.getElementById("tambah");
+tombolTambah.addEventListener("click", function () {
+  angka++;
+  elemenAngka.textContent = angka;
+});
+
+// event listener untuk aksi tombol kurang
+let tombolKurang = document.getElementById("kurang");
+tombolKurang.addEventListener("click", function () {
+  angka--;
+  elemenAngka.textContent = angka;
+});
+
+// event listener untuk aksi tombol reset
+let tombolReset = document.getElementById("reset");
+tombolReset.addEventListener("click", function () {
+  angka = 0;
+  elemenAngka.textContent = angka;
+});
+```
+
+![Ilustrasi JavaScript](/images/javascript/dom-7.png)
+
+Kode JavaScript saya terlihat panjang karena style elemen saya menggunakan DOM untuk mengaturnya, padahal hal itu tidak perlu. Untuk meringkas bisa pakai CSS saja untuk mengatur stylingnya.
