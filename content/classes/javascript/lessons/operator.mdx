@@ -1,0 +1,192 @@
+---
+title: "Operator Dalam JavaScript"
+description: "Memahami operator dan penggunaannya dalam JavaScript."
+order: 4
+---
+
+Setelah mempelajari materi ini paling tidak kita mampu menjelaskan pengertian operator, menggunakan berbagai macam operator, serta membuat program sederhana dengan berbagai macam operator.
+
+## Pengertian Operator
+
+**Operator** adalah simbol atau tanda yang digunakan untuk melakukan operasi terhadap suatu atau beberapa nilai. Contohnya, ketika membuat aplikasi kasir, kita membutuhkan operator untuk menghitung total belanja, menghitung diskon, dan menentukan apakah pelanggan mendapatkan potongan harga.
+
+JavaScript memiliki berbagai jenis operator yang sering digunakan.
+
+## Jenis-Jenis Operator
+
+### Operator Aritmatika
+
+Operator aritmatika digunakan untuk melakukan operasi matematika. Berikut contoh macam-macam operator aritmatika beserta cara menggunakannya:
+
+| Operator | Fungsi      | Contoh   |
+| -------- | ----------- | -------- |
+| `+`      | Penjumlahan | `10 + 5` |
+| `-`      | Pengurangan | `10 - 5` |
+| `*`      | Perkalian   | `10 * 5` |
+| `/`      | Pembagian   | `10 / 5` |
+| `&`      | Sisa bagi   | `10 % 3` |
+| `**`     | Pangkat     | `2 ** 3` |
+
+Contoh program:
+
+```javascript
+let angka1 = 10;
+let angka2 = 5;
+
+console.log("Penjumlahan :", angka1 + angka2);
+console.log("Pengurangan :", angka1 - angka2);
+console.log("Perkalian   :", angka1 * angka2);
+console.log("Pembagian   :", angka1 / angka2);
+console.log("Sisa bagi   :", angka1 % 3);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/operator-1.png)
+
+Melihat cara kerja operator aritmatika masih sederhana karena itu operator dasar yang sering kita gunakan sehari-hari.
+
+### Operator Penugasan (Assignment)
+
+Operator penugasan digunakan untuk memberikan atau memperbarui nilai variabel. Berikut contoh macam-macam operator penugasan:
+
+| Operator | Contoh   | Setara dengan       |
+| -------- | -------- | ------------------- |
+| `=`      | `x = 10` | Memberikan nilai 10 |
+| `+=`     | `x += 5` | `x = x + 5`         |
+| `-=`     | `x -= 5` | `x = x - 5`         |
+| `*=`     | `x *= 2` | `x = x * 2`         |
+| `/=`     | `x /= 2` | `x = x / 2`         |
+
+Contoh penggunaannya dalam program:
+
+```javascript
+let nilai = 80;
+console.log("Nilai awal  : " + nilai);
+
+nilai += 10;
+console.log("Nilai akhir : " + nilai);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/operator-2.png)
+
+### Operator Perbandingan (Comparison)
+
+Operator perbandingan digunakakn untuk membandingkan dua nilai. Hasilnya berupa boolean `true` atau `false`.
+
+| Operator | Fungsi                            |
+| -------- | --------------------------------- |
+| `==`     | Sama dengan setelah konversi tipe |
+| `===`    | Sama nilai dan tipe data          |
+| `!=`     | Tidak sama setelah konversi tipe  |
+| `!==`    | Tidak sama nilai atau tipe data   |
+| `>`      | Lebih besar                       |
+| `<`      | Lebih kecil                       |
+| `>=`     | Lebih besar atau sama dengan      |
+| `<=`     | Lebih kecil atau sama dengan      |
+
+Contoh penggunaannya dalam program:
+
+```javascript
+let nilaiA = 80;
+let nilaiB = 90;
+
+console.log(nilaiA > nilaiB);
+console.log(nilaiA < nilaiB);
+console.log(nilaiA === 80);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/operator-3.png)
+
+### Operator Logika (Logical)
+
+Operator logika digunakan untuk menggabungkan atau membalikkan kondisi. Berikut macam-macam operator logika:
+
+| Operator | Fungsi          |
+| -------- | --------------- |
+| `&&`     | AND (dan)       |
+| `\|\|`   | OR (atau)       |
+| `!`      | NOT (kebalikan) |
+
+Berikut contoh penggunannya dalam program:
+
+```javascript
+let nilai = 85;
+let kehadiran = 90;
+
+let lulus = nilai >= 75 && kehadiran >= 80;
+
+console.log("Status Lulus : " + lulus);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/operator-4.png)
+
+Artinya siswa yang dinyatakan memenuhi kedua syarat karena nilai dan kehadirannya sesuai ketentuan, akan mengembalikan nilai `true`.
+
+## Latihan
+
+Buatlah program untuk menghitung total belanja, dengan 5 variabel:
+
+- variabel **hargaBarang** (diinputkan nilainya)
+- variabel **jumlahBarang** (diinputkan nilainya)
+- variabel **totalBelanja** (hasil dari **hargaBarang** dikali **jumlahBarang**)
+- variabel **jumlahUang** (diinputkan nilainya)
+- variabel **jumlahKembali** (hasil dari **jumlahUang** dikurangi **totalBelanja**)
+
+Silahkan dipecahkan terlebih dahulu sebelum mencocokkan dengan hasil di bawah ini.
+
+## Hasil Latihan
+
+Berikut kode dari latihan di atas:
+
+```javascript
+let hargaBarang = 50000;
+let jumlahBarang = 3;
+let jumlahUang = 200000;
+
+let totalBelanja = hargaBarang * jumlahBarang;
+let jumlahKembali = jumlahUang - totalBelanja;
+
+console.log("========================================");
+console.log("RIWAYAT BELANJA");
+console.log("========================================");
+console.log("Harga barang  : Rp. " + hargaBarang + ",-");
+console.log("Jumlah barang : Rp. " + jumlahBarang + ",-");
+console.log("Total belanja : Rp. " + totalBelanja + ",-");
+console.log("========================================");
+console.log("Bayar         : Rp. " + jumlahUang + ",-");
+console.log("Kembalian     : Rp. " + jumlahKembali + ",-");
+console.log("========================================");
+```
+
+Berikut hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/operator-5.png)
+
+Untuk menambah pengetahuan bisa coba gunakan method bawaan javascript `prompt( )` untuk menerima input manual dari pengguna aplikasi lewat popup browser. Seperti contoh berikut:
+
+```javascript
+let hargaBarang = prompt("Masukkan harga barang");
+let jumlahBarang = prompt("Masukkan jumlah barang");
+let jumlahUang = prompt("Jumlah uang pelanggan");
+
+let totalBelanja = hargaBarang * jumlahBarang;
+let jumlahKembali = jumlahUang - totalBelanja;
+
+console.log("========================================");
+console.log("RIWAYAT BELANJA");
+console.log("========================================");
+console.log("Harga barang  : Rp. " + hargaBarang + ",-");
+console.log("Jumlah barang : Rp. " + jumlahBarang + ",-");
+console.log("Total belanja : Rp. " + totalBelanja + ",-");
+console.log("========================================");
+console.log("Bayar         : Rp. " + jumlahUang + ",-");
+console.log("Kembalian     : Rp. " + jumlahKembali + ",-");
+console.log("========================================");
+```
