@@ -1,0 +1,159 @@
+---
+title: "Function Dalam JavaScript"
+description: "Memahami function dan penggunaannya dalam JavaScript."
+order: 5
+---
+
+Setelah mempelajari materi ini paling tidak kita membuat menjelaskan pengertian function, memahami manfaat function, membuat function dan berbagai parameter serta argument nya, sampai membuat program sederhana menggunakan function.
+
+## Pengertian Function
+
+**Function** atau **fungsi** adalah sekumpulan perintah yang dibuat untuk menjalankan tugas tertentu dan dapat digunakan kembali ketika dibutuhkan. Misalnya sebuah aplikasi sekolah memiliki fitur untuk menghitung nilai rata-rata siswa. Daripada menuliskan rumus perhitungan berulang kali, kita dapat membuat satu function untuk menghitung nilai rata-rata tersebut.
+
+Dengan menggunakan function, program menjadi lebih terstruktur, mudah dibaca, mudah diperbaiki, dapat digunakan kembali, serta tidak perlu menuliskan kode yang sama berulang kali.
+
+## Membuat Function
+
+Salah satu cara membuat function adalah menggunakan `function declaration`.
+
+Struktur dasar:
+
+```javascript
+function namaFungsi() {
+  // perintah yang akan dijalankan
+}
+```
+
+Contohnya:
+
+```javascript
+// membuat function
+function sapa() {
+  console.log("Selamat Datang Ibnu");
+}
+
+// memanggil function
+sapa();
+```
+
+Hasilnya:
+![Ilustrasi JavaScript](/images/javascript/function-1.png)
+
+Keterangan:
+
+- `function` merupakan kata kunci untuk membuat fungsi
+- `sapa` merupakan nama fungsi
+- `()` merupakan tempat untuk menyisipkan parameter
+- `{}` merupakan tempat untuk menuliskan perintah
+- `sapa()` digunakan untuk memanggil fungsi
+
+## Function dengan Parameter
+
+Parameter merupakan variabel yang dituliskan dalam deklarasi fungsi untuk menerima data. Contohnya:
+
+```javascript
+// membuat function
+function sapa(nama) {
+  console.log("Selamat Datang " + nama);
+}
+
+// memanggil function
+sapa("Fauzi");
+sapa("Ibnu");
+sapa("Budi");
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/function-2.png)
+
+Pada contoh di atas, `nama` merupakan parameter sedangkan `"Fauzi"`, `"Ibnu"`, dan `"Budi"` merupakan argumen yang diberikan saat fungsi dipanggil.
+
+## Function dengan Return
+
+`return` digunakan untuk mengembalikan hasil dari suatu fungsi sehingga hasil tersebut dapat disimpan atau digunakan kembali. Contohnya:
+
+```javascript
+function tambah(a, b) {
+  return a + b;
+}
+
+let hasil = tambah(10, 5);
+
+console.log("Hasil penjumlahan:", hasil);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/function-3.png)
+
+Perbedaannya menggunakan `console.log( )` akan menampilkan informasi ke Console langsung, namun dengan `return` akan mengembalikan nilai dari fungsi kepada bagian program yang memanggilnya.
+
+## Function Expression
+
+Function juga dapat disimpan ke dalam variabel. Contohnya:
+
+```javascript
+const perkalian = function (a, b) {
+  return a * b;
+};
+
+console.log(perkalian(5, 4));
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/function-4.png)
+
+## Arrow Function
+
+JavaScript modern menyediakan penulisan fungsi menggunakan arrow function. Contohnya:
+
+```javascript
+const pembagian = (a, b) => {
+  return a / b;
+};
+
+console.log(pembagian(20, 5));
+```
+
+Untuk fungsi yang sederhana, penulisannya bisa lebih singkat lagi:
+
+```javascript
+const kuadrat = (angka) => angka * angka;
+
+console.log(kuadrat(5));
+```
+
+## Latihan
+
+Buat fungsi untuk menghitung nilai rata rata dari 5 angka dengan return serta menampilkan hasilnya ke Console.
+
+Silahkan dipecahkan latihannya setelah itu bisa mencocokkan hasilnya dengan kode di bawah ini.
+
+## Hasil Latihan
+
+```javascript
+// membuat function rata-rata
+function rataRata(angka1, angka2, angka3, angka4, angka5) {
+  // menjumlahkan semua angka yang masuk
+  let jumlahData = angka1 + angka2 + angka3 + angka4 + angka5;
+
+  // mendefinisikan jumlah data
+  let banyakData = 5;
+
+  // menghitung rata-rata
+  let hasilRataRata = jumlahData / banyakData;
+
+  return hasilRataRata;
+}
+
+// memanggil dan menampilkan hasil rata-rata
+console.log(rataRata(80, 90, 88, 75, 89));
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/function-5.png)
+
+Untuk lebih memperbanyak materi coba modifikasi agar banyak data serta jumlah data yang bisa digunaka oleh parameter lebih dinamis.
