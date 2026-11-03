@@ -36,20 +36,38 @@ const slugPattern = /^[a-z0-9-]+$/;
 
 // Mengambil satu kelas berdasarkan slug
 export async function getClass(classSlug: string) {
-  if (!slugPattern.test(classSlug)) return null;
+  console.log("=================================");
+  console.log("Mencari kelas:", classSlug);
+
+  if (!slugPattern.test(classSlug)) {
+    console.log("Slug tidak valid:", classSlug);
+    return null;
+  }
 
   try {
     const filePath = path.join(contentDirectory, classSlug, "class.json");
 
+    console.log("Lokasi file:", filePath);
+
     const source = await fs.readFile(filePath, "utf8");
+    console.log("File class.json berhasil dibaca");
+
     const data = JSON.parse(source) as ClassMetadata;
 
+    console.log("Data kelas:", data);
+    console.log("Published:", data.published);
+    console.log("Slug cocok:", data.slug === classSlug);
+
     if (!data.published || data.slug !== classSlug) {
+      console.log("Kelas tidak memenuhi syarat publikasi");
       return null;
     }
 
+    console.log("Kelas berhasil ditemukan!");
     return data;
-  } catch {
+  } catch (error) {
+    console.error("GAGAL MEMBACA KELAS:", classSlug);
+    console.error(error);
     return null;
   }
 }

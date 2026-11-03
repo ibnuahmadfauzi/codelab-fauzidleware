@@ -1,0 +1,482 @@
+---
+title: "Percabangan dalam JavaScript (Conditional Statement)"
+description: "Memahami percabangan dan penggunaannya dalam JavaScript."
+order: 1
+---
+
+Setelah belajar materi ini, paling tidak kita tau apa itu percabangan serta fungsinya dalam pemrograman, menggunakan berbagai macam jenis percabangan, serta menerapkan percabangan dalam permasalahan sehari-hari.
+
+## Pengertian Percabangan
+
+**Percabangan (conditional statement)** adalah salah satu konsep dasar dalam pemrograman yang digunakan untuk menentukan tindakan berdasarkan kondisi tertentu. Dengan percabangan, sebuah program dapat mengambil keputusan sesuai dengan nilai atau keadaan yang sedang diperiksa.
+
+Dalam kehidupan sehari-hari, kita sering menggunakan konsep percabangan tanpa menyadarinya. Contohnya:
+
+1. Jika hujan, maka membawa payung
+2. Jika tidak hujan, maka tidak perlu membawa payung
+
+Dalam JavaScript, percabangan memungkinkan program menjalankan kode yang berbeda berdasarkan hasil evaluasi suatu kondisi. Contoh sederhana:
+
+```javascript
+let cuaca = "hujan";
+
+if (cuaca === "hujan") {
+  console.log("Saya membawa payung.");
+} else {
+  console.log("Saya tidak membawa payung.");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-1.png)
+
+Dari contoh di atas, program memeriksa kondisi `cuaca === "hujan"`. Karena kondisi bernilai `true`, program menjalankan perintah di dalam blok `if`.
+
+## Mengenal If dan Else
+
+`if` dan `else` merupakan bentuk percabangan yang digunakan untuk menentukan tindakan berdasarkan dua kemungkinan kondisi.
+
+- `if` digunakan untuk menjalankan kode ketika kondisi bernilai `true`.
+- `else` digunakan untuk menjalankan kode ketika kondisi `if` bernilai `false`.
+
+### Struktur Dasar If
+
+Berikut struktur dasar penggunaan `if`:
+
+```javascript
+if (kondisi) {
+  // Kode dijalankan jika kondisi true
+}
+```
+
+Contohnya:
+
+```javascript
+let umur = 20;
+
+if (umur >= 17) {
+  console.log("Anda sudah cukup umur.");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-2.png)
+
+Penjelasan:
+
+1. Variabel `umur` memiliki nilai 20.
+2. Program memeriksa apakah `umur` lebih besar atau sama denga 17.
+3. Karena kondisi bernilai `true`, perintah di dalam `if` dijalankan.
+
+Jika nilai umur kurang dari 17, program tidak menampilkan apapun karena tidak ada blok `else`.
+
+### Struktur If Else
+
+Jika kita ingin memberikan tindakan ketika kondisi bernilai `false`, kita dapat menggunakan `else`. Berikut struktur dasarnya:
+
+```javascript
+if (kondisi) {
+  // Jika kondisi true
+} else {
+  // Jika kondisi false
+}
+```
+
+Contohnya:
+
+```javascript
+let nilai = 65;
+
+if (nilai >= 75) {
+  console.log("Selamat, Anda lulus!");
+} else {
+  console.log("Maaf, Anda belum lulus.");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-3.png)
+
+Penjelasan:
+
+- Nilai siswa adalah 65
+- Program memeriksa apakah nilai minimal 75
+- Kondisi bernilai `false`
+- Program menjalankan perintah di dalam blok `else`
+
+### Contoh Penerapan If Else
+
+Misalnya, kita ingin membuat program sederhana untuk menentukan apakah seseorang boleh membuat akun berdasarkan usia. Dan kita membuat input pengguna menggunakan input dari popup browser dengan bantuan method `prompt()`, Berikut contohnya:
+
+```javascript
+let username = prompt("Buat username baru");
+let umur = prompt("Masukkan usia anda");
+
+if (umur >= 17) {
+  console.log("===============================");
+  console.log("STATUS AKUN");
+  console.log("===============================");
+  console.log("Username : " + username);
+  console.log("Berhasil Didaftarkan,");
+  console.log("Selamat Bermain");
+  console.log("===============================");
+} else {
+  console.log("===============================");
+  console.log("STATUS AKUN");
+  console.log("===============================");
+  console.log("Username : " + username);
+  console.log("Gagal Didaftarkan,");
+  console.log("Tidak Memenuhi Syarat");
+  console.log("===============================");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-4.png)
+
+## Mengenal Else If
+
+`else if` digunakan ketika kita memiliki lebih dari dua kemungkinan atau kondisi yang perlu diperiksa. Misalnya dalam penilaian siswa, nilai dapat dikategorikan dalam beberapa predikat:
+
+| Nilai       | Predikat |
+| ----------- | -------- |
+| 90 - 100    | A        |
+| 80 - 89     | B        |
+| 70 - 79     | C        |
+| 60 - 69     | D        |
+| Di bawah 60 | E        |
+
+Untuk menangani beberapa kondisi tersebut, kita dapat menggunakan `else if`.
+
+### Struktur Dasar Else If
+
+```javascript
+if (kondisi1) {
+  // Jika kondisi1 true
+} else if (kondisi2) {
+  // Jika kondisi2 true
+} else if (kondisi3) {
+  // Jika kondisi3 true
+} else {
+  // Jika semua kondisi false
+}
+```
+
+### Contoh Program Penilaian Siswa
+
+```javascript
+let nilai = 85;
+
+if (nilai >= 90) {
+  console.log("Predikat A");
+} else if (nilai >= 80) {
+  console.log("Predikat B");
+} else if (nilai >= 70) {
+  console.log("Predikat C");
+} else if (nilai >= 60) {
+  console.log("Predikat D");
+} else {
+  console.log("Predikat E");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-5.png)
+
+Penjelasan:
+
+1. Program memeriksa apakah nilai minimal 90. Hasilnya `false`
+2. Program memeriksa apakah nilai minimal 80. Hasilnya `true`
+3. Program menjalankan kode pada blok `else if` kedua
+4. Pemeriksaan kondisi berikutnya dilewati
+
+Urutan kondisi sangat berpengaruh. Letakkan kondisi dari rentang tertinggi ke terrendah agar hasilnya sesuai dengan yang diharapkan.
+
+## Mengenal Switch Case
+
+`switch case` merupakan bentuk percabangan yang digunakan untuk memilih satu tindakan dari beberapa kemungkinan nilai. Biasanya `switch` digunakan ketika ingin membandingkan satu ekspresi dengan beberapa nilai tertentu.
+
+### Struktur Dasar Switch Case
+
+```javascript
+switch (ekspresi) {
+  case nilai1:
+    // Perintah jika cocok dengan nilai1
+    break;
+
+  case nilai2:
+    // Perintah jika cocok dengan nilai2
+    break;
+
+  default:
+  // Perintah jika tidak ada yang cocok
+}
+```
+
+Keterangan:
+
+- `switch` : memulai proses pemeriksaan
+- `case` : menentukan nilai yang akan dibandingkan
+- `break` : menghentikan proses switch agar tidak melanjutkan ke case berikutnya
+- `default` : menjalankan kode jika tidak ada case yang sesuai
+
+### Contoh Program Hari dalam Seminggu
+
+```javascript
+let hari = 3;
+
+switch (hari) {
+  case 1:
+    console.log("Senin");
+    break;
+
+  case 2:
+    console.log("Selasa");
+    break;
+
+  case 3:
+    console.log("Rabu");
+    break;
+
+  case 4:
+    console.log("Kamis");
+    break;
+
+  case 5:
+    console.log("Jumat");
+    break;
+
+  case 6:
+    console.log("Sabtu");
+    break;
+
+  case 7:
+    console.log("Minggu");
+    break;
+
+  default:
+    console.log("Nomor hari tidak valid.");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-6.png)
+
+### Menggunakan Beberapa Case untuk Satu Hasil
+
+Kita juga dapat menggabungkan beberapa `case` untuk menjalankan perintah yang sama. Contohnya:
+
+```javascript
+let hari = "Sabtu";
+
+switch (hari) {
+  case "Sabtu":
+  case "Minggu":
+    console.log("Hari libur.");
+    break;
+
+  case "Senin":
+  case "Selasa":
+  case "Rabu":
+  case "Kamis":
+  case "Jumat":
+    console.log("Hari sekolah.");
+    break;
+
+  default:
+    console.log("Nama hari tidak valid.");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-7.png)
+
+Penggabungan tersebut disebut fall-through yang disengaja, yaitu beberapa case berbagi satu blok perintah karena tidak diberi `break` diantaranya.
+
+## Mengenal Ternary Operator
+
+**Ternary** operator adalah bentuk singkatan dari percabangan `if else`. Ternary sangat cocok digunakan ketika kita hanya membutuhkan satu kondisi dengan dua kemungkinan hasil.
+
+### Struktur Dasar Ternary Operator
+
+```javascript
+kondisi ? nilaiJikaTrue : nilaiJikaFalse;
+```
+
+Keterangan:
+
+- `?` digunakan untuk memisahkan kondisi dengan hasil ketika kondisi benar
+- `:` digunakan untuk memisahkan hasil ketika kondisi benar dan salah
+
+### Contoh Sederhana
+
+Jika menggunakan if else:
+
+```javascript
+let umur = 20;
+let status;
+
+if (umur >= 17) {
+  status = "Dewasa";
+} else {
+  status = "Belum dewasa";
+}
+
+console.log(status);
+```
+
+Jika menggunakan ternary operator:
+
+```javascript
+let umur = 20;
+
+let status = umur >= 17 ? "Dewasa" : "Belum dewasa";
+
+console.log(status);
+```
+
+Kedua kode di atas menghasilkan hasil yang sama.
+
+### Ternary Operator denga Template Literal
+
+Ternary juga dapat digunakan secara langsung dalam template literal. Berikut penggunannya:
+
+```javascript
+let nilai = 85;
+
+console.log(`Status: ${nilai >= 75 ? "Lulus" : "Tidak Lulus"}`);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-8.png)
+
+Hindari penggunaan ternary bertingkat yang terlalu panjang, karena dapat membuat kode sulit dibaca. Untuk banyak kondisi lebih baik gunakan `if else if` atau `switch case`.
+
+## Mengenal Nested If
+
+**Nested if** adalah percabangan yang berada di dalam percabangan lainnya. Nested if digunakan ketika sebuah keputusan membutuhkan pemeriksaan kondisi tambahan setelah kondisi pertama terpenuhi.
+
+Contohnya, sebuah sistem login harus memeriksa apakah username benar terlebih dahulu, kemudian baru memeriksa password.
+
+### Struktur Dasar Nested If
+
+```javascript
+if (kondisi1) {
+  if (kondisi2) {
+    // Jika kondisi1 dan kondisi2 true
+  } else {
+    // Jika kondisi1 true, kondisi2 false
+  }
+} else {
+  // Jika kondisi1 false
+}
+```
+
+### Contoh Program Login Sederhana
+
+```javascript
+let username = "admin";
+let password = "12345";
+
+if (username === "admin") {
+  if (password === "12345") {
+    console.log("Login berhasil!");
+  } else {
+    console.log("Password salah!");
+  }
+} else {
+  console.log("Username tidak ditemukan!");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-9.png)
+
+Penjelasan:
+
+1. Program memeriksa apakah username adalah `admin`
+2. Jika benar, program memeriksa password
+3. Jika password juga benar, perogram menampilkan pesan login berhasil
+4. Jika password salah, program menampilkan pesan password salah
+5. Jika username salah, program menampilkan pesan username tidak ditemukan
+
+### Contoh Penerapan Nested If pada Penilaian
+
+Misalnya, sekolah memiliki ketentuan kelulusan berdasarkan nilai dan kehadiran. Ketentuannya:
+
+- Nilai minimal 75
+- Kehadiran minimal 80%
+- Jika kedua persayratan terpenuhi, siswa dinyatakan lulus
+
+```javascript
+let nilai = 85;
+let kehadiran = 90;
+
+if (nilai >= 75) {
+  if (kehadiran >= 80) {
+    console.log("Siswa dinyatakan lulus.");
+  } else {
+    console.log("Siswa tidak lulus karena kehadiran kurang.");
+  }
+} else {
+  console.log("Siswa tidak lulus karena nilai kurang.");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-10.png)
+
+## Latihan
+
+Untuk latihan buatlah game tebak angka antara angka 1 sampai 10, dengan ketentuan:
+
+1. Komputer menentukan 1 bilangan random dengan rentang 1 sampai 10
+2. Pengguna melakukan input 1 angka antara 1 sampai 10 tanpa tahu angka berapa yang dipilih komputer
+3. Jika angka yang diinputkan pengguna sama dengan yang dipilih komputer maka menampilkan hasil "Hebat, tebakanmu tepat!!"
+4. Jika angka yang diinputkan pengguna di bawah pilihan komputer maka muncul pesan "Sayang sekali, masih kurang banyak"
+5. Jika angka yang diinputkan pengguna di atas pilihan komputer maka muncul pesan "Sayang sekali, terlalu banyak"
+6. Jika angka yang diinputkan pengguna diluar antara 1 sampai 10, maka mucul pesan "Input tidak valid"
+
+Selamat mengerjakan, jika sudah cek hasilnya, atau bisa bandingkan dengan hasil di bawah ini.
+
+## Hasil Latihan
+
+```javascript
+let angkaCom = Math.floor(Math.random() * 10) + 1;
+let angkaPengguna = prompt("Masukkan Angka Anda");
+console.log("================================");
+console.log("HASIL PERMAINAN");
+console.log("================================");
+if (angkaPengguna >= 1 && angkaPengguna <= 10) {
+  if (angkaCom == angkaPengguna) {
+    console.log("Hebat, tebakanmu tepat!!");
+  } else if (angkaPengguna > angkaCom) {
+    console.log("Sayang sekali, terlalu banyak");
+  } else if (angkaPengguna < angkaCom) {
+    console.log("Sayang sekali, masih kurang banyak");
+  } else {
+    console.log("Kondisi tidak terdaftar");
+  }
+} else {
+  console.log("Input tidak valid");
+}
+console.log("================================");
+```
+
+Berikut contoh jika hasilnya ditemukan:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-11.png)
+
+Jika memasukkan angka diluar 1 sampai 10 atau memasukkan huruf maka hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/percabangan-12.png)
