@@ -1,0 +1,644 @@
+---
+title: "Object dalam JavaScript"
+description: "Memahami object dan penggunaannya dalam JavaScript."
+order: 4
+---
+
+Setelah belajar materi ini, paling tidak kita paham konsep dan fungsi object dalam JavaScript, bisa membuat object dengan properti dan nilai, memahami penggunaan berbagai method di dalam object, serta memanfaatkan object dalam pembuatan aplikasi.
+
+## Pengertian Object
+
+**Object** adalah struktur data dalam JavaScript yang digunakan untuk menyimpan sekumpulan informasi dalam bentuk pasangan **key** dan **value** (kunci dan nilai).
+
+Jika array digunakan untuk menyimpan kumpulan data berdasarkan indeks. object digunakakn untuk menyimpan data berdasarkan nama properti.
+
+Misalnya, kita ingin menyimpan informasi seorang mahasiswa, seperti nama, fakultas, jurusan, dan nim. Tanpa object kita melakukannya seperti ini:
+
+```javascript
+let nama = "Andi";
+let fakultas = "Teknologi Informasi";
+let jurusan = "Teknik Informatika";
+let nim = "19104410028";
+```
+
+Menggunakan object, pembuatannya jadi seperti ini:
+
+```javascript
+let mahasiswa = {
+  nama: "Andi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+};
+```
+
+Dengan object, seluruh informasi mahasiswa dikelompokkan dalam satu variabel.
+
+### Struktur Object
+
+Object dibuat menggunakan tanda kurung kurawal `{}`.
+
+```javascript
+let mahasiswa = {
+  nama: "Andi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+};
+```
+
+Perhatikan struktur berikut:
+
+Object : `mahasiswa`
+
+| key / property | value                 |
+| -------------- | --------------------- |
+| nama           | "Andi"                |
+| fakultas       | "Teknologi Informasi" |
+| jurusan        | "Teknik Informatika"  |
+| nim            | "19104410028"         |
+
+Beberapa istilah penting:
+
+- **Object**: tempat untuk mengelompokkan data
+- **Property**: informasi atau atribut yang dimiliki object
+- **Key**: nama properti
+- **Value**: nilai yang disimpan dalam properti
+- **Method**: function yang menjadi bagian dari object
+
+### Jenis Data dalam Object
+
+Value dalam object dapat menggunakan berbagai jenis tipe data, seperti string, number, boolean, array, function, bahkan object lainnya.
+
+```javascript
+let produk = {
+  nama: "Laptop",
+  harga: 7500000,
+  tersedia: true,
+  warna: ["Hitam", "Silver", "Putih"],
+  spesifikasi: {
+    ram: "16 GB",
+    penyimpanan: "512 GB SSD",
+  },
+};
+
+console.log(produk);
+```
+
+## Mengakses Properti Object
+
+JavaScript menyediakan dua cara utama untuk mengakses proeprti object, yaitu dot notation dan bracket notation.
+
+### Dot Notation
+
+Dot notation menggunakan tanda titik (`.`) untuk mengakses properti object.
+
+```javascript
+let mahasiswa = {
+  nama: "Andi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+};
+
+console.log(mahasiswa.nama);
+console.log(mahasiswa.nim);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/object-1.png)
+
+Cara ini paling sering digunakan ketika nama properti sudah diketahui secara langsung.
+
+### Bracket Notation
+
+Bracket notation menggunakan tanda kurung siku(`[]`) untuk mengakses properti object.
+
+```javascript
+let mahasiswa = {
+  nama: "Andi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+};
+
+console.log(mahasiswa["nama"]);
+console.log(mahasiswa["nim"]);
+```
+
+Hasilnya sama saja. Lalu apa bedanya ?
+
+### Perbedaan Do Notation dan Bracket Notation
+
+| Do Notation                         | Bracket Notation                                        |
+| ----------------------------------- | ------------------------------------------------------- |
+| `mahasiswa.nama`                    | `mahasiswa["nama"]`                                     |
+| Menggunakan titik                   | Menggunakan kurung siku                                 |
+| Nama properti ditulis langsung      | Nama properti dapat menggunakan variabel                |
+| Cocok untuk nama properti sederhana | Cocok untuk nama properti dinamis atau mengandung spasi |
+
+## Menambahkan, Mengubah, dan Menghapus Properti Object
+
+Object dapat dimanipulasi setelah dibuat, kita dapat menambahkan properti baru, mengubah nilai properti, dan menghapus properti yang tidak dibutuhkan.
+
+### Menambahkan Properti
+
+Gunakan dot notation atau bracket notation untuk menambahkan properti baru. Seperti pada contoh berikut:
+
+```javascript
+let mahasiswa = {
+  nama: "Andi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+};
+
+mahasiswa.status = true;
+
+console.log(mahasiswa);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/object-2.png)
+
+### Mengubah Properti
+
+Untuk mengubah nilai peroperti, cukup tentukan properti yang ingin diperbarui.
+
+```javascript
+let mahasiswa = {
+  nama: "Andi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+};
+
+mahasiswa.status = true;
+mahasiswa.nama = "Ibnu Ahmad Fauzi";
+
+console.log(mahasiswa);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/object-3.png)
+
+### Menghapus Properti
+
+Gunakan keyword `delete` untuk menghapus properti object.
+
+```javascript
+let mahasiswa = {
+  nama: "Ibnu Ahmad Fauzi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+  status: true,
+};
+
+delete mahasiswa.status;
+delete mahasiswa.fakultas;
+
+console.log(mahasiswa);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/object-4.png)
+
+### Memeriksa Keberadaan Properti
+
+Kita dapat menggunakan operator `in` untuk memeriksa apakah sebuah properti tersedia di dalam object.
+
+```javascript
+let mahasiswa = {
+  nama: "Ibnu Ahmad Fauzi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+  status: true,
+};
+
+delete mahasiswa.status;
+delete mahasiswa.fakultas;
+
+console.log("nama" in mahasiswa);
+console.log("fakultas" in mahasiswa);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/object-5.png)
+
+Cara lainya menggunakan `Object.hasOwn()`
+
+```javascript
+let mahasiswa = {
+  nama: "Ibnu Ahmad Fauzi",
+  fakultas: "Teknologi Informasi",
+  jurusan: "Teknik Informatika",
+  nim: "19104410028",
+  status: true,
+};
+
+delete mahasiswa.status;
+delete mahasiswa.fakultas;
+
+console.log(Object.hasOwn(mahasiswa, "nama"));
+console.log(Object.hasOwn(mahasiswa, "fakultas"));
+```
+
+Metode ini memeriksa apakah properti tersebut dimiliki langsung oleh object.
+
+## Method dalam Object
+
+Selain menyimpan data, object juga dapat memiliki function. Function yang berada di dalam object disebut **method**.
+
+Contohnya:
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+
+  perkenalan: function () {
+    console.log("Halo, nama saya " + this.nama);
+  },
+};
+
+pengguna.perkenalan();
+```
+
+Penjelasan:
+
+- `perkenalan` merupakan method dalam object
+- `this` digunakan untuk mengakses object yang menjadi pemilik method tersebut
+- `this.nama` mengambil properti nama dari object pengguna
+
+### Menggunakan Method dengan Arrow Function
+
+Kita juga dapat menuliskan method menggunakan shorthand method syntax.
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+
+  perkenalan() {
+    console.log(`Halo, nama saya ${this.nama}`);
+  },
+};
+
+pengguna.perkenalan();
+```
+
+Hindari menggunakan arrow function untuk method yang membutuhkan `this` milik object. Arrow function tidak memiliki `this` sendiri, sehingga perilakunya berbeda dari method biasa.
+
+### Method dengan parameter
+
+Method dapat menerima parameter seperti function pada umumnya:
+
+```javascript
+let kalkulator = {
+  tambah(a, b) {
+    return a + b;
+  },
+
+  kurang(a, b) {
+    return a - b;
+  },
+
+  kali(a, b) {
+    return a * b;
+  },
+};
+
+console.log(kalkulator.tambah(10, 5));
+console.log(kalkulator.kurang(10, 5));
+console.log(kalkulator.kali(10, 5));
+```
+
+## Nested Object
+
+Nested object adalah object yang berada di dalam object lainnya. Struktur ini digunakan ketika sebuah data memiliki kelompok informasi yang lebih kompleks. Contohnya:
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+
+  alamat: {
+    jalan: "Jalan Merdeka",
+    kota: "Blitar",
+    provinsi: "Jawa Timur",
+  },
+};
+
+console.log(pengguna.nama);
+console.log(pengguna.alamat.kota);
+console.log(pengguna.alamat.provinsi);
+```
+
+Pada contoh tersebut, object `alamat` berada di dalam object `pengguna`.
+
+### Mengubah Data Nested Object
+
+Kita dapat megubah nilai properti di dalam nested object dengan mengakses properti secara berurutan.
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  alamat: {
+    kota: "Blitar",
+    provinsi: "Jawa Timur",
+  },
+};
+
+pengguna.alamat.kota = "Surabaya";
+
+console.log(pengguna.alamat.kota);
+```
+
+### Optional Chaining
+
+Terkadang sebuah properti nested object belum tersedia atau bernilai `undefined`. Jika kita mengakses properti berikutnya secara langsung, JavaScript dapat menghasilkan error. Contohnya:
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+};
+
+console.log(pengguna.alamat.kota);
+```
+
+Haslnya error karena alamat belum tersedia:
+
+![Ilustrasi JavaScript](/images/javascript/object-6.png)
+
+Kita bisa menggunakan optional chaining (`?.`) agar akses properti lebih aman.
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+};
+
+console.log(pengguna.alamat?.kota);
+```
+
+Dengan begitu bukan lagi error tapi program akan menghasilkan `undefined` jika bagian sebelum tanda `?.` bernilai `null` atau `undefined`.
+
+## Array of Objects
+
+Pada materi sebelumnya, kita sudah mempelajari array. Object dapat dikombinasikan dengna array untuk menyimpan banyak data yang memiliki struktur serupa. Kombinasi tersebut disebut **array of objects**. Contohnya:
+
+```javascript
+let produk = [
+  {
+    nama: "Laptop",
+    harga: 7500000,
+    kategori: "Elektronik",
+  },
+  {
+    nama: "Mouse",
+    harga: 150000,
+    kategori: "Aksesoris",
+  },
+  {
+    nama: "Keyboard",
+    harga: 350000,
+    kategori: "Aksesoris",
+  },
+];
+```
+
+### Mengakses Data Array of Objects
+
+Untuk mengakses datanya cukup tambahkan indeks arraynya diikuti nama properti. Seperti berikut ini:
+
+```javascript
+console.log(produk[0].nama);
+console.log(produk[1].harga);
+console.log(produk[2].kategori);
+```
+
+Dengan begitu kita juga bisa memanfaatkan berbagai method array ke dalam konsep array of objects asalkan mengetahui nomor indeks beserta propertinya,
+
+## Object.keys(), Object.values(), dan Object.entries()
+
+JavaScript menyediakan beberapa method bawaan untuk mengambil informasi dari object.
+
+### Object.keys()
+
+Digunakan untuk mengambil seluruh nama properti atau key dari sebuah object. Hasilnya berupa array:
+
+```javascript
+let siswa = {
+  nama: "Andi",
+  umur: 17,
+  jurusan: "RPL",
+};
+
+let hasil = Object.keys(siswa);
+
+console.log(hasil);
+```
+
+Berikut hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/object-7.png)
+
+### Object.values()
+
+Digunakan untuk mengambil seluruh nilai atau value dari sebuah object.
+
+```javascript
+let siswa = {
+  nama: "Andi",
+  umur: 17,
+  jurusan: "RPL",
+};
+
+let hasil = Object.values(siswa);
+
+console.log(hasil);
+```
+
+Berikut hasilnya yang juga berbentuk array:
+
+![Ilustrasi JavaScript](/images/javascript/object-8.png)
+
+### Object.entries()
+
+Digunakan untuk mengambil seluruh pasangan key dan value dalam bentuk array.
+
+```javascript
+let siswa = {
+  nama: "Andi",
+  umur: 17,
+  jurusan: "RPL",
+};
+
+let hasil = Object.entries(siswa);
+
+console.log(hasil);
+```
+
+Berikut hasilnya yang berbentuk nested array:
+
+![Ilustrasi JavaScript](/images/javascript/object-9.png)
+
+## Destructuring Object
+
+**Destructuring** adalah fitur JavaScript yang memungkinkan kita mengambil nilai properti object dan menyimpannya ke dalam variabel dengan cara yang lebih ringkas. Tanpa destructuring:
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+  pekerjaan: "Frontend Developer",
+};
+
+let nama = pengguna.nama;
+let umur = pengguna.umur;
+let pekerjaan = pengguna.pekerjaan;
+
+console.log(nama);
+console.log(umur);
+console.log(pekerjaan);
+```
+
+Menggunakan destructuring:
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+  pekerjaan: "Frontend Developer",
+};
+
+let { nama, umur, pekerjaan } = pengguna;
+
+console.log(nama);
+console.log(umur);
+console.log(pekerjaan);
+```
+
+### Menggunakan Nama Variabel yang Berbeda
+
+Kita dapat mengganti nama variabel ketika mengambil properti object.
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+};
+
+let { nama: namaPengguna, umur: usia } = pengguna;
+
+console.log(namaPengguna);
+console.log(usia);
+```
+
+Pada contoh tersebut:
+
+- `nama` merupakan properti object.
+- `namaPengguna` merupakan nama variabel baru.
+- `umur` merupakan properti object.
+- `usia` merupakan nama variabel baru.
+
+### Default Value
+
+Kita dapat memberikan nilai default jika properti tidak tersedia atau bernilai `undefined`.
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+};
+
+let { nama, umur = 20 } = pengguna;
+
+console.log(nama);
+console.log(umur);
+```
+
+### Nested Destructuring
+
+Destructuring juga dapat digunakan untuk mengambil properti dari nested object:
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  alamat: {
+    kota: "Blitar",
+    provinsi: "Jawa Timur",
+  },
+};
+
+let {
+  alamat: { kota, provinsi },
+} = pengguna;
+
+console.log(kota);
+console.log(provinsi);
+```
+
+## Spread Operator pada Object
+
+Spread operator menggunakan tiga titik (`...`). Pada object, spread operator dapat digunakan untuk menyalin properti dari satu object ke object lain.
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+};
+
+let penggunaBaru = { ...pengguna };
+
+console.log(penggunaBaru);
+```
+
+`penggunaBaru` merupakan object baru dengan properti yang sama.
+
+### Menggabungkan Dua Object
+
+```javascript
+let identitas = {
+  nama: "Ibnu",
+  umur: 26,
+};
+
+let pekerjaan = {
+  profesi: "Frontend Developer",
+  perusahaan: "Fauzidleware",
+};
+
+let profil = {
+  ...identitas,
+  ...pekerjaan,
+};
+
+console.log(profil);
+```
+
+### Mengubah Nilai Properti dengan Spread Operator
+
+Spread operator juga dapat digunakan untuk membuat object baru dengan nilai properti yang diperarui.
+
+```javascript
+let pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+  kota: "Blitar",
+};
+
+let penggunaBaru = {
+  ...pengguna,
+  kota: "Surabaya",
+};
+
+console.log(penggunaBaru);
+```
+
+Ketika ada properti dengan nama yang sama, nilai yang ditulis belakangan akan menggantikan atau menimpa nilai sebelumnya. Spread operator pada object melakukan penyalinan dangkal (shallow copy). Jika object memiliki nested object, bagian di dalamnya masih dapat berbagi referensi dengan object asli. Jadi spread operator tidak otomatis membuat seluruh struktur menjadi salinan independen.
