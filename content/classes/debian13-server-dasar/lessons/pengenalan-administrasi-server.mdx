@@ -1,0 +1,212 @@
+---
+title: "Pengenalan Administrasi Server"
+description: "Memahami apa itu administrasi server dan memulai belajar debian 13 server."
+order: 1
+---
+
+Dalam dunia teknologi informasi, server memiliki peranan sangat penting dalam menyediakan layanan dan mengelola sumber daya yang digunakan oleh banyak komputer dalam sebuah jaringan. Hampir semua aktivitas digital yang kita lakukan, seperti membuka website, mengirim email, menyimpan file secara online, dan mengakses aplikasi, melibatkan server.
+
+Server tidak hanya digunakan oleh perusahaan besar. Sekolah, kampus, kantor, hingga organisasi kecil juga membutuhkan server untuk mengelola data, menyediakan layanan jaringan, dan mendukung aktivitas operasional.
+
+Oleh karena itu, kemampuan administrasi server menjadi salah satu keterampilan penting dalam bidang teknologi informasi, khususnya jaringan komputer dan sistem operasi linux.
+
+Pada kelas ini, kita akan mempelajari administrasi server menggunakan **Debian 13 (Trixie)** yang dijalankan melalui **Oracle VM VirtualBox**. Seluruh proses pembelajaran akan dilakukan secara bertahap, mulai dari pengenalan server, instalasi sistem operasi, konfigurasi jaringan, hingga membangun berbagai layanan server.
+
+## Pengertian Server
+
+**Server** adalah komputer atau sistem yang menyediakan layanan, data, maupun sumber daya kepada komputer atau perangkat lain melalui sebuah jaringan. Perangkat atau sistem yang meminta layanan dari server disebut **client**.
+
+Sebagai contoh, ketika seseorag membuka sebuah website melalui browser, komputer pengguna bertindak sebagai client yang mengirimkan permintaan kepada web server. Server kemudian memproses permintaan tersebut dan mengirimkan halaman website kepada client.
+
+Server dapat berupa komputer fisik, mesin virtual, maupun sistem berbasis cloud. Hal terpenting adalah server menjalankan layanan yang dapat diakses oleh client sesuai dengan konfigurasi jaringan dan hak akses yang diberikan.
+
+### Cara Kerja Server dan Client
+
+Komunikasi server dan client secara umum berlangsung melalui beberapa tahapan:
+
+1. Client mengirimkan permintaan (request) kepada server
+2. Server menerima permintaan melalui layanan dan port tertentu
+3. Server memproses permintaan tersebut
+4. Server mengirimkan respons (response) kepada client
+5. Client menerima dan menampilkan hasil respons
+
+Contoh sederhana:
+
+Ketike pengguna membuka alamat **www.example.com**:
+
+1. Browser mengirimkan permintaan untuk mengakses website
+2. DNS membantu menerjemahkan nama domain menjadi alamat IP
+3. Web server menerima permintaan HTTP atau HTTPS
+4. Web server mengirimkan halaman website
+5. Browser menampilkan halaman tersebut kepada pengguna
+
+### Ilustrasi Komunikasi Server dan Client
+
+![Ilustrasi JavaScript](/images/debian13/pengenalan-1.png)
+
+Model komunikasi tersebut menjadi dasar dari berbagai layanan jaringan yang akan kita pelajari.
+
+## Pengertian Administrasi Server
+
+**Administrasi server** adalah kegiatan mengelola, mengonfigurasi, memelihara, dan mengamankan server agar dapat menjalankan layanan sesuai kebutuhan pengguna atau organisasi. Administrasi server tidak hanya berkaitan dengan instalasi sistem operasi, tetapi juga mencakup pengelolaan jaringan, pegguna, penyimpanan data, layanan aplikasi, keamanan, serta pemantauan kinerja server.
+
+Seorang administrator server bertanggung jawab memastikan server dapat berjalan dengan baik, stabil, aman, dan dapat diakses oleh pengguna yang memiliki hak akses.
+
+### Ruang Lingkup Administrasi Server
+
+Beberapa kegiatan yang termasuk dalam administrasi server antara lain:
+
+| Kegiatan                 | Penjelasan                                                         |
+| ------------------------ | ------------------------------------------------------------------ |
+| Instalasi Sistem Operasi | Memasang dan menyiapkan sistem operasi server.                     |
+| Konfigurasi Jaringan     | Mengatur IP Address, DNS, gateway, dan interface jaringan.         |
+| Manajemen Pengguna       | Membuat, menghapus, dan mengatur akun pengguna.                    |
+| Manajemen Layanan        | Mengelola layanan seperti DNS, DHCP, Web Server, dan Database.     |
+| Keamanan Server          | Melindungi server dari akses yang tidak sah.                       |
+| Backup dan Restore       | Membuat salinan data dan memulihkan data ketika terjadi kerusakan. |
+| Monitoring               | Memantau penggunaan CPU, RAM, disk, dan jaringan.                  |
+| Troubleshooting          | Menganalisis serta memperbaiki permasalahan server.                |
+
+## Jenis-Jenis Server
+
+Server memiliki berbagai jenis berdasarkan fungsi dan layanan yang disediakan. Berikut beberapa jenis server yang umum digunakan.
+
+### Web Server
+
+**Web server** merupakan server yang bertugas menyediakan halaman website kepada client melalui protokol HTTP atau HTTPS. Contoh software web server:
+
+- Apache HTTP Server
+- Nginx
+- Caddy
+
+Contoh penggunaan: hosting website sekolah, portal akademik, dan aplikasi berbasis web.
+
+### File Server
+
+**File server** merupakan server yang digunakan untuk menyimpan, mengelola, dan membagikan file kepada pengguna dalam jaringan. Contoh software file server:
+
+- Samba
+- NFS
+
+Contoh penggunaan: penyimpanan dokumen bersama dalam lingkungan kantor atau laboratorium komputer.
+
+### Database Server
+
+**Database server** bertugas menyimpan, mengelola, dan menyediakan akses terhadap data yang digunakan oleh aplikasi. Contoh software database server:
+
+- MariaDB
+- MySQL
+- PostgreSQL
+
+Contoh penggunaan: menyimpan data pengguna, transaksi, informasi siswa, dan data aplikasi.
+
+### DNS Server
+
+**DNS (Domain Name System) Server** bertugas menerjemahkan nama domain menjadi alamat IP sehingga komputer dapat menemukan server tujuan berdasarkan nama domain. Contoh software DNS server:
+
+- BIND9
+- Unbound
+
+Contoh penggunaan: menerjemahkan **www.example.com** menjadi alamat ip server yang sesuai.
+
+### DHCP Server
+
+**DHCP (Dynamic Host Configuration Protocol) Server** bertugas memberikan konfigurasi jaringan secara otomatis kepada perangkat client. Informasi yang dapat diberikan meliputi:
+
+- IP Address
+- Subnet Mask
+- Default Gateway
+- DNS Server
+
+Dengan DHCP, administrator tidak perlu mengatur IP Address setiap komputer secara manual.
+
+### Mail Server
+
+**Mail server** merupakan server yang bertugas mengirim, menerima, dan mengelola email. Contoh software mail server:
+
+- Postfix
+- Dovecot
+
+Mail server biasanya menggunakan protokol SMTP untuk pengiriman email serta IMAP atau POP3 untuk pengambilan email.
+
+### Proxy Server
+
+**Proxy server** bertindak sebagai perantara antara client dan server tujuan. Proxy dapat digunakan untuk mengatur akses internet, melakukan filtering, serta menerapkan kebijakan penggunaan jaringan. Contoh software proxy server: Squid.
+
+### VPN Server
+
+**VPN (Virtual Private Network) Server** menyediakan koneksi jaringan privat melalui jaringan publik dengan menggunakan mekanisme tunneling dan enkripsi. Contoh software VPN server:
+
+- WireGurad
+- OpenVPN
+
+VPN memungkinkan administrator atau pengguna yang berwenang mengakses jaringan internal dari lokasi berbeda.
+
+## Peran dan Tanggung Jawab Administrator Server
+
+**Administrator server** adalah seseorang yang bertugas mengelola dan memastikan seluruh layanan server berjalan sesuai kebutuhan. Beberapa tanggung jawab administrator server meliputi:
+
+- **Instalasi dan konfigurasi:** menyiapkan sistem operasi dan layanan server.
+- **Manajemen jarigan:** memastikan komunikasi antara server dan client berjalan baik.
+- **Keamanan sistem:** mengatur hak akses, firewall, dan perlindungan server.
+- **Pemeliharaan:** melakukan pembaruan sistem dan pemeriksaan berkala.
+- **Backup data:** memastikan data penting memiliki salinan cadangan.
+- **Monitoring:** memantau kondisi dan performa server.
+
+* **Troubleshooting:** menangani gangguan dan kesalahan konfigurasi.
+* **Dokumentasi:** mencatat konfigurasi, perubahan, dan prosedur pengelolaan server.
+
+Seorang administrator server dituntut memiliki pemahaman tentang sistem operasi, jaringan komputer, keamanan informasi, serta kemampuan menganalisis permasalahan teknis.
+
+## Mengenal Sistem Operasi Debian 13
+
+**Debian** merupakan salah satu distribusi Linux yang dikenal stabil, memiliki komunitas pengembangan yang besar, serta menyediakan banyak paket perangkat lunak untuk berbagai kebutuhan. Debian 13 memiliki nama kode **Trixie** dan dapat digunakan sebagai sistem operasi server untuk menjalankan berbagai layanan jaringan.
+
+### Mengapa Menggunakan Debian13?
+
+Beberapa alasan menggunakan Debian 13 dalam pembelajaran administrasi server:
+
+- **Stabil:** cocok untuk mempelajari pengelolaan sistem server.
+- **Open Source:** dapat digunakan dan dikembangkan secara bebas sesuai lisensinya.
+- **Ringan:** dapat dijalankan tanpa lingkungan desktip grafis.
+- **Repository Lengkap:** menyediakan berbagai paket untuk kebutuhan administrais server.
+- **Dokumentasi Luas:** memiliki dokumentasi dan komunitas yang dapat dijadikan sumber belajar.
+- **Mendukung berbagai layanan:** dapat digunakan untuk DNS, DHCP, Web Server, Database, File Server, dan layanan lainnya.
+
+### Debian Server dengan Command Line Interface
+
+Dalam pembelajaran ini, Debian 13 akan menggunakan mode Command Line Interface (CLI). **CLI** adalah antarmuka yang memungkinkan pengguna berinteraksi dengan sistem operasi melalui perintah teks di terminal. Contoh perintah di linux:
+
+- **pwd**
+- **ls**
+- **whoami**
+- **hostname**
+- **ip addr**
+
+Melalui CLI, administrator dapat mengelola hampir seluruh kebutuhan server tanpa harus menggunakan antarmuka grafis.
+
+## Mengenal VirtualBox
+
+**Oracle VM VirtualBox** adalah perangkat lunak virtualisasi yang memungkinkan pengguna menjalankan beberapa sistem operasi virtual dalam satu komputer fisik. Dalam pembelajaran ini, VirtualBox digunakan sebagai laboratorium virtual untuk membangun dan menguji server Debian 13. Dengan VirtualBox, kita tidak perlu menyediakan banyak komputer fisik untuk melakukan simulasi jaringan.
+
+### Istilah Penting dalam VirtualBox
+
+| Kegiatan        | Penjelasan                                                        |
+| --------------- | ----------------------------------------------------------------- |
+| Host            | Komputer fisik yang menjalankan VirtualBox.                       |
+| Guest           | Sistem operasi yang dijalankan di dalam virtual machine.          |
+| Virtual Machine | Komputer virtual yang memiliki CPU, RAM, dan penyimpanan virtual. |
+| Virtual Disk    | Media penyimpanan virtual untuk sistem operasi guest.             |
+| Network Adapter | Perangkat jaringan virtual yang digunakan VM.                     |
+| Spanshot        | Titik penyimpanan kondisi VM yang dapat dikembalikan              |
+| ISO             | File image yang digunakan sebagai media instalasi sistem operasi. |
+
+### Gambaran Lingkungan Praktik
+
+Dalam kelas ini, komputer fisik akan bertindak sebagai host, sedangkan Debian 13 akan dijalankan sebagai guest di dalam VirtualBox.
+
+![Ilustrasi JavaScript](/images/debian13/pengenalan-2.png)
+
+Pada materi berikutnya, kita akan mulai mempersiapkan VirtualBox dan membuat virtual machine untuk instalasi Debian13.
+
+Karena masih penjelasan teori jadi belum ada latihan, selamat belajar dan semoga bermanfaat 😉
