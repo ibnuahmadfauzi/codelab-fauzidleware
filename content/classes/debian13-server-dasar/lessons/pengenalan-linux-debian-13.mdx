@@ -1,0 +1,205 @@
+---
+title: "Pengenalan Linux dan Debian 13"
+description: "Memulai mengenal tentang sistem operasi jaringan linux dan Debian 13 Trixie"
+order: 2
+---
+
+Pada materi sebelumnya, kita telah mempelajari konsep dasar server, client, berbagai jenis server, serta pengertian administrasi server. Sebelum mulai melakukan instalasi dan konfigurasi server, kita perlu memahami sistem operasi yang akan digunakan. Dalam pembelajaran ini, sistem operasi yang dipilih adalah Linux dengan distribusi Debian 13 (Trixie).
+
+Linux merupakan salah satu sistem operasi yang banyak digunakan dalam lingkup server karena memilki fleksibilitas tinggi, mendukung berbagai layanan jaringan, serta menyediakan banyak perangkat administrasi melalui terminal.
+
+Debian merupakan salah satu distribusi Linux yang dikenal stabil dan banyak digunakan untuk membangun infrastruktur server. Pada materi ini, kita akan mempelajari pengenalan Linux, sejarah singkatnya, konsep distribusi Linux, karakteristik Debian, hingga mengenal komponen dasar Debian 13.
+
+## Mengenal Linux
+
+**Linux** adalah sistem operasi berbasis kernel Linux yang dikembangkan secara terbuka dan dapat digunakan untuk berbagai kebutuhan komputasi.
+
+Linux dikenal sebagai sistem operasi Open Source, yang berarti kode sumbernya dapat dipelajari, dimodifikasi, dan didistribusikan kembali sesuai dengan ketentuan lisensinya.
+
+Linux banyak digunakan pada:
+
+- Server website
+- Server database
+- Infrastruktur jaringan
+- Komputer desktop
+- Perangkat mobile
+- Sistem embedded dan Internet of Things
+- Infrastruktur cloud dan pusat data
+
+Linux menjadi salah satu pilihan utama dalam lingkungan server karena memiliki fleksibilitas, keamanan, serta kemampuan untuk menjalankan berbagai layanan jaringan.
+
+### Sejarah Singkat Linux
+
+Linux pertama kali dikembangkan oleh **Linux Torvalds** pada tahun 1991. Pada awalnya, Linux dikembangkan sebagai kernel sistem operasi yang terinspirasi dari konsep Unix. Kernel tersebut kemudian berkembang dengan dukungan komunitas pengembang di seluruh dunia.
+
+Linux juga berkembang bersama berbagai perangkat lunak dari proyek GNU, sehingga terbentuk sistem operasi lengkap yang seriing disebut GNU/Linux.
+
+Saat ini, Linux telah menjadi bagian penting dari perkembangan teknologi informasi, trutama dalam bidang server, jaringan komputer, cloud computing, dan pengembang perangkat lunak.
+
+### Pengertian Kernel
+
+**Kernel** adalah bagian inti dari sistem operasi yang bertugas menghubungkan perangkat keras dengan perangkat lunak. Kernel mengatur berbagai sumber daya komputer agar dapat digunakan oleh program yang berjalan di dalam sistem operasi. Beberapa fungsi kernel antara lain:
+
+- Mengelola penggunaan CPU
+- Mengatur penggunaan RAM
+- Mengelola perangkat penyimpanan
+- Mengatur komunikasi dengan perangkat keras
+- Mengelola proses yang sedang berjalan
+- Mengatur komunikasi jaringan
+
+Dalam Linux, kernel menjadi komponen utama yang memungkinkan sistem operasi mengelola perangkat keras dan menjalankan berbagai aplikasi.
+
+### Hubungan Kernel, Sistem Operasi, dan Aplikasi
+
+Secara sederhana, hubungan antara komponen tersebut dapat digambarkan sebagai berikut:
+
+![Ilustrasi JavaScript](/images/debian13/pengenalan-3.png)
+
+Aplikasi berinteraksi dengan sistem operasi untuk menggunakan sumber daya komputer. Sistem operasi kemudian memanfaatkan kernel untuk mengelola perangkat keras.
+
+## Mengenal Distribusi Linux (Distro)
+
+**Distribusi Linux** atau **distro** adalah sistem operasi yang dibangun menggunakan kernel Linux dan dilengkapi dengan berbagai perangkat lunak, utilitas sistem, sistem manajemen paket, serta konfigurasi pendukung. Setiap distribusi Linux dapat memiliki tujuan dan karakteristik yang berbeda.
+
+Ada distro yang dirancang untuk penggunaan desktop, server, keamanan jaringan, pengembangan perangkat lunak, maupun kebutuhan khusus lainnya.
+
+### Contoh Distribusi Linux
+
+Berikut beberapa distribusi Linux yang cukup dikenal:
+
+| Distribusi  | Kegunaan                                            |
+| ----------- | --------------------------------------------------- |
+| Debian      | Server dan sistem operasi umum                      |
+| Ubuntu      | Desktop, server, dan cloud computing                |
+| Linux Mint  | Sistem operasi desktop                              |
+| Fedora      | Desktop, pengembangan, dan teknologi terbaru        |
+| Rocky Linux | Infrastruktur server dan enterprise                 |
+| Arch Linux  | Sistem Linux yang fleksibel dan dapat dikustomisasi |
+| Kali Linux  | Pengujian keamanan dan penetration testing          |
+
+Meskipun menggunakan kernel Linux, setiap distribusi memiliki sistem manajemen paket, konfigurasi, dan pendekatan pengelolaan sistem yang berbeda.
+
+### Hubungan Debian dan Ubuntu
+
+Debian dan Ubuntu merupakan dua distribusi Linux yang memiliki hubungan erat. Ubuntu dikembangkan berdasarkan Debian dan menggunakan banyak komponen serta sistem manajemen paket yang berasal dari ekosistem Debian. Perbedaan sederhananya:
+
+- Debian berfokus pada stabilitas dan prinsip pengembangan komunitas
+- Ubuntu menyediakan pendekatan yang lebih terintegrasi untuk berbagai kebutuhan desktop, server, dan cloud
+
+Keduanya sama-sama menggunakan sistem manajemen paket APT dan format paket DEB.
+
+## Mengenal Debian
+
+**Debian** adalah distribusi Linux Open Source yang dikembangkan oleh komunitas Debian Project. Debian pertama kali diumumkan oleh Ian Murdock pada tahun 1993 dan berkembang menjadi salah satu distribusi Linux yang memiliki komunitas besar. Debian dapat digunakan untuk berbagai kebutuhan, mulai dari komputer pribadi, server, hingga infrastruktur jaringan. Debian menyediakan ribuan paket perangkat lunak yang dapat dipasang sesuai kebutuhan pengguna.
+
+### Karakteristik Debian
+
+Beberapa karakteristik Debian antara lain:
+
+**1. Stabilitas:** Debian Stable mengutamakan kestabilan sistem sehingga cocok digunakan untuk menjalankan layanan server.
+
+**2. Open Source:** Debian dikembangkan secara terbuka dan dapat digunakan sesuai dengan ketentuan lisensinya.
+
+**3. Repository Paket:** Debian memiliki repository yang menyediakan berbagai perangkat lunak untuk kebutuhan sistem.
+
+**4. Manajemen Paket APT:** Debian menggunakan APT untuk memudahkan instalasi, pembaruan, dan penghapusan perangkat lunak.
+
+**5. Dukungan Arsitektur:** Debian mendukung berbagai arsitektur perangkat keras, sehingga dapat digunakan pada berbagai jenis komputer.
+
+**6. Komunitas dan Dokumentasi:** Debian memiliki dokumentasi dan komunitas yang dapat membantu pengguna mempelajari serta mengatasi permasalahan sistem.
+
+### Siklus Rilis Debian
+
+Debian memiliki beberapa jenis rilis yang perlu diketahui:
+
+| Aspek     | Linux Desktop                   | Linux Server                 |
+| --------- | ------------------------------- | ---------------------------- |
+| Tujuan    | Penggunaan komputer sehari-hari | Menyediakan layanan jaringan |
+| Antarmuka | Umumnya GUI                     | Umumnya CLI                  |
+| Pengguna  | Pengguna komputer               |
+
+Administrator dan client layanan |
+| Pengelolaan | GUI dan terminal | Umumnya terminal dan remote access |
+| Layanan | Aplikasi desktop | DNS, DHCP, Web, Database, dll. |
+| Penggunaan | Komputer pribadi | Infrastruktur jaringan |
+
+Dalam kelas ini, kita akan menggunakan Debian 13 Server berbasis CLI agar peserta terbiasa melakukan administrasi sistem melalui terminal.
+
+## Mengenal Komponen Dasar Debian
+
+Sebelum melakukan konfigurasi server, ada beberapa komponen penting dalam Debian yang perlu diketahui.
+
+### Terminal
+
+**Terminal** merupakan aplikasi yang digunakan untuk berinteraksi dengan sistem operasi melalui perintah teks. Contohnya:
+
+- **whoami**
+- **hostname**
+- **pwd**
+- **ls**
+
+### Shell
+
+**Shell** merupakan program yang bertugas menerima dan menjalankan perintah dari pengguna. Salah satu shell yang umum digunakan di Linux adalah **Bash (Bourne Again Shell)**. Contoh penggunaannya:
+
+- \*\*echo "Belajar Debian 13"
+
+Perintah tersebut akan menampilkan teks pada terminal.
+
+### APT (Advanced Package Tool)
+
+**APT** merupakan sistem manajemen paket yang digunakan untuk mengelola perangkat lunak pada Debian dan distribusi turunannya. APT memungkinkan administrator melakukan instalasi, pembaruan, dan penghapusan perangkat lunak melalui terminal. Contoh perintah:
+
+- **apt update** (perintah untuk memperbarui informasi repository).
+- **apt install nama-paket** (perintah untuk menginstal sebuah paket)
+
+### Repository
+
+**Repository** merupakan tempat penyimpanan paket perangkat lunak yang dapat diakses oleh sistem untuk melakukan instalasi maupun pembaruan. Debian menyediakan repository resmi yang berisi berbagai paket untuk kebutuhan sistem. Konfigurasi repository Debian 13 umumnya dikelola melalui:
+
+- **/etc/apt/sources.list**
+- **/etc/apt/sources.list.d/**
+
+### Package (.deb)
+
+**DEB** merupakan format paket perangkat lunak yang digunakan oleh Debian. Paket ini berisi berkas perangkat lunak beserta informasi yang dibutuhkan untuk proses instalasi.
+
+Contohnya, ketika administrator menginstal Apache2 menggunakan APT, sistem akan mengambil paket yang diperlukan dari repository dan memasangnya pada sistem.
+
+## Mengenal Struktur Direktori Linux
+
+Linux memiliki struktur direktori yang berbeda dengan Windows. Pada Linux, seluruh sistem direktori dimulai dari direktori **root** yang ditandai dengan simbol **/**. Berikut beberapa direktori penting dalam Debian:
+
+| Direktori | Fungsi                                                             |
+| --------- | ------------------------------------------------------------------ |
+| /         | Direktori utama atau root filesystem.                              |
+| /home     | Menyimpan direktori pengguna biasa.                                |
+| /root     | Direktori home milik administrator root.                           |
+| /etc      | Menyimpan file konfigurasi sistem.                                 |
+| /var      | Menyimpan data yang sering berubah, termasuk log dan data layanan. |
+| /usr      | Menyimpan berbagai program dan sumber daya sistem.                 |
+| /bin      | Menyediakan perintah dasar sistem.                                 |
+| /sbin     | Menyediakan utilitas administrasi sistem.                          |
+| /tmp      | Menyimpan file sementara.                                          |
+| /boot     | Menyimpan file yang dibutuhkan untuk proses booting.               |
+| /dev      | Menyediakan representasi perangkat sistem.                         |
+| /proc     | Menyediakan informasi proses dan kernel secara virtual.            |
+
+Contoh struktur direktori:
+
+```text
+/
+├── boot
+├── dev
+├── etc
+├── home
+│ └── ibnu
+├── root
+├── tmp
+├── usr
+└── var
+```
+
+Memahami struktur direktori sangat penting karena administrator server akan sering berinteraksi dengan file konfigurasi, log, dan data layanan.
+
+Untuk materi kali ini karena masih teori jadi tidak ada latihan dulu. Selamat belajar 😉
