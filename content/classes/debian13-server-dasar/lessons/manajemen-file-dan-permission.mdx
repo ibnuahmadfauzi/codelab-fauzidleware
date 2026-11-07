@@ -1,0 +1,109 @@
+---
+title: "Manajemen File dan Permission"
+description: "Mengetahui Menejemen File dan Permission di Linux Debian 13"
+order: 7
+---
+
+## Pengertian Manajemen File
+
+**Manajemen file** merupakan proses mengelola file dan direktori pada sistem Linux, mulai dari membuat, menyalin, memindahkan, mengubah nama, hingga menghapus file. Dalam administrasi server, manajemen file diperlukan untuk mengatur konfigurasi, menyimpan data, dan mengelola direktori layanan server.
+
+## Perintah Dasar Manajemen File
+
+Sebagian perintah sudah pernah kita lakukan sebelumnya, jadi harusnya tahap ini masih mudah untuk diikuti:
+
+| Perintah | Fungsi                              |
+| -------- | ----------------------------------- |
+| `pwd`    | Melihat direktori aktif             |
+| `ls`     | Melihat isi direktori               |
+| `cd`     | Berpindah direktori                 |
+| `mkdir`  | Membuat direktori                   |
+| `touch`  | Membuat file kosong                 |
+| `cp`     | Menyalin file                       |
+| `mv`     | Memindahkan atau mengubah nama file |
+| `rm`     | Menghapus file                      |
+| `rmdir`  | Menghapus direktori kosong          |
+| `cat`    | Melihat isi file                    |
+
+Contoh penggunaan:
+
+```bash
+root@debian:~# cd /home/fauzidleware/
+root@debian:/home/fauzidleware# ls
+backup-data  catatan.txt  dokumentasi  gambar  rekaman
+root@debian:/home/fauzidleware# mkdir data
+root@debian:/home/fauzidleware# cd data
+root@debian:/home/fauzidleware/data# touch catatan.txt
+root@debian:/home/fauzidleware/data# ls -lah
+total 8,0K
+drwxrwxr-x 2 root         root         4,0K Nov  7 20:41 .
+drwx------ 9 fauzidleware fauzidleware 4,0K Nov  7 20:41 ..
+-rw-rw-r-- 1 root         root            0 Nov  7 20:41 catatan.txt
+```
+
+## Pengertian File Permission
+
+**Permission** adalah sistem hak akses yang digunakan Linux untuk mengatur siapa saja yang boleh membaca, mengubah, dan menjalankan file atau direktori. Linux memiliki tiga jenis permission:
+
+| Permission | Simbol | Fungsi                                    |
+| ---------- | ------ | ----------------------------------------- |
+| Read       | r      | Membaca file                              |
+| Write      | w      | Mengubah file                             |
+| Execute    | x      | Menjalankan file atau mengakses direktori |
+
+Permission diterapkan pada tiga kategori:
+
+- **User (u):** Pemilik file
+- **Group (g):** Kelompok pemilik file
+- **Others (o):** Pengguna lainnya
+
+## Melihat Permission File
+
+Gunakan perintah `ls -l`. Contohnya:
+
+```bash
+root@debian:/home/fauzidleware/data# ls -l
+total 0
+-rw-rw-r-- 1 root root 0 Nov  7 20:41 catatan.txt
+```
+
+Keterangan:
+
+- **rw- :** Pemilik dapat mmebaca dan menulis
+- **r-- :** Group hanya dapat membaca
+- **r-- :** Others hanya dapat membaca
+
+## Mengubah Permission dengan chmod
+
+Perintah `chmod` digunakan untuk mengubah hak akses file dan direktori. Contohnya:
+
+```bash
+root@debian:/home/fauzidleware/data# ls -l
+total 0
+-rw-rw-r-- 1 root root 0 Nov  7 20:41 catatan.txt
+root@debian:/home/fauzidleware/data# chmod 777 catatan.txt
+root@debian:/home/fauzidleware/data# ls -l
+total 0
+-rwxrwxrwx 1 root root 0 Nov  7 20:41 catatan.txt
+```
+
+Berikut nilai permission numerik:
+
+| Angka | Permission                   |
+| ----- | ---------------------------- |
+| 0     | Tidak ada akses              |
+| 1     | Execute (x)                  |
+| 2     | Write (w)                    |
+| 3     | Write + Execute (wx)         |
+| 4     | Read (r)                     |
+| 5     | Read + Execute (rx)          |
+| 6     | Read + Write (rw)            |
+| 7     | Read + Write + Execute (rwx) |
+
+Contoh **chmod 777** berarti:
+
+- **User:** 7 (rwx)
+- **Group:** 7 (rwx)
+- **Others:** 7 (rwx)
+
+Namun hindari memberi hak akses penuh seperti contoh di atas, silahkan disesuaikan dengan kebutuhan.
