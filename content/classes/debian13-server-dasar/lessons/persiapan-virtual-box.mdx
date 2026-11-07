@@ -3,3 +3,201 @@ title: "Persiapan VirtualBox"
 description: "Memulai VirtualBox untuk Menjalankan Virtual Machine Debian 13"
 order: 3
 ---
+
+Pada materi sebelumnya, kita telah mengenal Linux dan Debian 13 sebagai sistem operasi yang akan digunakan dalam pembelajaran administrasi server jaringan. Sebelum melakukan instalasi Debian 13, kita perlu menyiapkan lingkungan virtualisasi terlebih dahulu.
+
+Dalam pemebelajaran ini, kita akan menggunakan **Oracle VM VirtualBox**, yaitu perangkat lunak virtualisais yang memungkinkan kita menjalankan sistem operasi lain di dalam komputer tanpa harus menginstalnya secara langsung pada perangkat fisik. Dengan VirtualBox, kita dapat membuat komputer virtual yang memiliki sumber daya CPU, RAM, penyimpanan, dan perangkat jaringan sendiri.
+
+Hal ini sangat membantu dalam pembelajaran administrasi server karena kita dapat membangun simulasi jaringan mnggunakan beberapa mesin virtual dalam satu komputer.
+
+## Mengenal VirtualBox
+
+**Oracle VM VirtualBox** adalah perangkat lunak virtualisasi yang memungkinkan pengguna membuat dan menjalankan beberapa mesin virtual dalam satu komputer fisik. VirtualBox dikembangkan oleh Oracle dan dapat digunakan pada berbagai sistem operasi host, seperti Windows, Linux, dan macOS. Dengan VirtualBox, kita dapat menjalankan Debian 13 sebagai sistem operasi guest meskipun komputer utama menggunakan Windows.
+
+### Fungsi VirtualBox
+
+Bebrapa fungsi VirtualBox antara lain:
+
+- Menjalankan sistem operasi lain tanpa mengubah sistem operasi utama.
+- Membuat simulasi jaringan komputer.
+- Menguji konfigurasi server dan client.
+- Mempelajari instalasi berbagai sistem operasi.
+- Melakukan pengujian perangkat lunak dalam lingkungan terpisah.
+- Membuat snapshot untuk menyimpan kondisi mesin virtual.
+
+### Istilah Penting dalam VirtualBox
+
+Walaupun di materi pertama sudah pernah kita bahas, tidak masalah akan kita bahas ulang:
+
+| Istilah              | Penjelasan                                                        |
+| -------------------- | ----------------------------------------------------------------- |
+| Host                 | Komputer fisik yang menjalankan VirtualBox.                       |
+| Guest                | Sistem operasi yang berjalan di dalam mesin virtual.              |
+| Virtual Machine (VM) | Komputer virtual yang dibuat menggunakan VirtualBox.              |
+| Virtual CPU          | Sumber daya prosesor virtual yang dialokasikan untuk VM.          |
+| Virtual RAM          | Kapasitas memori yang dialokasikan untuk VM.                      |
+| Virtual Disk         | Media penyimpanan virtual untuk sistem operasi guest.             |
+| ISO                  | File image yang digunakan sebagai media instalasi sistem operasi. |
+| Snapshot             | Penyimpanan kondisi VM pada waktu tertentu.                       |
+| Network Adapter      | Perangkat jaringan virtual untuk menghubungkan VM ke jaringan.    |
+
+## Persyaratan Perangkat Keras
+
+Sebelum menginstal VirtualBox, pastikan komputer memiliki spesifikasi yang memadai.
+
+### Spesifikasi Minimum yang Disarankan
+
+| Komponen       | Rekomendasi                              |
+| -------------- | ---------------------------------------- |
+| Processor      | Intel atau AMD 64-bit                    |
+| RAM            | Minimal 4 GB                             |
+| Sistem Operasi | Windows, Lunux, atau macOS yang didukung |
+| Penyimpanan    | Minimal 30 GB ruang kosong               |
+| Virtualization | Intel VT-x atau AMD-V aktif              |
+
+Untuk pengalaman praktik yang lebih nyaman, disarankan menggunakan komputer dengan RAM 8 GB atau lebih dan ruang penyimpanan cukup.
+
+### Mengenal Hardware Virtualization
+
+Hardware virtualization merupakan teknologi pada prosesor yang memungkinkan komputer menjalankan mesin virtual dengan lebih optimal. Teknologi ini dikenal dengan beberapa nama:
+
+- Intel VT-x pada prosesor Intel
+- AMD-V atau SVM pada prosesor AMD
+
+Pada beberapa komputer, fitur virtualisasi perlu diaktifkan melalui pengaturan BIOS atau UEFI. Jika fitur tersebut belum aktif, VirtualBox mungkin mengalami kendala ketika menjalankan mesin virtual.
+
+## Mengunduh Oracle VM VirtualBox
+
+Langkah pertama adalah mengunduh installer VirtualBox dari website resminya.
+
+**https://www.virtualbox.org/wiki/Downloads**
+
+![Ilustrasi JavaScript](/images/debian13/vm-1.png)
+
+Jika menggunakan Windows, pilih paket **Windows hosts**. Jika menggunakan Linux atau macOS, pilih paket yang sesuai dengan distribusi atau sistem operasi yang digunakan. Pastikan mengunduh installer dar website resmi untuk menghindari file yang tidak aman atau telah dimodifikasi.
+
+### Menginstal VirtualBox
+
+Setelah berhasil download file installer Oracle VM VirtualBox, buka file nya, jika muncul **Welcome Page** seperti berikut, klik **Next**
+
+![Ilustrasi JavaScript](/images/debian13/vm-2.png)
+
+Selanjutnya **End-User License Agreement** pilih dulu yang **K accept the terms of the license agreement** lalu klik **Next**.
+
+![Ilustrasi JavaScript](/images/debian13/vm-3.png)
+
+Selanjutnya **Custom Setup** klik **Next**
+
+![Ilustrasi JavaScript](/images/debian13/vm-4.png)
+
+Selanjutnya pada halaman **Warning: Network Disconnection** dan **Missing Dependencies** klik **Yes**.
+
+![Ilustrasi JavaScript](/images/debian13/vm-5.png)
+
+![Ilustrasi JavaScript](/images/debian13/vm-6.png)
+
+Selanjutnya pada halaman **Custom Setup** yang ini, checklist semua pilihannya lalu klik **Next**.
+
+![Ilustrasi JavaScript](/images/debian13/vm-7.png)
+
+Selanjutnya klik **Install** dan tunggu sampai proses pemasangan selesai.
+
+![Ilustrasi JavaScript](/images/debian13/vm-8.png)
+
+![Ilustrasi JavaScript](/images/debian13/vm-9.png)
+
+Jika sudah selesai, untuk **Start Oracle VirtualBox** bisa di checklist saja, agar ketika klik tombol **Finish** halaman VirtualBox nya langsung terbuka.
+
+![Ilustrasi JavaScript](/images/debian13/vm-10.png)
+
+Berikut tampilan awal dari aplikasi Oracle VM VirtualBox.
+
+![Ilustrasi JavaScript](/images/debian13/vm-11.png)
+
+Pada tahap ini, VirtualBox sudah siap digunakan untuk membuat mesin virtual.
+
+## Mengunduh ISO Debian 13
+
+Setelah VirtualBox terinstal, langkah selanjutnya adalah menyiapkan file ISO Debian 13. ISO merupakan file image yang berisi media instalasi sistem operasi. File ini nantinya akan digunakan sebagai media booting saat proses instalasi Debian 13 di mesin virtual.
+
+Untuk mendapatkan file ISO Debian 13 bisa download langsung di situs resminya
+
+**https://www.debian.org/distrib/**
+
+![Ilustrasi JavaScript](/images/debian13/vm-12.png)
+
+Untuk saat ini karena versi Debian yang terbaru adalah Deban 13, maka yang terpampang di halaman utamanya masih link untuk Debian 13. Perhatikan nama file yang di download terdapat kata **netinst** yang merupakan installer berukuran relatif kecil dan menggunakan koneksi internet untuk mengambil paket tambahan selama instalasi. Jadi untuk Debian 13 ini file ISO nya tidak besar, hanya sekitar 700 MB an.
+
+## Membuat Virtual Machine Baru
+
+Setelah VirtualBox dan ISO Debian 13 tersedia, kita dapat mulai membuat mesin virtual.
+
+Buka VirtualBox lalu klik tombol **New**
+
+![Ilustrasi JavaScript](/images/debian13/vm-13.png)
+
+Setelah itu jendela pembuatan mesin virtual akan ditampilkan
+
+![Ilustrasi JavaScript](/images/debian13/vm-14.png)
+
+Pada bagian **Virtual machine name and operating system** ada beberapa bagian yang perlu diisi:
+
+- **VM Name:** direkomendasikan isikan nama untuk VM tanpa menggunakan spasi
+- **VM Folder:** secara default akan diarahkan ke **Local Disk C:** tapi karena di komputer saya sudah penuh, maka saya pindah ke **Disk D:**
+- **ISO Image** sementara biarkan kosong dulu
+- **OS:** isikan Linux
+- **OS Distribution:** isikan Debian
+- **OS Version:** isikan Debian 13 Trixiee (64-bit)
+
+![Ilustrasi JavaScript](/images/debian13/vm-15.png)
+
+Bagian **Set up unattended guest OS installation** belum bisa kita isi
+
+![Ilustrasi JavaScript](/images/debian13/vm-16.png)
+
+Selanjutnya pada bagian **Specify virtual hardware** di **Base Memory** untuk mengatur RAM VM nya saya menggunakan RAM 1 GB saja, dan karena di sini satuannya MB jadi di isi **1024 MB**, dan **Number of CPUs** biaskan di **1 CPU**
+
+![Ilustrasi JavaScript](/images/debian13/vm-17.png)
+
+Selanjutnya pada bagian **Create a New Virtual Hard Disk** untuk **Disk Size** saya isi **10 GB**, lalu untuk **Hard Disk File Type and Format** saya isi **VDI (VirtualBox Disk Image)**, jika sudah bisa klik tombol **Finish**.
+
+![Ilustrasi JavaScript](/images/debian13/vm-18.png)
+
+Jika sudah maka VM baru kita muncul di halaman VirtualBox
+
+![Ilustrasi JavaScript](/images/debian13/vm-19.png)
+
+## Mengenal Pengaturan Jaringan VirtualBox
+
+Jaringan merupakan salah satu bagian penting dalam administrasi server. VirtualBox menyediakan beberapa jenis mode jaringan yang dapat digunakan sesuai kebutuhan.
+
+- **NAT (Network Address Translation):** memungkinkan mesin virtual mengakses jaringan luar melalui koneksi jaringan komputer host. Mode ini cocok digunakan ketika kita ingin Debian 13 mengakses internet untuk mengunduh paket atau melakukan pembaruan sistem.
+- **NAT Network:** memungkinkan beberapa mesin virtual berada dalam jaringan NAT yang sama dan berkomunikasi satu sama lain, sekaligus mengakses jarngan luar.
+- **Bridge Adapter:** menghubungkan mesin virtual ke jaringan visik melalui adapter jaringan komputer host. Dengan mode ini, VM dapat memperoleh alamat IP dari jaringan lokal dan berkomunikasi dengan perangkat lain dalam jaringan tersebut.
+- **Host-only Adapter:** memungkinkan komunikasi antara komputer host dan mesin virtual melalui jaringan virtual khusus. Mode ini cocok untuk praktik administrasi server lokal tanpa harus mengekspos server ke jaringan luar.
+- **Internal Network:** memungkinkan beberapa mesin virtual berkomunikasi satu sama lain dalam jaringan virtual internal. Jaringan ini tidak secara langsung terhubung ke komputer host maupun jaringan luar.
+
+Berikut tabel perbandingan dari beberapa contoh pengaturan jaringan di atas:
+
+| Mode             | Akses Internet       | Komunikasi dengan Host | Komunikasi Antar-VM |
+| ---------------- | -------------------- | ---------------------- | ------------------- |
+| NAT              | Ya                   | Terbatas               | Tidak langsung      |
+| NAT Network      | Ya                   | Tidak langsung         | Ya                  |
+| Bridged          | Ya, sesuai jaringan  | Ya                     | Ya                  |
+| Host-only        | Tidak secara default | Ya                     | Ya                  |
+| Internal Network | Tidak secara default | Tidak                  | Ya                  |
+
+Untuk tahap awal instalasi Debian, kita akan menggunakan **NAT** agar mesin virtual dapat mengakses internet. Pada materi konfigurasi jaringan berikutnya, kita akan mempelajari penggunaan Host-only, Internal Network, dan mode lainnya untuk membangun simulasi jaringan server dan client.
+
+## Mengenal SNapshot VirtualBox
+
+**Snapshot** adalah fitur VirtualBox yang digunakan untuk menyimpan kondisi mesin virtual pada waktu tertentu. Fitur ini sangat berguna ketika melakukan praktik administrasi server. Misalnya, sebelum mengubah konfigurasi DNS Server, kita dapat membuat snapshot terlebih dahulu. Jika terjadi kesalahan, kodnsisi mesin virtual dapat dikembalikan ke snapshot sebelumnya.
+
+Beberapa manfaat snapshot:
+
+- Menyimpan kondisi sistem sebelum melakukan perubahan.
+- Mengembalikan sistem ketika terjadi kesalahan konfigurasi.
+- Mempermudah pengujian berbagai konfigurasi.
+- Mengurangi kebutuhan untuk menginstal ulang sistem operasi ketika melakukan eksperimen.
+
+Perlu diketahui bahwa snapshot bukan pengganti backup. Snapshot tetap bergantung pada file dan media penyimpanan VM, sehingga tidak boleh dijadikan satu-satunya salinan data penting.
