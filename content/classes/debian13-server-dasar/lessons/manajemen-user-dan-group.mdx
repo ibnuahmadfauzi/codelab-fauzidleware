@@ -1,0 +1,117 @@
+---
+title: "Manajemen User dan Group di Linux"
+description: "Mengenal cara pembuatan user dan group di Linux Debian 13"
+order: 6
+---
+
+Sekarang kita akan belajar manajemen user dan group secara singkat saja untuk menambah pengetahuan seputar administrator server jaringan.
+
+## Mengenal User dan Group
+
+**User** adalah akun yang digunakan seseorang atau layanan untuk mengakses sistem Linux. Setiap user memiliki identitas berupa User ID (UID).
+
+**Group** adalah kumpulan pengguna yang dikelompokkan untuk mempermudah pengaturan hak akses terhadap file dan direktori. Setiap group memiliki Group ID (GID).
+
+![Ilustrasi JavaScript](/images/debian13/uss-1.png)
+
+Contohnya:
+
+- User: **ibnu**, **fauzidleware**, **operator**
+- Group: **admin**, **developer**, **staff**
+
+## Jenis User di Linux
+
+Linux memiliki beberapa jenis pengguna atau user:
+
+- **Root User:** administrator utama dengan hak akses penuh terhadap sistem (UID 0)
+- **Regular User:** pengguna biasa dengan hak akses terbatas
+- **System User:** akun yang digunakan untuk menjalankan layanan sistem, seperti www-data
+
+## Melihat Informasi User dan Group
+
+Beberapa perintah dasarnya:
+
+| Perintah          | Fungsi                 |
+| ----------------- | ---------------------- |
+| `whoami`          | Melihat user aktif     |
+| `id`              | Melihat UID dan GID    |
+| `groups`          | Melihat group pengguna |
+| `cat /etc/passwd` | Melihat daftar user    |
+| `cat /etc/group`  | Melihat daftar group   |
+
+Contohnya:
+
+```bash
+fauzidleware@debian:~$ whoami
+fauzidleware
+fauzidleware@debian:~$ id
+uid=1000(fauzidleware) gid=1000(fauzidleware) groups=1000(fauzidleware),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),100(users),101(netdev),103(bluetooth)
+fauzidleware@debian:~$ groups
+fauzidleware cdrom floppy audio dip video plugdev users netdev bluetooth
+```
+
+## Membuat dan Mengelola User
+
+Membuat user baru bisa dilakukan dengan perintah `adduser` diikuti nama user yang mau digunakan. Contoh:
+
+```bash
+fauzidleware@debian:~$ adduser siswa
+-bash: adduser: perintah tidak ditemukan
+fauzidleware@debian:~$ su -
+Kata Sandi:
+root@debian:~# adduser siswa
+Kata sandi baru:
+Ketik ulang kata sandi baru:
+passwd: kata sandi diperbaharui dengan sukses
+Mengubah informasi pengguna dari siswa
+Masukkan nilai baru atau tekan ENTER untuk nilai bawaan
+        Nama Lengkap []:
+        Nomor Ruangan []:
+        Telepon Kantor []:
+        Telepon Rumah []:
+        Lain-lain []:
+Is the information correct? [Y/n] y
+root@debian:~#
+```
+
+Jika gagal silahkan berpindah ke **root**. Ketika membuat user **siswa** baru akan langsung dimintai kata sandi untuk digunakan login.
+
+Untuk berpindah user bisa gunakan perintah `su` seperti berikut:
+
+```bash
+root@debian:~# exit
+logout
+fauzidleware@debian:~$ su siswa
+Kata Sandi:
+siswa@debian:/home/fauzidleware$
+```
+
+## Membuat dan Mengelola Group
+
+Membuat group dengan perintah `groupadd` seperti berikut:
+
+```bash
+fauzidleware@debian:~$ su siswa
+Kata Sandi:
+siswa@debian:/home/fauzidleware$ su -
+Kata Sandi:
+root@debian:~# groupadd developer
+```
+
+Seperti biasa masuk dulu ke **root** untuk membuat user baru. Lalu untuk menambahkan user ke group gunakan perintah `usermod` ditambah opsi `-aG` lalu diikuti nama group dan nama user. Dan untuk melihat anggota group gunakan perintah `getent group` lalu diikuti nama group. Seperti contoh berikut:
+
+```bash
+root@debian:~# usermod -aG developer siswa
+root@debian:~# getent group developer
+developer:x:1002:siswa
+```
+
+Untuk menhapus user dari group gunakan perintah `gpasswd` dengan opsi `-d` diikuti nama user dan nama group. Lalu untuk menghapus group gunakan perintah `groupdel` diikuti nama group. Seperti contoh berikut:
+
+```bash
+root@debian:~# gpasswd -d siswa developer
+Mengeluarkan pengguna siswa dari grup developer
+root@debian:~# getent group developer
+developer:x:1002:
+root@debian:~# groupdel developer
+```
