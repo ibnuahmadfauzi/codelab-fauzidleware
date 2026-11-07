@@ -1,0 +1,200 @@
+---
+title: "Manajemen Paket Debian"
+description: "Mengetahui Menejemen Paket Debian 13 dengan APT"
+order: 8
+---
+
+## Pengertian APT
+
+**APT (Advanced Package Tool)** adalah sistem manajemen paket pada Debian yang digunakan untuk menginstal, memperbarui, dan menghapus perangkat lunak. Dengan APT, administrator dapat mengelola berbagai aplikasi dan layanan server tanpa harus mengunduh serta memasangnya secara manual.
+
+Contoh perangkat lunak yang dapat diinstal menggunakan APT:
+
+- Apache Web Server
+- Nginx
+- OpenSSH Server
+- MariaDB
+- DNS Server (BIND9)
+- DHCP Server
+
+## Mengenal Repository Debian
+
+**Repository** adalah tempat penyimpanan paket perangkat lunak yang dapat diunduh dan diinstal oleh sistem Linux. Debian menyediakan repository resmi yang berisi berbagai aplikasi dan pembaruan sistem. Konfigurasi repository dapat diperiksa melalui `cat /etc/apt/sources.list`
+
+```bash
+root@debian:/home/fauzidleware/data# cat /etc/apt/sources.list
+#deb cdrom:[Debian GNU/Linux 13.7.0 _Trixie_ - Official amd64 NETINST with firmware 20260912-09:35]/ trixie contrib main non-free-firmware
+
+deb http://deb.debian.org/debian/ trixie main non-free-firmware
+deb-src http://deb.debian.org/debian/ trixie main non-free-firmware
+
+deb http://security.debian.org/debian-security trixie-security main non-free-firmware
+deb-src http://security.debian.org/debian-security trixie-security main non-free-firmware
+
+# trixie-updates, to get updates before a point release is made;
+# see https://www.debian.org/doc/manuals/debian-reference/ch02.en.html#_updates_and_backports
+deb http://deb.debian.org/debian/ trixie-updates main non-free-firmware
+deb-src http://deb.debian.org/debian/ trixie-updates main non-free-firmware
+
+# This system was installed using small removable media
+# (e.g. netinst, live or single CD). The matching "deb cdrom"
+# entries were disabled at the end of the installation process.
+# For information about how to configure apt package sources,
+# see the sources.list(5) manual.
+```
+
+## Memperbarui Daftar Paket
+
+Sebelum menginstal aplikasi, administrator sebaiknya memperbarui daftar informasi paket. Gunakan perintah `apt update`. Perintah tersebut mengambil informasi paket terbaru dari repository:
+
+```bash
+root@debian:/home/fauzidleware# apt update
+Hit:1 http://deb.debian.org/debian trixie InRelease
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47,3 kB]
+Get:3 http://security.debian.org/debian-security trixie-security InRelease [43,4 kB]
+Get:4 http://security.debian.org/debian-security trixie-security/main Sources [261 kB]
+Get:5 http://security.debian.org/debian-security trixie-security/main amd64 Packages [300 kB]
+Get:6 http://security.debian.org/debian-security trixie-security/main Translation-en [180 kB]
+Fetched 832 kB in 1s (604 kB/s)
+1 package can be upgraded. Run 'apt list --upgradable' to see it.
+```
+
+`apt update` tidak langsung memperbarui seluruh aplikasi yang terinstal.
+
+## Memperbarui Paket Sistem
+
+Untuk memperbarui paket yang sudah terinstal, gunakan: `apt upgrade`. Jika ingin memperbarui paket sekaligus menangani perubahan dependensi yang diperlukan, gunakan: `apt full-upgrade`. Perintah `full-upgrade` datapa menghapus paket tertentu jika diperlukan untuk menyelesaikan proses pembaruan.
+
+```bash
+root@debian:/home/fauzidleware# apt upgrade
+Upgrading:
+  zlib1g
+
+Summary:
+  Upgrading: 1, Installing: 0, Removing: 0, Not Upgrading: 0
+  Download size: 88,7 kB
+  Freed space: 1.024 B
+
+Continue? [Y/n] y
+Get:1 http://security.debian.org/debian-security trixie-security/main amd64 zlib1g amd64 1:1.3.dfsg+really1.3.1-1+deb13u1 [88,7 kB]
+Fetched 88,7 kB in 0s (276 kB/s)
+Reading changelogs... Done
+(Sedang membaca basis data ...  35316 berkas atau direktori telah terpasang.)
+Preparing to unpack .../zlib1g_1%3a1.3.dfsg+really1.3.1-1+deb13u1_amd64.deb ...
+Unpacking zlib1g:amd64 (1:1.3.dfsg+really1.3.1-1+deb13u1) over (1:1.3.dfsg+really1.3.1-1+b1) ...
+Sedang menata zlib1g:amd64 (1:1.3.dfsg+really1.3.1-1+deb13u1) ...
+Processing triggers for libc-bin (2.41-12+deb13u4) ...
+```
+
+## Menginstal Aplikasi
+
+Untuk menginstal aplikasi, gunakan perintah: `apt install nama-paket`. Contohnya kita mau menginstal **Nginx**, lakukan seperti ini:
+
+```bash
+root@debian:/home/fauzidleware# apt install nginx -y
+Installing:
+  nginx
+
+Installing dependencies:
+  nginx-common
+
+Suggested packages:
+  fcgiwrap  nginx-doc  ssl-cert
+
+Summary:
+  Upgrading: 0, Installing: 2, Removing: 0, Not Upgrading: 0
+  Download size: 725 kB
+  Space needed: 1.906 kB / 8.084 MB available
+
+Get:1 http://security.debian.org/debian-security trixie-security/main amd64 nginx-common all 1.26.3-3+deb13u10 [112 kB]
+Get:2 http://security.debian.org/debian-security trixie-security/main amd64 nginx amd64 1.26.3-3+deb13u10 [614 kB]
+Fetched 725 kB in 1s (1.179 kB/s)
+Prakonfigurasi paket ...
+Selecting previously unselected package nginx-common.
+(Sedang membaca basis data ...  35315 berkas atau direktori telah terpasang.)
+Preparing to unpack .../nginx-common_1.26.3-3+deb13u10_all.deb ...
+Unpacking nginx-common (1.26.3-3+deb13u10) ...
+Selecting previously unselected package nginx.
+Preparing to unpack .../nginx_1.26.3-3+deb13u10_amd64.deb ...
+Unpacking nginx (1.26.3-3+deb13u10) ...
+Sedang menata nginx-common (1.26.3-3+deb13u10) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/nginx.service' → '/usr/lib/systemd/system/nginx.service'.
+Sedang menata nginx (1.26.3-3+deb13u10) ...
+Upgrading binary: nginx.
+Processing triggers for man-db (2.13.1-1) ...
+```
+
+Opsi `-y` digunakan untuk menyetujui konfirmasi instalasi secara otomatis.
+
+## Melihat dan Mencari Paket
+
+Mencari paket berdasarkan nama bisa gunakan perintah `apt search nginx`, jika mau melihat informasi paket gunakan perintah `apt show nginx`, jika mau melihat daftar paket yang terinstal gunakan perintah `apt list --installed`.
+
+```bash
+root@debian:/home/fauzidleware# apt show nginx
+Package: nginx
+Version: 1.26.3-3+deb13u10
+Priority: optional
+Section: httpd
+Maintainer: Debian Nginx Maintainers <pkg-nginx-maintainers@alioth-lists>
+Installed-Size: 1.593 kB
+Provides: httpd, httpd-cgi, nginx-abi-1.26.3-1
+Depends: libc6 (>= 2.34), libcrypt1 (>= 1:4.1.0), libpcre2-8-0 (>= 10.22>
+Breaks: nginx-core (<< 1.22.1-6~), nginx-extras (<< 1.22.1-6~), nginx-li>
+Replaces: nginx-core (<< 1.22.1-6~), nginx-extras (<< 1.22.1-6~), nginx->
+Homepage: https://nginx.org
+Download-Size: 614 kB
+APT-Manual-Installed: yes
+APT-Sources: http://security.debian.org/debian-security trixie-security/>
+Description: small, powerful, scalable web/proxy server
+ Nginx ("engine X") is a high-performance web and reverse proxy server
+ created by Igor Sysoev. It can be used both as a standalone web server
+ and as a proxy to reduce the load on back-end HTTP or mail servers.
+
+Notice: There is 1 additional record. Please use the '-a' switch to see >
+lines 1-20/20 (END)
+```
+
+## Menghapus Aplikasi
+
+Untuk menghapus aplikasi tanpa menghapus file konfigurasi sistem yang tersisa bisa gunakan perintah `apt remove nginx`, untuk menghapus aplikasi beserta file konfigurasi paket gunakan perintah `apt purge nginx`, untuk menghapus dependensi yang sudah tidak diperlukan gunakan perintah `apt autoremove`.
+
+```bash
+root@debian:/home/fauzidleware# apt show nginx
+Package: nginx
+Version: 1.26.3-3+deb13u10
+Priority: optional
+Section: httpd
+Maintainer: Debian Nginx Maintainers <pkg-nginx-maintainers@alioth-lists>
+Installed-Size: 1.593 kB
+Provides: httpd, httpd-cgi, nginx-abi-1.26.3-1
+Depends: libc6 (>= 2.34), libcrypt1 (>= 1:4.1.0), libpcre2-8-0 (>= 10.22>
+Breaks: nginx-core (<< 1.22.1-6~), nginx-extras (<< 1.22.1-6~), nginx-li>
+Replaces: nginx-core (<< 1.22.1-6~), nginx-extras (<< 1.22.1-6~), nginx->
+Homepage: https://nginx.org
+Download-Size: 614 kB
+APT-Manual-Installed: yes
+APT-Sources: http://security.debian.org/debian-security trixie-security/>
+Description: small, powerful, scalable web/proxy server
+ Nginx ("engine X") is a high-performance web and reverse proxy server
+ created by Igor Sysoev. It can be used both as a standalone web server
+ and as a proxy to reduce the load on back-end HTTP or mail servers.
+
+Notice: There is 1 additional record. Please use the '-a' switch to see >
+root@debian:/home/fauzidleware# apt remove nginx
+The following package was automatically installed and is no longer required:
+  nginx-common
+Use 'apt autoremove' to remove it.
+
+REMOVING:
+  nginx
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 1, Not Upgrading: 0
+  Freed space: 1.593 kB
+
+Continue? [Y/n] y
+(Sedang membaca basis data ...  35369 berkas atau direktori telah terpasang.)
+Removing nginx (1.26.3-3+deb13u10) ...
+Processing triggers for man-db (2.13.1-1) ...
+```
