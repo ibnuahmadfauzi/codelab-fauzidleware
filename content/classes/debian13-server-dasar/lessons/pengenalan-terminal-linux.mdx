@@ -1,0 +1,703 @@
+---
+title: "Pengenalan Terminal dan Perintah Dasar Linux"
+description: "Mengenal terminal dan perintah dasar pada sistem operasi Linux Debian 13"
+order: 5
+---
+
+Pada materi sebelumnya, kita telah berhasil menginstal Debian 13 Server menggunakan Oracle VM VirtualBox. Sekarang kita akan mulai belajar mengoperasikan Debian melalui Command Line Interface (CLI). **Terminal** merupakan salah satu alat utama yang digunakan administrator Linux untuk mengelola server. Melalui terminal, kita dapat mengelola file, direktori, pengguna, jaringan, layanan, hingga keamanan sistem.
+
+Pada materi ini, kita akan mempelajari perintah-perintah Linux yang paling sering digunakan dalam administrasi server, mulai dari navigasi direktori, pengelolaan file, membaca informasi sistem, hingga memahami hak akses pengguna.
+
+![Ilustrasi JavaScript](/images/debian13/termuk-1.png)
+
+## Mengenal Terminal Linux
+
+**Terminal** adalah antarmuka berbasis teks yang digunakan untuk berinteraksi dengan sistem operasi melalui perintah-perintah tertentu. Melalui terminal, pengguna dapat menjalankan berbagai instruksi tanpa harus menggunakan antarmuka grafis.
+
+Dalam administrasi server, terminal sangat penting karena sebagian besar konfigurasi dan pengelolaan server Linux dilakukan melalui CLI. Contoh aktivitas yang dapat dilakukan melalui terminal:
+
+- Membuat dan menghapus direktori
+- Mengelola file konfigurasi
+- Menginstal perangkat lunak
+- Mengatur pengguna
+- Memeriksa jaringan
+- Mengelola layanan server
+- Memeriksa kondisi sistem
+
+### Pengertian CLI
+
+**CLI (Command Line Interface)** adalah antarmuka yang memungkinkan pengguna berinteraksi dengan komputer menggunakan perintah teks. Berbeda dengan GUI (Graphical User Interface) yang menggunkan ikon serta tombol, CLI mengandalkan instruksi yang diketik melalui keyboard. Contoh perbandingannya:
+
+| GUI                                     | CLI                               |
+| --------------------------------------- | --------------------------------- |
+| Menggunakan tampilan grafis             | Menggunakan perintah teks         |
+| Berinteraksi melalui mouse dan keyboard | Umumnya menggunakan keyboard      |
+| Mudah digunakan pemula                  | Membutuhkan pemahaman perintah    |
+| Cocok untuk penggunaan desktop          | Sangat umum digunakan pada server |
+
+### Pengertian Shell
+
+**Shell** adalah program yang bertugas menerima perintah dar pengguna, menerjemahkannya, dan menjalankan instruksi melalui sistem operasi. Salah satu shell yang paling umum digunakan pada Linux adalah **Bash (Bourne Again Shell)**. Contoh perintah menggunakan Bash:
+
+```bash
+fauzidleware@debian:~$ echo "Selamat belajar Linux"
+Selamat belajar Linux
+```
+
+### Hubungan Terminal, Shell, dan Kernel
+
+Ketika komponen ini memiliki fungsi yang berbeda:
+
+- Terminal menjadi tempat pengguna memasukkan perintah
+- Shell menerima dan memproses perintah
+- Kernel mengelola sumber daya sistem untuk menjalankan instruksi
+
+Secara umum alurnya seperti ilustrasi berikut:
+
+![Ilustrasi JavaScript](/images/debian13/termuk-2.png)
+
+## Mengenal Prompt Terminal Linux
+
+Ketika berhasil login ke Debian 13, kita akan melihat tampilan terminal yang menunjukkan bahwa sistem siap menerima perintah. Contohnya:
+
+```bash
+fauzidleware@debian:~$
+```
+
+Tampilan tersebut disebut prompt.
+
+### Bagian-Bagian Prompt
+
+| Bagian       | Fungsi                              |
+| ------------ | ----------------------------------- |
+| fauzidleware | Username yang sedang digunakan      |
+| debian       | Hostname komputer                   |
+| ~            | Menunjukkan direktori home pengguna |
+| $            | Menunjukkan pengguna biasa          |
+
+Jika menggunakan akun root, biasanya prompt berakhir dengan simbol `#`. Contohnya
+
+```bash
+fauzidleware@debian:~$ su -
+Kata Sandi:
+root@debian:~#
+```
+
+Pada contoh di atas saya masuk ke root menggunakan perintah `su -` untuk masuk ke super user, lalu memasukkan kata sandi root dan sekarang status prompt nya berubah menjadi root.
+
+### Menjalankan Perintah
+
+Untuk menjalankan perintah Linux, ketik perintah pada terminal kemudia tekan Enter. Contohnya:
+
+```bash
+root@debian:~# whoami
+root
+root@debian:~# exit
+logout
+fauzidleware@debian:~$ whoami
+fauzidleware
+fauzidleware@debian:~$
+```
+
+Pada contoh di atas saya lakukan perintah `whoami` ketika berada di root dan user biasa. Perintah `exit` digunakan ketika ingin keluar dari posisi root ke user biasa.
+
+Linux bersifat case sensitif, artinya perintah dengan huruf kecil dan huruf besar dianggap berbeda walaupun baca nya sama. Contohnya:
+
+```bash
+fauzidleware@debian:~$ whoami
+fauzidleware
+fauzidleware@debian:~$ WHOAMI
+-bash: WHOAMI: perintah tidak ditemukan
+fauzidleware@debian:~$
+```
+
+## Perintah Dasar untuk Navigasi Direktori
+
+**Navigasi direktori** adalah kegiatan berpindah dan melihat lokasi dalam sistem Linux.
+
+Contohnya ketika ingin mengetahui lokasi direktori yang sedang aktif bisa menggunakan perintah `pwd` **(Print Working DIrectory)**:
+
+```bash
+fauzidleware@debian:~$ pwd
+/home/fauzidleware
+```
+
+Artinya saat ini sedang berada di direktori **/home/fauzidleware**.
+
+Lalu jika ingin menampilkan daftar file dan direktori, gunakan perintah `ls`
+
+```bash
+fauzidleware@debian:~$ ls
+```
+
+Jika tidak muncul apa-apa, karena memang pada bawaannya direktori ini terlihat kosong. Coba kita mundur dua direktori ke belakang:
+
+```bash
+fauzidleware@debian:~$ cd ../../
+fauzidleware@debian:/$ ls
+bin   home            lib64       opt   sbin  usr
+boot  initrd.img      lost+found  proc  srv   var
+dev   initrd.img.old  media       root  sys   vmlinuz
+etc   lib             mnt         run   tmp   vmlinuz.old
+```
+
+Dan di sini terlihat banyak sekali direktori serta ada file juga. Untuk menampilkan informasi yang lebih lengkap bisa menggunakan perintah `ls -l`:
+
+```bash
+fauzidleware@debian:/$ ls -l
+total 56
+lrwxrwxrwx   1 root root     7 Nov  7 10:49 bin -> usr/bin
+drwxr-xr-x   3 root root  4096 Nov  7 10:59 boot
+drwxr-xr-x  18 root root  3240 Nov  7 13:42 dev
+drwxr-xr-x  70 root root  4096 Nov  7 11:00 etc
+drwxr-xr-x   3 root root  4096 Nov  7 10:58 home
+lrwxrwxrwx   1 root root    38 Nov  7 10:54 initrd.img -> boot/initrd.img-6.12.115+deb13.1-amd64
+lrwxrwxrwx   1 root root    36 Nov  7 10:51 initrd.img.old -> boot/initrd.img-6.12.107+deb13-amd64
+lrwxrwxrwx   1 root root     7 Nov  7 10:49 lib -> usr/lib
+lrwxrwxrwx   1 root root     9 Nov  7 10:49 lib64 -> usr/lib64
+drwx------   2 root root 16384 Nov  7 10:49 lost+found
+drwxr-xr-x   3 root root  4096 Nov  7 10:49 media
+drwxr-xr-x   2 root root  4096 Nov  7 10:50 mnt
+drwxr-xr-x   2 root root  4096 Nov  7 10:50 opt
+dr-xr-xr-x 107 root root     0 Nov  7 13:42 proc
+drwx------   3 root root  4096 Nov  7 13:49 root
+drwxr-xr-x  20 root root   540 Nov  7 13:43 run
+lrwxrwxrwx   1 root root     8 Nov  7 10:49 sbin -> usr/sbin
+drwxr-xr-x   2 root root  4096 Nov  7 10:50 srv
+dr-xr-xr-x  13 root root     0 Nov  7 13:42 sys
+drwxrwxrwt   7 root root   140 Nov  7 13:42 tmp
+drwxr-xr-x  12 root root  4096 Nov  7 10:50 usr
+drwxr-xr-x  11 root root  4096 Nov  7 11:00 var
+lrwxrwxrwx   1 root root    35 Nov  7 10:54 vmlinuz -> boot/vmlinuz-6.12.115+deb13.1-amd64
+lrwxrwxrwx   1 root root    33 Nov  7 10:51 vmlinuz.old -> boot/vmlinuz-6.12.107+deb13-amd64
+```
+
+Bahkan hak akses dan tanggal pembuatannya pun ditampilkan di sini. Berikut tabel opsi tambahan untuk `ls`:
+
+| Opsi | Fungsi                                            |
+| ---- | ------------------------------------------------- |
+| -l   | Menampilkan informasi dalam format panjang        |
+| -a   | Menampilkan file tersembunyi                      |
+| -h   | Menampilkan ukuran dalam format yang mudah dibaca |
+
+Selanjutnya ada perintah `cd` atau **(Change Directory)** digunakan untuk berpindah direktori. Contohnya berikut untuk berpindah ke direktori home pengguna
+
+```bash
+fauzidleware@debian:/$ cd /home/
+fauzidleware@debian:/home$
+```
+
+Berikut perintah untuk kembali ke direktori sebelumnya:
+
+```bash
+fauzidleware@debian:/home$ cd ~
+fauzidleware@debian:~$
+```
+
+Berikut contoh jika mau naik satu tingkat direktori:
+
+```bash
+fauzidleware@debian:~$ cd -
+/home
+fauzidleware@debian:/home$
+```
+
+Dalam Linux, terdapat dua cara untuk menunjukkan lokasi file atau direktori. **Path Absolut** merupakan alamat lengkap yang dimulai dari direktori root `/`. Contohnya:
+
+```bash
+fauzidleware@debian:~$ cd /home/fauzidleware/
+```
+
+**Path Relatif** merupakan alamat yang dihitung berdasarkan direktori saat ini.. Contohnya jika sedang berada di lokasi **/home**
+
+```bash
+fauzidleware@debian:~$ cd ..
+fauzidleware@debian:/home$ pwd
+/home
+```
+
+Langsung jalankan `cd fauzidleware` untuk berpindah ke direktori user nya
+
+```bash
+fauzidleware@debian:/home$ cd fauzidleware
+fauzidleware@debian:~$ pwd
+/home/fauzidleware
+```
+
+## Perintah Membuat dan Mengelola Direktori
+
+Perintah `mkdir` \*\*(Make Directory) digunakan untuk membuat direktori baru. Contohnya:
+
+```bash
+fauzidleware@debian:~$ pwd
+/home/fauzidleware
+fauzidleware@debian:~$ mkdir belajar-linux
+fauzidleware@debian:~$ ls
+belajar-linux
+```
+
+Perintah tersebut membuat direktori dengan nama **"belajar-linux**. Untuk membuar beberapa direktori sekaligus:
+
+```bash
+fauzidleware@debian:~$ mkdir dokumentasi backup gambar rekaman
+fauzidleware@debian:~$ ls
+backup  belajar-linux  dokumentasi  gambar  rekaman
+```
+
+Untuk membuat direktori bertingkat:
+
+```bash
+fauzidleware@debian:~$ mkdir -p proyek/web/assets
+fauzidleware@debian:~$ ls
+backup  belajar-linux  dokumentasi  gambar  proyek  rekaman
+```
+
+Opsi `-p` memungkinkan pembuatan direktori induk yang belum tersedia.
+
+Perintah `rmdir` digunakan untuk menghapus direktori kosong. Contohnya:
+
+```bash
+fauzidleware@debian:~$ ls
+backup  belajar-linux  dokumentasi  gambar  proyek  rekaman
+fauzidleware@debian:~$ rmdir belajar-linux
+fauzidleware@debian:~$ ls
+backup  dokumentasi  gambar  proyek  rekaman
+```
+
+Perintah tersebut hanya berhasil jika direktori tidak memiliki isi.
+
+Perintah `tree` digunakan untuk menampilkan struktur direktori dalam bentuk pohon. Contohnya:
+
+```bash
+fauzidleware@debian:~$ tree
+-bash: tree: perintah tidak ditemukan
+```
+
+Jika perintah belum tersedia, instal terlebih dahulu:
+
+```bash
+fauzidleware@debian:~$ apt install tree
+Error: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Ijin ditolak)
+Error: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+fauzidleware@debian:~$ su -
+Kata Sandi:
+root@debian:~# apt install tree
+Installing:
+  tree
+
+Summary:
+  Upgrading: 0, Installing: 1, Removing: 0, Not Upgrading: 0
+  Download size: 59,4 kB
+  Space needed: 132 kB / 8.094 MB available
+
+Get:1 http://deb.debian.org/debian trixie/main amd64 tree amd64 2.2.1-1 [59,4 kB]
+Fetched 59,4 kB in 1s (118 kB/s)
+Selecting previously unselected package tree.
+(Sedang membaca basis data ...  35308 berkas atau direktori telah terpasang.)
+Preparing to unpack .../tree_2.2.1-1_amd64.deb ...
+Unpacking tree (2.2.1-1) ...
+Sedang menata tree (2.2.1-1) ...
+Processing triggers for man-db (2.13.1-1) ...
+root@debian:~#
+```
+
+Jangan lupa jika mau instal perangkat lunak masuk dulu ke root. Berikut contoh penggunaan perintah `tree`:
+
+```bash
+root@debian:~# cd /
+root@debian:/# cd home/fauzidleware/
+root@debian:/home/fauzidleware# tree
+.
+├── backup
+├── dokumentasi
+├── gambar
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+8 directories, 0 files
+```
+
+Tidak perlu menggunakan **root** jika hanya ingin menampilkan tree:
+
+```bash
+root@debian:/home/fauzidleware# exit
+logout
+fauzidleware@debian:~$ cd /home/fauzidleware/
+fauzidleware@debian:~$ tree
+.
+├── backup
+├── dokumentasi
+├── gambar
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+8 directories, 0 files
+```
+
+## Perintah Membuat dan Mengelola File
+
+Perintah `touch` digunakan untuk membuat file kosong. Contohnya:
+
+```bash
+fauzidleware@debian:~$ ls
+backup  dokumentasi  gambar  proyek  rekaman
+fauzidleware@debian:~$ touch catatan.txt
+fauzidleware@debian:~$ ls
+backup  catatan.txt  dokumentasi  gambar  proyek  rekaman
+```
+
+Perintah tersebut membuat file bernama **"catatan.txt"**. Lalu ada juga perintah `cp` **(Copy)** digunakan untuk menyalin file atau direktori. Berikut contohnya menyalin file:
+
+```bash
+fauzidleware@debian:~$ cp catatan.txt catatan-copy.txt
+fauzidleware@debian:~$ ls
+backup            catatan.txt  gambar  rekaman
+catatan-copy.txt  dokumentasi  proyek
+fauzidleware@debian:~$ cp catatan.txt dokumentasi/catatan.txt
+fauzidleware@debian:~$ tree
+.
+├── backup
+├── catatan-copy.txt
+├── catatan.txt
+├── dokumentasi
+│   └── catatan.txt
+├── gambar
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+8 directories, 3 files
+```
+
+Pada contoh di atas, saya menyalin file **"catatan.txt"** di lokasi yang sama dengan nama file **"catatan-copy.txt"** serta menyalin **"catatan.txt"** ke dalam direktori **dokumentasi**.
+
+Kita juga bisa menyalin direktori beserta isinya:
+
+```bash
+fauzidleware@debian:~$ cp -r dokumentasi dokumentasi-backup
+fauzidleware@debian:~$ tree
+.
+├── backup
+├── catatan-copy.txt
+├── catatan.txt
+├── dokumentasi
+│   └── catatan.txt
+├── dokumentasi-backup
+│   └── catatan.txt
+├── gambar
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+9 directories, 4 files
+fauzidleware@debian:~$
+```
+
+Sekarang muncul direktori **dokumentasi-backup** dengan isi yang sama seperti **dokumentasi** karena itu merupakan salinan direktori. Opsi `-r` digunakan untuk menyalin direktori secara rekursif.
+
+Perintah `mv` **(Move)** digunakan untuk memindahkan atau mengganti nama file dan direktori. Memindahkan file:
+
+```bash
+fauzidleware@debian:~$ tree
+.
+├── backup
+├── catatan-copy.txt
+├── catatan.txt
+├── dokumentasi
+│   └── catatan.txt
+├── dokumentasi-backup
+│   └── catatan.txt
+├── gambar
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+9 directories, 4 files
+fauzidleware@debian:~$ mv catatan.txt gambar
+fauzidleware@debian:~$ tree
+.
+├── backup
+├── catatan-copy.txt
+├── dokumentasi
+│   └── catatan.txt
+├── dokumentasi-backup
+│   └── catatan.txt
+├── gambar
+│   └── catatan.txt
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+9 directories, 4 files
+```
+
+Perhatikan file **"catatan.txt"** yang sebelumnya ada di luar, sekarang berpindah ke dalam direktori **gambar**.
+
+Mengganti nama file:
+
+```bash
+fauzidleware@debian:~$ tree
+.
+├── backup
+├── catatan-copy.txt
+├── dokumentasi
+│   └── catatan.txt
+├── dokumentasi-backup
+│   └── catatan.txt
+├── gambar
+│   └── catatan.txt
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+9 directories, 4 files
+fauzidleware@debian:~$ mv catatan-copy.txt catatan.txt
+fauzidleware@debian:~$ tree
+.
+├── backup
+├── catatan.txt
+├── dokumentasi
+│   └── catatan.txt
+├── dokumentasi-backup
+│   └── catatan.txt
+├── gambar
+│   └── catatan.txt
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+9 directories, 4 files
+```
+
+Perhatikan bahwa file **"catatan-copy.txt"** sekarang namanya berubah menjadi **"catatan.txt"**.
+
+Dengan perintah mv juga bisa digunakan untuk mengganti nama direktori:
+
+```bash
+fauzidleware@debian:~$ tree
+.
+├── backup
+├── catatan.txt
+├── dokumentasi
+│   └── catatan.txt
+├── dokumentasi-backup
+│   └── catatan.txt
+├── gambar
+│   └── catatan.txt
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+9 directories, 4 files
+fauzidleware@debian:~$ mv backup backup-data
+fauzidleware@debian:~$ tree
+.
+├── backup-data
+├── catatan.txt
+├── dokumentasi
+│   └── catatan.txt
+├── dokumentasi-backup
+│   └── catatan.txt
+├── gambar
+│   └── catatan.txt
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+9 directories, 4 files
+```
+
+Perintah `rm` **(Remove)** digunakan untuk menghapus file. Contohnya:
+
+```bash
+fauzidleware@debian:~$ ls
+backup-data  dokumentasi         gambar  rekaman
+catatan.txt  dokumentasi-backup  proyek
+fauzidleware@debian:~$ rm catatan.txt
+fauzidleware@debian:~$ ls
+backup-data  dokumentasi  dokumentasi-backup  gambar  proyek  rekaman
+```
+
+Perhatikan file **"catatan.txt"** yang ada di luar sudah hilang. Selain itu kita juga bisa mengapus direktori beserta isinya dengan tambahan opsi `-r` seperti berikut:
+
+```bash
+fauzidleware@debian:~$ tree
+.
+├── backup-data
+├── dokumentasi
+│   └── catatan.txt
+├── dokumentasi-backup
+│   └── catatan.txt
+├── gambar
+│   └── catatan.txt
+├── proyek
+│   └── web
+│       └── assets
+└── rekaman
+
+9 directories, 3 files
+fauzidleware@debian:~$ rm -r proyek
+fauzidleware@debian:~$ rm -r dokumentasi-backup
+fauzidleware@debian:~$ tree
+.
+├── backup-data
+├── dokumentasi
+│   └── catatan.txt
+├── gambar
+│   └── catatan.txt
+└── rekaman
+
+5 directories, 2 files
+```
+
+Perintah `rm` dapat menghapus data secara langsung. Gunakan dengan hati-hati dan periksa kembali lokasi serta nama file sebelum mengeksekusinya. Hindari menjalankan perintah penghapusan dengan hak root jika belum memahami dampaknya.
+
+## Perintah Mengedit File
+
+Dalam administrasi server, kita sering perlu mengubah file-file konfigurasi. Salah satu editor yang umum digunakan melalui terminal adalah **Nano**.
+
+**Nano** merupakan editor teks berbasis terminal yang mudah digunakan oleh pemula. Jika belum terpasang instal menggunakan perintah `apt install nano`.
+
+Contohnya gunakan perintah
+
+```bash
+fauzidleware@debian:~$ nano catatan.txt
+```
+
+Nano akan mengedit file **"catatan.txt"** namun jika belum punya file tersebut maka nano akan membuatkan file baru.
+
+Maka akan terbuka editor seperti berikut ini:
+
+![Ilustrasi JavaScript](/images/debian13/termuk-3.png)
+
+Contoh praktik:
+
+1. Setelah terbuka editor nano untuk file **catatan.txt** seperti di atas
+2. Ketik **"Saya sedang belajar Debian 13"**
+3. Tekan `Ctrl + O`
+4. Lalu tekan `Enter` untuk menyimpan
+5. Tekan `Ctrl + X` untuk keluar
+6. Jalankan perintah `cat catatan.txt` untuk memeriksa hasilnya
+
+```bash
+fauzidleware@debian:~$ cat catatan.txt
+Saya sedang belajar Debian 13
+```
+
+## Perintah Informasi Sistem
+
+Selain mengelola file, administrator perlu mengetahui kondisi sistem yang sedang berjalan. Contohnya yang sudah pernah kita gunakan untuk menampilkan username yang sedang digunakan menggunaka `whoami`:
+
+```bash
+fauzidleware@debian:~$ whoami
+fauzidleware
+```
+
+Untuk menampilkan nama komputer atau server gunakan perintah `hostname`:
+
+```bash
+fauzidleware@debian:~$ hostname
+debian
+```
+
+Untuk menampilkan informasi tentang kernel Linux bisa gunakan `uname -a` atau `uname -r` kalau mau versi kernelnya saja:
+
+```bash
+fauzidleware@debian:~$ uname -a
+Linux debian 6.12.115+deb13.1-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.115-2 (2026-11-01) x86_64 GNU/Linux
+fauzidleware@debian:~$ uname -r
+6.12.115+deb13.1-amd64
+```
+
+Untuk menampilkan lama waktu sistem telah berjalan gunakan perintah `uptime`
+
+```bash
+fauzidleware@debian:~$ uptime
+ 19:53:06 up  1:23,  2 users,  load average: 0,00, 0,00, 0,00
+```
+
+Untuk menampilkan tanggal dan waktu sistem gunakan perintah `date`
+
+```bash
+fauzidleware@debian:~$ date
+Sab 07 Nov 2026 19:54:00 WIB
+```
+
+Untuk menampikkan informasi penggunaan RAM gunakan perintah `free -h`:
+
+```bash
+fauzidleware@debian:~$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           967Mi       284Mi       588Mi       568Ki       226Mi       682Mi
+Swap:          582Mi          0B       582Mi
+```
+
+Menampilkan informasi kapasitas penyimpanan gunakan perintah `df -h`:
+
+```bash
+fauzidleware@debian:~$ df -h
+Sistem Berkas  Besar   Isi  Sisa Isi% Dipasang di
+udev            456M     0  456M   0% /dev
+tmpfs            97M  560K   97M   1% /run
+/dev/sda1       9,2G  1,2G  7,6G  14% /
+tmpfs           484M     0  484M   0% /dev/shm
+tmpfs           1,0M     0  1,0M   0% /run/credentials/systemd-journald.service
+tmpfs           5,0M     0  5,0M   0% /run/lock
+tmpfs           484M     0  484M   0% /tmp
+tmpfs           1,0M     0  1,0M   0% /run/credentials/getty@tty1.service
+tmpfs            97M  8,0K   97M   1% /run/user/1000
+```
+
+Menampilkan ukuran file atau direktori gunakan perintah `du -sh nama direktori atau file`. Contohnya:
+
+```bash
+fauzidleware@debian:~$ du -sh /home/fauzidleware
+52K     /home/fauzidleware
+```
+
+Perintah tersebut menampilkan total penggunaan penyimpanan direktori **/home/fauzidleware**.
+
+Perintah `top` digunakan untuk menampilkan proses yang sedang berjalan dan sumber daya sistem secara langsung:
+
+```bash
+fauzidleware@debian:~$ top
+top - 19:58:01 up  1:28,  2 users,  load average: 0,00, 0,00, 0,00
+Tasks:  93 total,   1 running,  92 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0,0 us,  0,0 sy,  0,0 ni, 96,6 id,  3,4 wa,  0,0 hi,  0,0 si,  0,0 st
+MiB Mem :    967,4 total,    588,3 free,    284,6 used,    227,1 buff/cache
+MiB Swap:    583,0 total,    583,0 free,      0,0 used.    682,8 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    178 root      20   0       0      0      0 I   0,3   0,0   0:24.14 kworker/0:3-+
+      1 root      20   0   23816  14940  10712 S   0,0   1,5   0:02.84 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0,0   0,0   0:00.00 pool_workque+
+      4 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker/R-kv+
+      5 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker/R-rc+
+      6 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker/R-sy+
+      7 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker/R-sl+
+      8 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker/R-ne+
+     11 root       0 -20       0      0      0 I   0,0   0,0   0:00.02 kworker/0:0H+
+     13 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker/R-mm+
+     14 root      20   0       0      0      0 I   0,0   0,0   0:00.00 rcu_tasks_kt+
+     15 root      20   0       0      0      0 I   0,0   0,0   0:00.00 rcu_tasks_ru+
+     16 root      20   0       0      0      0 I   0,0   0,0   0:00.00 rcu_tasks_tr+
+     17 root      20   0       0      0      0 S   0,0   0,0   0:00.25 ksoftirqd/0
+     18 root      20   0       0      0      0 I   0,0   0,0   0:00.30 rcu_preempt
+     19 root      20   0       0      0      0 S   0,0   0,0   0:00.00 rcu_exp_par_+
+     20 root      20   0       0      0      0 S   0,0   0,0   0:00.00 rcu_exp_gp_k+
+```
+
+Sementara itu dulu tentang perintah-perintah dasar Linux. Selengkapnya akan kita pelajari pelan-pelan di materi berikutnya.
