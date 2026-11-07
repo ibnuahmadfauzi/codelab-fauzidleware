@@ -1,0 +1,206 @@
+---
+title: "Installasi Debian 13 Server"
+description: "Memulai Installasi Debian 13 Server dengan Virtual Machine"
+order: 4
+---
+
+Pada materi sebelumnya, kita telah mempersiapkan Oracle VM VirtualBox dan membuat mesin virtual yang akan digunakan untuk menjalankan Debian 13. Sekarang kita akan mulai melakukan instalasi Debian 13 (Trixie) sebagai sistem operasi server. Proses instalasi meliputi booting menggunakan file ISO, pemilihan metode instalasi, konfigurasi bahasa dan jaringan, pengaturan hostname, pembuatan akun pengguna, partisi penyimpanan, hingga pemilihan software yang akan dipasang.
+
+Dalam materi ini tentu kita akan tetap menggunakan Debian 13 dengan mode **Command Line Interface (CLI)** tanpa Desktop Environment. Tujuannya agar kita terbiasa mengelola server menggunakan terminal Linux.
+
+![Ilustrasi JavaScript](/images/debian13/deb-1.png)
+
+## Persiapan Instalasi
+
+Sebelum memulai instalasi, pastikan seluruh kebutuhan berikut telah tersedia.
+
+### Kebutuhan Software
+
+| Software             | Keterangan                                       |
+| -------------------- | ------------------------------------------------ |
+| Oracle VM VirtualBox | Menjalankan mesin virtual                        |
+| Debian 13 ISO        | Media instalasi sistem operasi                   |
+| Host OS              | Windows atau Linux                               |
+| Koneksi Internet     | Mengunduh paket selama instalasi jika diperlukan |
+
+### Spesifikasi Virtual Machine
+
+Gunakan konfigurasi mesin virtual yang telah dibuat pada materi sebelumnya.
+
+| Komponen         | Konfigurasi          |
+| ---------------- | -------------------- |
+| Nama VM          | ServerDebian13       |
+| Operating System | Debian (64-bit)      |
+| RAM              | 1024 MB              |
+| CPU              | 1 Core               |
+| Virtual Disk     | 10 GB                |
+| Disk Format      | VDI                  |
+| Storage          | Dynamially Allocated |
+| Network          | NAT                  |
+
+Konfigurasi tersebut cukup untuk praktik awal administrasi server.
+
+### Memastikan File ISO Terpasang
+
+Sebelum menjalankan VM, pastikan ISO Debian 13 sudah terpasang sebagai media instalasi. Untuk melihatnya:
+
+![Ilustrasi JavaScript](/images/debian13/deb-3.png)
+
+1. Klik tombol **Settings**
+2. Pilih menu **Storage**
+3. Klik disk **Empty** yang masih kosong
+4. Klik icon DVD
+5. Pilih **Choose a Disk File...** lalu cari file ISO Debian 13 yang sudah di download
+
+Setelah itu file ISO sudah terlihat terpasang seperti gambar di bawah ini, lalu klik **OK**.
+
+![Ilustrasi JavaScript](/images/debian13/deb-4.png)
+
+## Memulai Instalasi Debian 13
+
+Setelah semua persiapan selesai, kita dapat mulai melakukan instalasi.
+
+### Menjalankan Virtual Machine
+
+Pilih VM yang sudah dibuat dan diatur file ISO nya. Lalu klikt tombol **Start**.
+
+![Ilustrasi JavaScript](/images/debian13/deb-5.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-6.png)
+
+Setelah itu muncul menu \*\*Debian GNU/Linux installer menu (BIOS mode)\*\* yang menampilkan beberapa pilihan:
+
+| PIlihan            | Fungsi                                        |
+| ------------------ | --------------------------------------------- |
+| Graphcical Install | Instalasi menggunakan antarmuka grafis        |
+| Install            | Instalasi menggunakan antarmuka berbasis teks |
+| Advanced Option    | Pengaturan instalasi lanjutan                 |
+| Help               | Informasi bantuan instalasi                   |
+
+Pada tahap ini kita pilih **Install** karena metode ini menggunakan antarmuka berbasi teks sehingga kita dapat mengenal proses instalasi Debian melalui menu CLI. Tekan **Enter** untuk melanjutkan.
+
+### Konfigurasi Awal Sistem
+
+Ada beberapa konfigurasi awal yang perlu dipehatikan di setiap bagian setelah melewati metode instalasi.
+
+![Ilustrasi JavaScript](/images/debian13/deb-7.png)
+
+**Select a language** adalah bahasa yang digunakan ketika proses instalasi, karena ada Bahasa Indonesia jadi kita pilih yang **Bahasa Indonesia** lalu tekan **Enter**.
+
+![Ilustrasi JavaScript](/images/debian13/deb-8.png)
+
+Pada tahap **Pilih lokasi anda** juga pilih yang **Indonesia**
+
+![Ilustrasi JavaScript](/images/debian13/deb-9.png)
+
+Lalu untuk **Mengonfigurasi papan ketik** pilih yang standar saja yaitu **Inggris Amerika**.
+
+### Konfigurasi Hostname dan Username
+
+Selanjutnya ada beberapa **Konfigurasi jaringan** yang perlu diatur.
+
+![Ilustrasi JavaScript](/images/debian13/deb-10.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-11.png)
+
+Contohnya untuk **Nama host** bisa diganti, di sini saya akan tetap pakai nama **"debian"** dan untuk **Nama domain** dikosongi saja.
+
+![Ilustrasi JavaScript](/images/debian13/deb-12.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-13.png)
+
+Selanjutnya atur untuk \*_Kata sandi root_ sebanyak 2 kali untuk verifikasi juga, dan jangan sampai lupa.
+
+![Ilustrasi JavaScript](/images/debian13/deb-14.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-15.png)
+
+Selanjutnya untuk **Nama pengguna akun** dan **Nama lengkap akun** saya memilih disamakan saja agar tidak ribet.
+
+![Ilustrasi JavaScript](/images/debian13/deb-16.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-17.png)
+
+Dan jangan lupa memasukkan juga 2 kata sandi yang sama untuk verifikasi. Kata sandi untuk nama pengguna ini boleh beda denga yang root tadi.
+
+### Konfigurasi Waktu
+
+Untuk **Pilih kota dalam zona waktu** bisa disesuaikan dengan lokasi masing-masing, karena saya ada di Java, jadi saya pilih yang **WIB**
+
+![Ilustrasi JavaScript](/images/debian13/deb-18.png)
+
+### Konfigurasi Partisi Hard Disk
+
+Sebenarnya ada banyak hal yang perlu diperhatikan dalam proses konfigurasi partisi harddisk, tapi saya anggap di sini kita sama-sama pemula, jadi untuk **Metode pemartisian** di sini pilih saja dulu yang **Terpadu - gunakan seluruh disk**. Nanti jika sudah mahir, bisa buat manual sesuai kebutuhan.
+
+![Ilustrasi JavaScript](/images/debian13/deb-19.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-20.png)
+
+Setelah itu **Pilih disk yang akan dipartisi** dan karena di VM kita cuma punya 1 disk, jadi langsung saja pilih yang disediakan.
+
+![Ilustrasi JavaScript](/images/debian13/deb-21.png)
+
+Pada bagian ini juga untuk **Skema partisi** agar tidak ribet karena sama-sama pemula pilih yang **Semua berkas di satu partisi (disarankan untuk pemula)**
+
+![Ilustrasi JavaScript](/images/debian13/deb-22.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-23.png)
+
+Jika sudah masuk ke proses terakhir pemartisian, pilih **Selesai mempartisi dan tulis perubahan ke disk**, lalu pilih **Ya** untuk **Tulis perubahan ke disk?**.
+
+### Konfigurasi Package Manager
+
+Setelah partisi selesai, Debian akan melakukan konfigurasi package manager. **Package magaer** merupakan sistem yang digunakan untuk mengelola instalasi dan pembaruan perangkat lunak.
+
+![Ilustrasi JavaScript](/images/debian13/deb-24.png)
+
+Sebelum itu ketika ditawarkan **Pindai media instalasi tambahan?** pilih **Tidak** saja, untuk paket tambahan kita bisa instal sendiri ketika sudah masuk Debian.
+
+![Ilustrasi JavaScript](/images/debian13/deb-25.png)
+
+Untuk **Negara tempat cermin arsip Debian** atau lokasi paket yang diambil, pilih saja **Indonesia**.
+
+![Ilustrasi JavaScript](/images/debian13/deb-26.png)
+
+Lalu pilih yang **deb.debian.org** untuk paket bawaan dari Debian. Jika mau nyoba yang lain nanti bisa diatur ketika sudah di dalam Debian.
+
+![Ilustrasi JavaScript](/images/debian13/deb-27.png)
+
+**Alamat proksi HTTP** dikosongkan saja.
+
+![Ilustrasi JavaScript](/images/debian13/deb-28.png)
+
+Lalu **Berpartisipasi dalam Survey Penggunaan Paket Debian** pilih **Tidak**.
+
+### Pemilihan Software
+
+![Ilustrasi JavaScript](/images/debian13/deb-29.png)
+
+Pada tahap ini, Debian akan meminta pengguna menentukan software yang ingin dipasang. Karena kita akan membangun server berasis CLI, pemilihan software perlu diperhatikan. Beberapa pilihan yang mungkin muncul seperti gambar di atas. Yang ada tanda bintang `*` adalah yang akan diinstal, untuk memberi tanda bintang gunakan tombol **Spasi**. Namun pada tahap ini kita hanya fokus ke **SSH server** dan **Perkakas sistem standar** saja yang diberi bintang, yang lain hilangkan. Untuk melanjutkan tekan tombol **TAB** agar tombol berpindah ke tombol **Lanjutkan**.
+
+### Instalasi GRUB Bootloader
+
+GRUB merupakan bootloader yang digunakan untuk memulai proses booting sistem operasi Linux. Pada tahap ini, installer akan menanyakan apakah GRUB perlu dipasang. Pilih **Ya** Kemudian pilih tempat pemasangan boot loader, pilih partisi yang sudah kita pasang Debian tadi yaitu **/dev/sda**.
+
+![Ilustrasi JavaScript](/images/debian13/deb-30.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-31.png)
+
+![Ilustrasi JavaScript](/images/debian13/deb-32.png)
+
+Setelah itu **Instalasi selesai** klik tombol **Enter** untuk **Lanjutkan** yang mana setelah itu VM akan mlakukan reboot atau restart.
+
+### Menyelesaikan Instalasi
+
+![Ilustrasi JavaScript](/images/debian13/deb-33.png)
+
+Setelah melakukan restart, kita akan langsung dihadapkan dengan **GNU GRUB** menu, yang mana terdapat 2 pilihan **Debian GNU/Linux** dan **Advanced option for Debian GNU/Linux**, di sini pilih yang **Debian GNU/Linux** atau biasanya jika kita diamkan beberapa detik, otomatis langsung memilih yang **Debian GNU/Linux**.
+
+![Ilustrasi JavaScript](/images/debian13/deb-34.png)
+
+Jika sudah muncul tampilan seperti di atas, maka proses instalsi Debian 13 sudah selesai. Dan silahkan login menggunakan akun **root** atau nama user.
+
+![Ilustrasi JavaScript](/images/debian13/deb-35.png)
+
+Untuk mematikan VM, bisa klik **Close** pilih **Power off the machine** lalu klik tombol **OK**.
