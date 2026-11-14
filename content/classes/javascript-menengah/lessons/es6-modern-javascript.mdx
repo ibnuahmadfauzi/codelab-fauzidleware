@@ -1,0 +1,690 @@
+---
+title: "ES6 dan Modern JavaScript"
+description: "Memahami ES6 dan perkembangan JavaScript modern."
+order: 5
+---
+
+Setelah mempelajari materi ini, paling tidak nanti kita bisa paham apa itu **ES6** dan perkembangan JavaScript modern, menggunakan `let` dan `const` untuk mendeklarasikan variabel, menggunakan template literals untuk membuat String lebih dinamis, memahami dan menggunakan arrow function, menggunakan default parameter, memahami rest parameter dan spread operator, menggunakan destructuring pada array dan object, memahami optional chaining dan nulish coalescing, serta menggunakan fitur JavaScript modern dalam pengembangan aplikasi sederhana.
+
+## Pengertian ES6 dan Modern JavaScript
+
+**ES6** merupakan singkatan dari **ECMAScript 2015**, yaitu pembaruan besar pada standar bahasa JavaScript yang dirilis pada tahun 2015.
+
+Sebelum ES6, JavaScript sudah digunakan untuk membuat halaman web interaktif, namun beberapa penulisan kode masih cukup panjang dan kurang praktis. ES6 memperkenalkan berbagai fitur baru yang membuat JavaScript lebih mudah dibaca, ditulis, dan dikembangkan. Beberapa fitur penting ES6 dan JavaScript modern antara lain:
+
+- `let` dan `const`
+- Template literals
+- Arrow function
+- Default parameters
+- Spread operator
+- Destructuring
+- Modules
+- Classes
+- Promises
+
+Dalam materi ini, kita akan berfokus pada fitur-fitur yang paling sering digunakan ketika mengembangkan aplikasi JavaScript.
+
+## Perbedaan JavaScript Lama dan Modern JavaScript
+
+Perhatikan contoh berikut.
+
+**JavaScript sebelum ES6:**
+
+```javascript
+var nama = "Ibnu";
+var umur = 26;
+
+var pesan = "Halo, nama saya " + nama + " dan umur saya " + umur + " tahun.";
+
+console.log(pesan);
+```
+
+**JavaScript modern:**
+
+```javascript
+const nama = "Ibnu";
+const umur = 26;
+
+const pesan = `Halo, nama saya ${nama} dan umur saya ${umur} tahun.`;
+
+console.log(pesan);
+```
+
+JavaScript modern memungkinkan kita menulis kode yang lebih ringkas dan mudah dibaca.
+
+## Let dan Const
+
+Pada materi JavaScript dasar, kita sudah mengenal variabel. Dalam JavaScript modern, kita lebih sering menggunakan `let` dan `const` dibandingkan `var`.
+
+### Menggunakan let
+
+`let` digunaan untuk membuat variabel yang nilainya dapat diubah. Contohnya:
+
+```javascript
+let nama = "Ibnu";
+
+console.log(nama);
+
+nama = "Budi";
+
+console.log(nama);
+```
+
+Nilai variabel `nama` berubah dari `"Ibnu"` menjadi `"Budi"`.
+
+### Menggunakan const
+
+`const` digunakan untuk membuat variabel yang tidak dapat diberikan nilai baru melalui assignment ulang. Contohnya:
+
+```javascript
+const nama = "Ibnu";
+
+console.log(nama);
+```
+
+Jika kita mengubah namanya:
+
+```javascript
+const nama = "Ibnu";
+
+nama = "Budi";
+
+console.log(nama);
+```
+
+JavaScript akan menghasilkan error karena variabel yang dideklarasikan menggunakan `const` tidak dapat di-assign ulang. Namun `const` tidak berarti seluruh isi object atau array menjadi tidak dapat diubah. Cotohnya:
+
+```javascript
+const buah = ["Apel", "Mangga"];
+
+buah.push("Jeruk");
+
+console.log(buah);
+```
+
+Hal tersebut diperbolehkan karena kita tidak mengganti referensi variabel `buah`, melainkan mengubah isi array-nya.
+
+## Template Literals
+
+**Template literals** menggunakan tanda backtick, bukan tanda kutip biasa. Sebelum ES6, penggabungan string biasanya menggunakan operator `+`, seperti contoh berikut:
+
+```javascript
+let nama = "Ibnu";
+let umur = 17;
+
+let pesan = "Nama saya " + nama + " dan umur saya " + umur;
+
+console.log(pesan);
+```
+
+Dengan template literals:
+
+```javascript
+let nama = "Ibnu";
+let umur = 17;
+
+let pesan = `Nama saya ${nama} dan umur saya ${umur}`;
+
+console.log(pesan);
+```
+
+Bagian `${}` disebut interpolation, yaitu cara memasukkan nilai variabel atau ekspresi ke dalam string.
+
+Template literals juga dapat digunakan untuk menjalankan ekspresi JavaScript. Contohnya:
+
+```javascript
+let harga = 50000;
+let jumlah = 3;
+
+let total = `Total pembayaran: Rp${harga * jumlah}`;
+
+console.log(total);
+```
+
+Template literals memudahkan kita membuat string yang terdiri dari beberap baris. Contohnya:
+
+```javascript
+let nama = "Ibnu";
+let pekerjaan = "Frontend Developer";
+
+let profil = `
+Nama: ${nama}
+Pekerjaan: ${pekerjaan}
+Lokasi: Indonesia
+`;
+
+console.log(profil);
+```
+
+Template literals sering digunakan ketika membuat teks dinamis, notifikasi, maupun tampilan HTML.
+
+## Arrow Function
+
+**Arrow function** merupakan cara penulisan function yang lebih ringkas dibandingkan function biasa. Arrow function menggunakan simbol `=>`. Berikut contoh function biasa:
+
+```javascript
+function sapa() {
+  return "Halo, selamat belajar JavaScript!";
+}
+
+console.log(sapa());
+```
+
+Berikut jika function di atas diubah ke arrow function:
+
+```javascript
+const sapa = () => {
+  return "Halo, selamat belajar JavaScript!";
+};
+
+console.log(sapa());
+```
+
+Hasilnya sama dengan function biasa.
+
+Dalam parameter function maupun arrow function bisa memanfaatkan ekspresi dalam template literals.
+
+```javascript
+const sapa = (nama) => {
+  return `Halo, ${nama}!`;
+};
+
+console.log(sapa("Ibnu"));
+```
+
+Jika hanya mengembalikan `return` singkat atau hanya berisi satu ekspresi, kita dapat menghilangkan tanda kurung kurawal dan keyword `return`. Seperti berikut:
+
+```javascript
+const tambah = (a, b) => a + b;
+
+console.log(tambah(10, 5));
+```
+
+## Default Parameters
+
+**Default parameters** merupakan fitur yang memungkinkan kita memberikan nilai bawaan pada parameter function. Fitur ini berguna ketika function dipanggil tanpa memberikan seluruh argumen yang dibutuhkan.
+
+```javascript
+function sapa(nama) {
+  console.log(`Halo, ${nama}`);
+}
+
+sapa("Ibnu");
+sapa();
+```
+
+Perhatikan function di atas. Tanpa default parameter, maka pemangilan function ke dua akan menghasilkan nilai `undefined`. Berikut cara menambahkan default parameters:
+
+```javascript
+function sapa(nama = "Pengunjung") {
+  console.log(`Halo, ${nama}`);
+}
+
+sapa("Ibnu");
+sapa();
+```
+
+Dengan begitu jika tidak ada argumen yang diberikan, JavaScript menggunakan nilai bawaan `"Pengunjung"`. Cara menggunakan default parameter di arrow function juga sama:
+
+```javascript
+const hitungDiskon = (harga, diskon = 10) => {
+  return harga - (harga * diskon) / 100;
+};
+
+console.log(hitungDiskon(100000));
+console.log(hitungDiskon(100000, 20));
+```
+
+## Rest Parameters
+
+**Rest parameters** digunakan untuk menerima sejumlah argumen dalam satu parameter berbentuk array. Rest parameters menggunakan tiga titik `(...)` diikuti nama parameter:
+
+Berikut contoh rest tanpa parameter:
+
+```javascript
+function jumlahkan(a, b, c) {
+  return a + b + c;
+}
+
+console.log(jumlahkan(10, 20, 30));
+```
+
+Function tersebut hanya dirancang menerima tiga parameter.
+
+Berikut jika menggunakan rest parameter:
+
+```javascript
+function jumlahkan(...angka) {
+  return angka.reduce((total, item) => total + item, 0);
+}
+
+console.log(jumlahkan(10, 20, 30));
+console.log(jumlahkan(5, 10, 15, 20, 25));
+```
+
+Penjelasan:
+
+- `...angka` menampung seluruh argumen yang diberikan.
+- Nilai argumen tersebut disimpan dalam bentuk array.
+- `reduce()` digunakan untuk menghitung total seluruh angka.
+
+Rest parameters dapat digunakan bersama parameter biasa.
+
+```javascript
+function tampilkanNama(kelas, ...siswa) {
+  console.log(`Kelas: ${kelas}`);
+  console.log("Daftar siswa:");
+
+  siswa.forEach((nama) => {
+    console.log(nama);
+  });
+}
+
+tampilkanNama("XI RPL", "Ibnu", "Budi", "Citra", "Dinda");
+```
+
+Rest parameter harus menjadi parameter terakhir dalam deklarasi function.
+
+## Spread Operator
+
+**Spread operator** menggunakan tiga titik `(...)` untuk menyebarkan elemen array atau properti object. Meskipun simbolnya sama dengan rest parameters, fungsinya berbeda:
+
+- Rest parameters mengumpulkan banyak argumen menjadi satu array.
+- Spread operator menyebarkan elemen array atau properti object.
+
+Spread Operator pada Array contohnya:
+
+```javascript
+const angka1 = [1, 2, 3];
+const angka2 = [4, 5, 6];
+
+const gabungan = [...angka1, ...angka2];
+
+console.log(gabungan);
+```
+
+Menyalin Array:
+
+```javascript
+const buah = ["Apel", "Mangga", "Jeruk"];
+
+const buahBaru = [...buah];
+
+console.log(buahBaru);
+```
+
+Array `buahBaru` merupakan array baru, bukan variabel yang menunjuk ke array yang sama.
+
+Menambahkan Elemen ke Array
+
+```javascript
+const buah = ["Apel", "Mangga"];
+
+const buahBaru = [...buah, "Jeruk", "Pisang"];
+
+console.log(buahBaru);
+```
+
+Spread Operator pada Object
+**Spread operator** juga dapat digunakan untuk menyalin dan menggabungkan properti object.
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+};
+
+const pekerjaan = {
+  profesi: "Frontend Developer",
+};
+
+const profil = {
+  ...pengguna,
+  ...pekerjaan,
+};
+
+console.log(profil);
+```
+
+## Destructuring
+
+**Destructuring** adalah fitur JavaScript untuk mengambil nilai dari array atau properti object dan menyimpannya ke dalam variabel dengan cara yang lebih ringkas. Pada materi sebelumnya, kita sudah mengenal destructuring object. Sekarang kita akan mempelajari penggunaannya pada array dan object.
+
+Array tanpa destructuring:
+
+```javascript
+const buah = ["Apel", "Mangga", "Jeruk"];
+
+const buahPertama = buah[0];
+const buahKedua = buah[1];
+
+console.log(buahPertama);
+console.log(buahKedua);
+```
+
+Array menggunakan destructuring:
+
+```javascript
+const buah = ["Apel", "Mangga", "Jeruk"];
+
+const [buahPertama, buahKedua, buahKetiga] = buah;
+
+console.log(buahPertama);
+console.log(buahKedua);
+console.log(buahKetiga);
+```
+
+Kita dapat melewati elemen tertentu dengan membiarkan posisi variabel kosong.
+
+```javascript
+const angka = [10, 20, 30, 40];
+
+const [pertama, , ketiga] = angka;
+
+console.log(pertama);
+console.log(ketiga);
+```
+
+Object destructuring mengambil nilai berdasarkan nama properti.
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+  pekerjaan: "Frontend Developer",
+};
+
+const { nama, umur, pekerjaan } = pengguna;
+
+console.log(nama);
+console.log(umur);
+console.log(pekerjaan);
+```
+
+Mengganti Nama Variabel
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+};
+
+const { nama: namaPengguna, umur: usia } = pengguna;
+
+console.log(namaPengguna);
+console.log(usia);
+```
+
+Destructuring juga dapat digunakan langsung pada parameter function.
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+  umur: 17,
+  jurusan: "RPL",
+};
+
+function tampilkanProfil({ nama, jurusan }) {
+  console.log(`Nama: ${nama}`);
+  console.log(`Jurusan: ${jurusan}`);
+}
+
+tampilkanProfil(pengguna);
+```
+
+Cara ini sering digunakan ketika function menerima object dengan banyak properti, tetapi hanya membutuhkan beberapa di antaranya.
+
+## Optional Chaining
+
+**Optional chaining** menggunakan operator `?`. untuk mengakses properti object dengan lebih aman. Fitur ini berguna ketika kita tidak yakin apakah suatu properti tersedia.
+
+Pada masalah akses properti seperti contoh berikut:
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+};
+
+console.log(pengguna.alamat.kota);
+```
+
+Kode tersebut menghasilkan error karena properti alamat tidak tersedia.
+
+Menggunakan Optional Chaining
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+};
+
+console.log(pengguna.alamat?.kota);
+```
+
+Optional chaining mencegah error ketika bagian sebelum `?`. bernilai null atau undefined.
+
+Optional Chaining pada Nested Object
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+  alamat: {
+    kota: "Blitar",
+  },
+};
+
+console.log(pengguna.alamat?.kota);
+console.log(pengguna.alamat?.jalan);
+```
+
+**Optional chaining** juga dapat digunakan untuk memanggil method yang mungkin tidak tersedia.
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+};
+
+pengguna.perkenalan?.();
+```
+
+Jika method perkenalan tidak tersedia atau bernilai null/undefined, pemanggilan tersebut tidak dilakukan. Optional chaining bukan pengganti validasi seluruh data. Kita tetap perlu memeriksa apakah data yang diterima sesuai kebutuhan aplikasi.
+
+## Nullish Coalescing
+
+Nullish coalescing menggunakan operator `??` untuk memberikan nilai alternatif ketika suatu nilai bernilai null atau undefined.
+
+Contoh Tanpa Nullish Coalescing
+
+```javascript
+let nama;
+
+if (nama === undefined || nama === null) {
+  nama = "Pengunjung";
+}
+
+console.log(nama);
+```
+
+Menggunakan Nullish Coalescing
+
+```javascript
+let nama = null;
+
+let hasil = nama ?? "Pengunjung";
+
+console.log(hasil);
+```
+
+Jika nilai di sebelah kiri `??` adalah `null` atau `undefined`, JavaScript akan menggunakan nilai di sebelah kanan.
+
+Perbedaan dengan Operator OR (`||`) merupakan bagian penting karena `??` dan `||` memiliki perilaku yang berbeda.
+
+Contoh menggunakan `||`:
+
+```javascript
+let jumlah = 0;
+
+let hasil = jumlah || 10;
+
+console.log(hasil);
+```
+
+Mengapa hasilnya 10? Karena angka 0 dianggap sebagai nilai falsy oleh operator `||`.
+
+Sekarang menggunakan `??`:
+
+```javascript
+let jumlah = 0;
+
+let hasil = jumlah ?? 10;
+
+console.log(hasil);
+```
+
+Hal ini terjadi karena 0 bukan `null` atau `undefined`.
+
+Gunakan:
+
+- `||` ketika ingin menggunakan nilai alternatif untuk semua nilai `falsy`.
+- `??` ketika hanya ingin menggunakan nilai alternatif jika nilai awal `null` atau `undefined`.
+  L. Studi Kasus: Aplikasi Profil Pengguna
+  Sekarang kita akan menggabungkan fitur-fitur JavaScript modern yang telah dipelajari.
+
+## Permasalahan:
+
+Kita ingin membuat program sederhana untuk menampilkan profil pengguna. Data pengguna memiliki nama, umur, pekerjaan, dan alamat.
+
+Program harus dapat:
+
+1. Membuat data pengguna menggunakan object.
+2. Mengambil properti menggunakan destructuring.
+3. Menggunakan template literals untuk menampilkan profil.
+4. Menggunakan default parameters.
+5. Menggunakan optional chaining untuk mengakses alamat.
+6. Menggunakan nullish coalescing untuk memberikan nilai alternatif.
+7. Menggunakan spread operator untuk memperbarui data pengguna.
+
+### Membuat Data Pengguna
+
+```javascript
+const pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+  pekerjaan: "Frontend Developer",
+  alamat: {
+    kota: "Blitar",
+    provinsi: "Jawa Timur",
+  },
+};
+```
+
+### Menggunakan Destructuring
+
+```javascript
+const { nama, umur, pekerjaan } = pengguna;
+
+console.log(nama);
+console.log(umur);
+console.log(pekerjaan);
+```
+
+### Membuat Function dengan Default Parameters
+
+```javascript
+const sapa = (nama = "Pengunjung") => {
+  return `Halo, ${nama}! Selamat datang.`;
+};
+
+console.log(sapa(pengguna.nama));
+console.log(sapa());
+```
+
+### Mengakses Alamat dengan Optional Chaining
+
+```javascript
+const kota = pengguna.alamat?.kota ?? "Kota tidak diketahui";
+
+console.log(kota);
+```
+
+### Memperbarui Object dengan Spread Operator
+
+```javascript
+const profilBaru = {
+  ...pengguna,
+  pekerjaan: "Fullstack Developer",
+};
+
+console.log(profilBaru);
+```
+
+Object pengguna tetap memiliki nilai pekerjaan sebelumnya, sedangkan profilBaru memiliki pekerjaan yang sudah diperbarui.
+
+### Menampilkan Profil Menggunakan Template Literals
+
+```javascript
+const tampilkanProfil = (data) => {
+  const nama = data.nama ?? "Tidak diketahui";
+  const umur = data.umur ?? "Tidak diketahui";
+  const pekerjaan = data.pekerjaan ?? "Belum bekerja";
+  const kota = data.alamat?.kota ?? "Tidak diketahui";
+
+  return `
+=== PROFIL PENGGUNA ===
+Nama       : ${nama}
+Umur       : ${umur} tahun
+Pekerjaan  : ${pekerjaan}
+Kota       : ${kota}
+`;
+};
+
+console.log(tampilkanProfil(profilBaru));
+```
+
+### Kode Lengkap Studi Kasus
+
+Berikut gabungan kode yang dapat dijalankan secara langsung.
+
+```javascript
+// Data pengguna
+const pengguna = {
+  nama: "Ibnu",
+  umur: 26,
+  pekerjaan: "Frontend Developer",
+  alamat: {
+    kota: "Blitar",
+    provinsi: "Jawa Timur",
+  },
+};
+
+// Destructuring
+const { nama, umur, pekerjaan } = pengguna;
+
+// Function dengan default parameter
+const sapa = (nama = "Pengunjung") => {
+  return `Halo, ${nama}! Selamat datang.`;
+};
+
+console.log(sapa(nama));
+
+// Optional chaining dan nullish coalescing
+const kota = pengguna.alamat?.kota ?? "Tidak diketahui";
+
+// Spread operator
+const profilBaru = {
+  ...pengguna,
+  pekerjaan: "Fullstack Developer",
+};
+
+// Function untuk menampilkan profil
+const tampilkanProfil = (data) => {
+  return `
+=== PROFIL PENGGUNA ===
+Nama       : ${data.nama}
+Umur       : ${data.umur} tahun
+Pekerjaan  : ${data.pekerjaan}
+Kota       : ${data.alamat?.kota ?? "Tidak diketahui"}
+`;
+};
+
+console.log(tampilkanProfil(profilBaru));
+```
