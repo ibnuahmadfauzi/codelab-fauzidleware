@@ -1,0 +1,154 @@
+---
+title: "Pengenalan PHP"
+description: "Memulai mengenal pengertian PHP, sejarah, fungsi, cara kerja PHP, dan kelebihan PHP"
+order: 1
+---
+
+## Pengertian PHP
+
+**PHP (PHP: Hypertext Preprocessor)** adalah bahasa pemrograman server-side yang digunakan untuk mengembangkan aplikasi web dinamis. PHP dijalankan di sisi server, bukan langsung di browser pengguna. PHP dapat digunakan untuk memproses data, mengelola formulir, berkomunikasi dengan database, serta menghasilkan halaman HTML secara dinamis.
+
+PHP juga dapat disisipkan langsung ke dalam kode HTML sehingga pengembang dapat menggabungkan struktur halaman dengan logika pemrograman.
+
+Contoh kode PHP sederhana:
+
+```php
+<?php
+    echo "Halo, Selamat Belajar PHP!";
+?>
+```
+
+Berbeda dengan HTML yang berfungsi untuk menyusun halaman, PHP memungkinkan website melakukan proses pengolahan data dan menjalankan logika program.
+
+## Sejarah PHP
+
+PHP pertama kali dikembangkan oleh seorang programmer bernama **Rasmus Lerdorf** pada tahun 1994. Awalnya, PHP dibuat sebagai kumpulan script sederhana untuk membantu mengelola dan memantau pengunjung halaman website pribadinya.
+
+Seiring perkembangan teknologi web, PHP terus dikembangkan hingga menjadi salah satu bahasa pemrograman populer untuk pengembangan aplikasi web. Berikut perkembangan singkat PHP:
+
+| Tahun | Perkembangan                                                       |
+| ----- | ------------------------------------------------------------------ |
+| 1994  | Rasmus Lerdorf mulai mengembangkan PHP Tools.                      |
+| 1995  | PHP Tools dirilis untuk digunakan oleh publik.                     |
+| 1997  | Andi Gutmans dan Zeev Suraski ikut mengembangkan PHP.              |
+| 1998  | PHP 3 resmi diperkenalkan.                                         |
+| 2000  | PHP 4 dirilis dengan Zend Engine.                                  |
+| 2004  | PHP 5 dirilis dengan peningkatan dukungan OOP.                     |
+| 2015  | PHP 7 dirilis dengan peningkatan performa yang signifikan.         |
+| 2020  | PHP 8 dirilis dengan berbagai fitur baru dan peningkatan performa. |
+
+Saat ini PHP terus dikembangkan dan digunakan untuk membangun berbagai jenis aplikasi web modern.
+
+## Fungsi PHP
+
+PHP memiliki berbagai fungsi dalam pengembangan website dan aplikasi web. Beberapa fungsi utama PHP antara lain:
+
+**1. Membuat Website Dinamis**
+
+PHP memungkinkan halaman website menampilkankonten yang dapat berubah sesuai kondisi atau data yang tersedia. Contohnya halaman katalog produk yang menampilkan daftar produk berdasarkan data yang dimiliki.
+
+**2. Mengolah Data dari Formulir**
+
+PHP dapat menerima dan memproses data yang dikirimkan ke pengguna melalui formulir HTML. Contohnya:
+
+- Formulir pendaftaran
+- Formulir login
+- Formulir kontak
+- Formulir input produk
+- dll.
+
+**3. Mengelola Database**
+
+PHP dapat digunakan untuk melakukan operasi database seperti:
+
+- Menambahkan data (create)
+- Membaca data (read)
+- Memperbarui data (update)
+- Menghapus data (delete)
+
+**4. Mengelola Session dan Cookie**
+
+PHP dapat menyimpan informasi tertentu untuk membantu mengelola aktivitas pengguna. Contohnya adalah mempertahankan status login pengguna ketika berpindah halaman.
+
+**5. Mengelola File**
+
+PHP dapat digunakan untuk mengunggah, membaca, membuat, mengubah, dan menghapus file di server.
+
+**6. Membuat Sistem Login dan Autentikasi**
+
+PHP dapat digunakan untuk membangun sistem autentikasi pengguna, seperti login, logout, dan pembatasan akses berdasarkan hak pengguna.
+
+## Cara Kerja PHP
+
+PHP bekerja menggunakan konsep server-side scriptiong, yaitu kode program dijalankan di server sebelum hasilnya dikirimkan kepada browser pengguna. Berikut alur kerja PHP:
+
+![Ilustrasi JavaScript](/images/php/php-1.jpg)
+
+Tahapan cara kerja PHP:
+
+1. **Pengguna mengakses website:** Pengguna membuka halaman website melalui browser.
+2. **Browser mengrim permintaan:** Browser mengirimkan HTTP Request kepada web server.
+3. **Server memproses PHP:** Web server meneruskan file PHP kepada PHP interpreter untuk dijalankan.
+4. **PHP mengolah data:** PHP menjalankan perintah program dan dapat mengambil atau menyimpan data ke database jika diperlukan.
+5. **Server mengirimkan hasil:** Hasil pemrosesan PHP dikirimkan kembali kepada browser, biasanya berupa HTML.
+6. **Browser menampilkan halaman:** Browser menerima dan menampilkan hasil tersebut kepada pengguna.
+
+**Contoh sederhana:**
+
+Misalnya, terdapat file bernama `index.php`.
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Belajar PHP</title>
+</head>
+<body>
+
+    <h1>
+        <?php
+            echo "Selamat Datang!";
+        ?>
+    </h1>
+
+</body>
+</html>
+```
+
+Ketika file tersebut dijalankan melalui server, browser akan menerima hasil HTML seperti berikut:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Belajar PHP</title>
+  </head>
+  <body>
+    <h1>Selamat Datang!</h1>
+  </body>
+</html>
+```
+
+Perlu diperhatikan bahwa browser hanya menerima hasil pemrosesan PHP, bukan kode PHP aslinya.
+
+## Kelebihan PHP
+
+PHP memiliki beberapa kelebihan yang membuatnya banyak digunakan dalam pengembangan web.
+
+1. **Gratis dan Open Source:** PHP dapat digunakan secara terbuka.
+2. **Mudah Dipelajari:** Sintaks PHP relatif mudah dipahami, terutama bagi pemula yang sudah mengenal HTML, CSS, atau JavaScript.
+3. **Dapat Berjalan di Berbagai Sistem Operasi:** PHP dapat dijalankan pada berbagai sistem operasi seperti Windows, Linux, dan macOS.
+4. **Mendukung Banyak Database:** PHP dapat terhubung dengan berbagai database, seperti MySQL, MariaDB, PostgreSQL, dan SQLite.
+5. **Terintegrasi dengan HTML:** PHP dapat ditulis langsung di dalam dokumen HTML sehingga memudahkan pengembangan website dinamis.
+6. **Memiliki Banyak Framework:** PHP memiliki berbagai framework yang membantu pengembangan aplikasi web, seperti:
+
+- Laravel
+- CodeIgniter
+- Symfony
+- Yii
+
+7. **Komunitas yang Besar:** PHP memiliki komunitas pengembang yang luas sehingga banyak tersedia dokumentasi, tutorial, dan solusi untuk berbagai permasalahan pemrograman.
+
+PHP merupakan bahasa pemrograman server-side yang digunakan untuk membangun website dan aplikasi web dinamis. PHP mampu mengolah data, memproses formulir, mengelola database, serta menghasilkan halaman HTML sesuai kebutuhan pengguna.
+
+Dengan sintaks yang relatif mudah dipelajari, dukungan berbagai database, dan komunitas yang luas, PHP menjadi salah satu pilihan untuk mempelajari pengembangan web backend.
