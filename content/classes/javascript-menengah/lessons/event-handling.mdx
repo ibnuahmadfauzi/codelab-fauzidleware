@@ -6,4 +6,411 @@ order: 6
 
 ## Pengertian Event Handling
 
-**Event handling** adalah proses menangani atau merespons suatu kejadian (event) yang terjadi pada halaman web melalui JavaScript.
+**Event handling** adalah proses menangani atau merespons suatu kejadian (event) yang terjadi pada halaman web melalui JavaScript. Event dapat terjadi ketika pengguna berinteraksi dengan halaman web, seperti:
+
+- Mengklik tombol
+- Mengetik pada kolom input
+- Menggerakkan mouse
+- Mengirim formulir
+- Menggulir halaman
+- Menekan tombol keyboard
+
+Dengan event handling, kita dapat membuat halaman web menjadi lebih interaktif dan responsif terhadap tindakan pengguna.
+
+**Contoh sederhana:**
+
+Ketika pengguna mengklik tombol, JavaScript akan menampilkan pesan. Seperti berikut ini:
+
+```html
+<body>
+  <button id="tombol">Klik Saya</button>
+
+  <script>
+    const tombol = document.getElementById("tombol");
+
+    tombol.addEventListener("click", function () {
+      alert("Tombol berhasil diklik!");
+    });
+  </script>
+</body>
+```
+
+Hasilnya seperti berikut:
+
+![Ilustrasi JavaScript](/images/javascript/jm-1.png)
+
+## Macam-Macam Event dalam JavaScript
+
+Berikut beberapa event yang sering digunakan:
+
+| Event       | Keterangan                                             |
+| ----------- | ------------------------------------------------------ |
+| `click`     | Ketika elemen diklik                                   |
+| `dblclick`  | Ketika elemen diklik dua kali                          |
+| `mouseover` | Ketika mouse berada di atas elemen                     |
+| `mouseout`  | Ketka mouse meninggalkan elemen                        |
+| `keydown`   | Ketika tombol keyboard ditekan                         |
+| `keyup`     | Ketika tombol keyboard dilepaskan                      |
+| `input`     | Ketika nilai input berubah                             |
+| `change`    | Ketika nilai elemen berubah dan perubahan dikonfirmasi |
+| `submit`    | Ketika formulir dikirim                                |
+| `load`      | Ketika halaman atau resource selesai dimuat            |
+
+## Menambahkan Event Listener
+
+Untuk menangani event, JavaScript menyediakan metode `addEventListener()`. Metode ini digunakan untuk memasang fungsi yang akan dijalankan ketika suatu event terjadi. Berikut sintaks dasarnya:
+
+```javascript
+element.addEventListener("event", function () {
+  // Kode yang dijalankan
+});
+```
+
+Contoh penggunannya seperti yang sudah kita coba:
+
+```html
+<body>
+  <button id="tombol">Klik Saya</button>
+
+  <script>
+    const tombol = document.getElementById("tombol");
+
+    tombol.addEventListener("click", function () {
+      alert("Tombol berhasil diklik!");
+    });
+  </script>
+</body>
+```
+
+Penjelasan:
+
+- `tombol` : Elemen HTML yang akan diberikan event
+- `addEventListener()` : Metode untuk memasang event listener
+- `click` : Jenis event yang ditangani
+- `function()` : Fungsi yang dijalankan ketika event terjadi
+
+Selain `addEventListener()`, terdapat cara lain seperti inline event (`onclick`) dan event property (`element.onclick`). Namun `addEventListener()` lebih direkomendasikan karena lebih fleksibel dan dapat menangani beberapa listener pada elemen yang sama.
+
+## Menggunakan Event Object
+
+**Event Object** adalah objek yang secara otomatis diberikan oleh JavaScript ketika suatu event terjadi. Objek ini berisi informasi mengenai event yang sedang berlangsung, seperti:
+
+- Jenis event yang terjadi
+- Elemen yang memicu event
+- Posisi mouse
+- Tombol keyboard yang ditekan
+- Informasi mengenai target event
+
+Event object biasanya ditulis menggunakan parameter `event`, `e`, atau nama lainnya. Seperti contoh berikut:
+
+```html
+<button id="tombol">Klik Saya</button>
+
+<script>
+  const tombol = document.getElementById("tombol");
+
+  tombol.addEventListener("click", function (event) {
+    console.log(event);
+  });
+</script>
+```
+
+Ketika tombol diklik, JavaScript akan menampilkan informasi Event Object pada Console Browser.
+
+![Ilustrasi JavaScript](/images/javascript/jm-2.png)
+
+## Properti Penting Event Object
+
+Berikut beberapa properti Event Object yang sering digunakan:
+
+| Properti              | Keterangan                                    |
+| --------------------- | --------------------------------------------- |
+| `event.type`          | Mengetahui jenis event                        |
+| `event.target`        | Mengetahui elemen yang menjadi target event   |
+| `event.cuttentTarget` | Mengetahui elemen tempat listener dipasang    |
+| `event.clientX`       | Posisi horizontal mouse terhadap area browser |
+| `event.clientY`       | Posisi vertikal mouse terhadap area browser   |
+| `event.key`           | Mengetahui tombol keyboard yang ditekan       |
+
+Contoh penggunannya:
+
+```html
+<button id="tombol">Klik Saya</button>
+
+<script>
+  const tombol = document.getElementById("tombol");
+
+  tombol.addEventListener("click", function (event) {
+    console.log("Jenis Event:", event.type);
+    console.log("Target:", event.target);
+  });
+</script>
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-3.png)
+
+## Event Handling pada Form Input
+
+Event Handling juga sering digunakan untuk menangani interaksi pada formulir HTML. Contohnya, mengambil nilai dari kolom input ketika pengguna mengetik.
+
+```html
+<input type="text" id="nama" placeholder="Masukkan nama" />
+
+<p id="hasil"></p>
+
+<script>
+  const inputNama = document.getElementById("nama");
+  const hasil = document.getElementById("hasil");
+
+  inputNama.addEventListener("input", function (event) {
+    hasil.textContent = "Halo, " + event.target.value;
+  });
+</script>
+```
+
+Penjelasan:
+
+- `input` : Event yang berjalan ketika nilai input berubah
+- `event.target` : Mengakses elemen input yang memicu event
+- `event.target.value` : Mengambil nilai yang sedang diketik pengguna
+- `textContent` : Mengubah teks pada elemen HTML
+
+Berikut hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-4.png)
+
+## Mencegah Perilaku Default dengan preventDefault()
+
+Beberapa elemen HTML memiliki perilaku bawaan (default behavior). Contohnya:
+
+- Form akan mengirim data ketika tombol submit ditekan
+- Link akan membuka halaman tujuan ketika diklik
+
+JavaScript menyediakan metode `preventDefault()` untuk mencegah perilaku bawaan tersebut. Contohnya:
+
+```html
+<form id="form">
+  <input type="text" placeholder="Masukkan nama" />
+  <button type="submit">Kirim</button>
+</form>
+
+<script>
+  const form = document.getElementById("form");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    alert("Form berhasil diproses!");
+  });
+</script>
+```
+
+Dengan `event.preventDefault()`, formulir tidak melakukan proses pengiriman secara default sehingga kita dapat mengatur prosesnya menggunakan JavaScript.
+
+![Ilustrasi JavaScript](/images/javascript/jm-5.png)
+
+## Menghapus Event Listener
+
+Selain menambahkan event listener, JavaScript juga memungkinkan kita menghapusnya menggunakan `removeEventListener()`. Contohnya:
+
+```html
+<button id="tombol">Klik Saya</button>
+
+<script>
+  const tombol = document.getElementById("tombol");
+
+  function tampilkanPesan() {
+    alert("Tombol diklik!");
+  }
+
+  tombol.addEventListener("click", tampilkanPesan);
+
+  // Menghapus event listener
+  tombol.removeEventListener("click", tampilkanPesan);
+</script>
+```
+
+Fungsi yang digunakan untuk menghapus event listener harus merujuk pada fungsi yang sama ketika listener ditambahkan. Fungsi anonim yang ditulis langsung tidak dapat dihapus dengan cara tersebut.
+
+## Membuat Kalkulator Sederhana
+
+Untuk memperkuat pemahaman kita sekarang kita coba implementasikan untuk membuat aplikasi kalkulator sederhana untuk mengoperasikan 2 buah angka.
+
+**Langkah 1: Menyiapkan Dokumen HTML dan JavaScript**
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Sederhana</title>
+    <style>
+      /* Styling CSS */
+    </style>
+  </head>
+  <body>
+    <!-- Elemen Form Kalkulator -->
+
+    <script>
+      // Kode JavaScript
+    </script>
+  </body>
+</html>
+```
+
+Di sini kita gunakan satu dokumen HTML saja dan menggunakan JavaScript langsung di dalam elemen `<script></script>`.
+
+**Langkah 2: Membuat Form Kalkulator**
+
+```html
+<!-- Elemen Form Kalkulator -->
+<form id="form-kalkulator">
+  <div>
+    <label for="angka-1">Angka Pertama:</label>
+    <input type="number" id="angka-1" />
+  </div>
+  <div>
+    <label for="angka-2">Angka Kedua:</label>
+    <input type="number" id="angka-2" />
+  </div>
+  <div>
+    <label for="operator">Operator:</label>
+    <select name="operator" id="operator">
+      <option value="penjumlahan">+ (Penjumlahan)</option>
+      <option value="pengurangan">- (Pengurangan)</option>
+      <option value="perkalian">* (Perkalian)</option>
+      <option value="pembagian">/ (Pembagian)</option>
+    </select>
+  </div>
+  <div>
+    <button id="proses">Proses Operasi</button>
+  </div>
+  <hr />
+  <h1 id="hasil">0</h1>
+</form>
+
+<script>
+  // Kode JavaScript
+</script>
+```
+
+Buat form sederhana saja untuk input 2 angka, pilihan operator yang digunakan, tombol proses, dan tempat menampilkan hasil.
+
+![Ilustrasi JavaScript](/images/javascript/jm-6.png)
+
+**Langkah 3: Mengatur Styling Tampilan Form**
+
+```html
+<style>
+  /* Styling CSS */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: sans-serif;
+  }
+  form {
+    width: 300px;
+    margin: auto;
+    margin-top: 50px;
+  }
+  form div {
+    margin-bottom: 10px;
+  }
+  form div label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  form div input {
+    display: block;
+    width: 100%;
+    padding: 5px;
+  }
+  form div select {
+    display: block;
+    width: 100%;
+    padding: 5px;
+  }
+  form button {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    padding: 10px 0;
+  }
+  h1 {
+    text-align: center;
+  }
+</style>
+```
+
+Tambahkan CSS untuk memperbaiki styling tampilan form agar lebih enak dilihat.
+
+![Ilustrasi JavaScript](/images/javascript/jm-7.png)
+
+**Langkah 4: Memberi Kode JavaScript**
+
+```javascript
+// Mengambil elemen HTML
+const form = document.getElementById("form-kalkulator");
+const angka1 = document.getElementById("angka-1");
+const angka2 = document.getElementById("angka-2");
+const operator = document.getElementById("operator");
+const hasil = document.getElementById("hasil");
+
+// Event Handling ketika form dikirim
+form.addEventListener("submit", function (event) {
+  // Mencegah halaman melakukan reload
+  event.preventDefault();
+
+  // Mengambil nilai input dan mengubahnya menjadi Number
+  const nilai1 = Number(angka1.value);
+  const nilai2 = Number(angka2.value);
+
+  // Variabel untuk menyimpan hasil operasi
+  let total;
+
+  // Memeriksa apakah input sudah diisi
+  if (angka1.value === "" || angka2.value === "") {
+    hasil.textContent = "Input harus diisi!";
+    return;
+  }
+
+  // Menentukan operasi berdasarkan operator
+  switch (operator.value) {
+    case "penjumlahan":
+      total = nilai1 + nilai2;
+      break;
+
+    case "pengurangan":
+      total = nilai1 - nilai2;
+      break;
+
+    case "perkalian":
+      total = nilai1 * nilai2;
+      break;
+
+    case "pembagian":
+      if (nilai2 === 0) {
+        hasil.textContent = "Tidak bisa dibagi 0!";
+        return;
+      }
+
+      total = nilai1 / nilai2;
+      break;
+
+    default:
+      hasil.textContent = "Operator tidak valid!";
+      return;
+  }
+
+  // Menampilkan hasil perhitungan
+  hasil.textContent = total;
+});
+```
+
+Silahkan ikuti dan pahami kode JavaScript di atas untuk proses pengolahan angka kalkulator:
+
+![Ilustrasi JavaScript](/images/javascript/jm-8.png)
