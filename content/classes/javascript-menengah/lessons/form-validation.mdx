@@ -1,0 +1,186 @@
+---
+title: "Form Validation dalam JavaScript"
+description: "Belajar mengambil nilai input, validasi form, pengecekan kosong, validasi email, dan menampilkan pesan kesalahan dalam JavaScript"
+order: 7
+---
+
+## Pengertian Form Validation
+
+**Form Validation** adalah proses memeriksa dan memastikan data yang dimasukkan pengguna ke dalam formulir (form) sudah sesuai dengan ketentuan sebelum data diproses atau dikirimkan. Tujuannya untuk memastikan data yang diterima memiliki format dan isi yang benar. Contohnya:
+
+- Nama tidak boleh kosong
+- Form email harus menggunakan email yang benar
+- Password harus memenuhi ketentuan tertentu
+- Nomor telepon hanya boleh berisi angka
+- Pengguna harus mengisi seluruh kolom yang wajib diisi
+
+Form validation sangat penting dalam pengembangan web, terutama pada fitur pendaftaran akun, login, pemesanan produk, dan pengisian data pengguna.
+
+## Mengambil Nilai Input
+
+Sebelum melakukan valdasi, tentu kita perlu mengambil nilai yang dimasukkan pengguna ke dalam elemen input HTML. JavaScript menyediakan `.value` untuk mengambil nilai dari sebuah elemen input.
+
+Contoh HTML:
+
+```html
+<input type="text" id="nama" placeholder="Masukkan nama" />
+
+<button id="proses">Proses</button>
+```
+
+Kode JavaScript:
+
+```javascript
+const nama = document.getElementById("nama");
+const tombol = document.getElementById("proses");
+
+tombol.addEventListener("click", function () {
+  const nilaiNama = nama.value;
+
+  console.log(nilaiNama);
+});
+```
+
+Penjelasan:
+
+- `getElementById()` digunakan untuk mengambil elemen HTML
+- `.value` digunakan untuk mengambil nilai input
+- `console.log()` digunakan untuk menampilkan nilai pada Console Browser
+
+Jika pengguna mengetik nama di dalam kolom input nama, maka nilai yang diambil oleh JavaScript adalah nilai dari nama yang diinputkan.
+
+## Validasi Form
+
+Validasi form merupakan proses memeriksa data yang dimasukkan pengguna sebelum formulir dikirimkan. Untuk melakukan validasi, kita dapat menggunakan percabangan seperti `if`, `else if`, dan `else`. Contoh kasusnya pengguna harus mengisi nama sebelum formulir dapat diproses.
+
+```html
+<form id="form-pendaftaran">
+  <label>Nama Lengkap:</label>
+  <input type="text" id="nama" />
+
+  <button type="submit">Daftar</button>
+</form>
+
+<script>
+  const form = document.getElementById("form-pendaftaran");
+  const nama = document.getElementById("nama");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (nama.value === "") {
+      alert("Nama harus diisi!");
+    } else {
+      alert("Pendaftaran berhasil!");
+    }
+  });
+</script>
+```
+
+Penjelasan:
+
+1. JavaScript mengambil elemen form dan input nama
+2. `addEventListener("submit")` mendeteksi ketika formulir dikirim
+3. `event.preventDefault()` mencegah halaman melakukan reload
+4. Percabangan `if` memeriksa apakah nama sudah diisi
+5. Jika kosong, muncul pesan kesalahan
+6. Jika sudah diisi, muncul pesan berhasil
+
+## Pengecekan Input Kosong
+
+Salah satu validasi yang paling sering digunakan adalah memastikan pengguna tidak mengirimkan input kosong. Kita dapat menggunakan properti `.value` dan metode `.trim()`.
+
+**Apa itu trim()?**
+
+`trim()` merupakan metode JavaScript untuk menghapus spasi yang berada di awal dan akhir sebuah teks. Contohnya:
+
+```javascript
+let nama = "   Ibnu Ahmad   ";
+
+console.log(nama.trim());
+
+// Hasil: "Ibnu Ahmad"
+```
+
+Dengan `trim()`, kita dapat mencegah pengguna mengisi input hanya menggunakan spasi. Contoh penerapan:
+
+```javascript
+const nama = document.getElementById("nama");
+
+if (nama.value.trim() === "") {
+  console.log("Nama tidak boleh kosong!");
+} else {
+  console.log("Nama berhasil diisi!");
+}
+```
+
+## Validasi Email
+
+Validasi email digunakan untuk memastikan alaman email yang dimasukkan pengguna memiliki format yang sesuai. Contoh email yang benar:
+
+- ibnu@gmail.com
+- siswa123@yahoo.com
+- admin@sekolah.sch.id
+
+Contoh email yang salah:
+
+- ibnu
+- ibnu@gmail
+- @gmail.com
+
+Salah satu cara melakukan validasi email adalah menggunakan **Regular Expression (Regex)**. Merupakan pola khusus yang digunakan untuk mencocokkan atau memeriksa suatu teks.
+
+Contoh kode JavaScript:
+
+```javascript
+const email = document.getElementById("email");
+
+const polaEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!polaEmail.test(email.value)) {
+  console.log("Format email tidak valid!");
+} else {
+  console.log("Format email valid!");
+}
+``;
+```
+
+Penjelasan:
+
+- `polaEmail` menyimpan pola Regex untuk email.
+- `.test()` digunakan untuk memeriksa apakah teks sesuai dengan pola.
+- `!` digunakan sebagai operator negasi atau kebalikan.
+- Jika email tidak sesuai pola, JavaScript menampilkan pesan kesalahan.
+
+Regex tersebut merupakan pemeriksaan format dasar, bukan jaminan bahwa alamat email benar-benar ada atau dapat menerima pesan.
+
+## Menampilkan Pesan Kesalahan
+
+Dalam sebuah formulir, pesan kesalahan sebaiknya ditampilkan langsung pada halaman web agar pengguna mengetahui bagian mana yang perlu diperbaiki. Kita dapat menggunakan `textContent` untuk menampilkan pesan kesalahan ke dalam elemen HTML.
+
+Contoh HTML:
+
+```html
+<input type="text" id="nama" />
+
+<p id="pesan-error"></p>
+```
+
+Contoh JavaScript:
+
+```javascript
+const nama = document.getElementById("nama");
+const pesanError = document.getElementById("pesan-error");
+
+if (nama.value.trim() === "") {
+  pesanError.textContent = "Nama tidak boleh kosong!";
+} else {
+  pesanError.textContent = "";
+}
+```
+
+Penjelasan:
+
+- `textContent` digunakan untuk mengubah isi teks elemen HTML.
+- Jika input kosong, pesan kesalahan ditampilkan.
+- Jika input sudah benar, pesan kesalahan dihapus.
