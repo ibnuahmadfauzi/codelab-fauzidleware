@@ -1,0 +1,407 @@
+---
+title: "Local Storage dan Session Storage"
+description: "Belajar menyimpan, membaca, mengubah, dan menghapus data di browser menggunakan Web Storage API"
+order: 8
+---
+
+## Pengertian Web Storage API
+
+**Web Storage API** adalah fitur pada browser yang memungkinkan JavaScript menyimpan data secara lokal di dalam browser pengguna. Dengan Web Storage API, kita dapat menyimpan informasi tanpa harus selalu mengirimkannya ke server atau database. Contohnya:
+
+- Menyimpan nama pengguna
+- Menyimpan tema tampilan (Dark Mode atau Light Mode)
+- Menyimpan daftar tugas (Todo List)
+- Menyimpan keranjang belanja sementara
+- Menyimpan preferensi pengguna
+
+Web Storage API memilki dua jenis penyimpanan utama:
+
+- Local Storage
+- Session Storage
+
+Keduanya memiliki fungsi yang hampir sama, tetapi berbeda dalam hal masa penyimpanan data.
+
+## Perbedaan Local Storage dan Session Storage
+
+**Local Storage** digunakan untuk menyimpan data di browser yang tetap tersedia meskipun halaman ditutup atau browser dimuat ulang, sampai data tersebut dihapus.
+
+**Session Storage** digunakan untuk menyimpan data selama sesi halaman berlangsung. Data akan dihapus ketika tab atau jendela tempat data tersebut dibuat ulang.
+
+Berikut tabel perbedaannya:
+
+| Aspek                     | Local Storage                                      | Session Storage                   |
+| ------------------------- | -------------------------------------------------- | --------------------------------- |
+| Masa penyimpanan          | Tetap tersimpan sampai dihapus                     | Selama sesi tab berlangsung       |
+| Ketika halaman di-refresh | Data tetap ada                                     | Data tetap ada                    |
+| Ketika browser ditutup    | Data tetap ada                                     | Data dihapus ketika tab ditutup   |
+| Akss antar-tab            | Dapat diakses oleh halaman dengan origin yang sama | Terpisah untuk setiap konteks tab |
+| Kapastas                  | Umumnya sekitar 5-10 MB                            | Umumnya sekitar 5-10 MB           |
+| Penggunaan                | Preferensi pengguna                                | Data sementara dalam sesi         |
+
+Kapasitas penyimpanan bergantung pada browser. Local Storage dan Session Storage hanya dapat diakses oleh halaman dengan origin yang sama (protokol, domain, dan port yang sama).
+
+## Mengenal Web Storage API
+
+JavaScript menyediakan dua objek utama untuk mengakses Web Storage API:
+
+- `localStorage` untuk mengelola Local Storage
+- `sessionStorage` untuk mengelola Session Storage
+
+Keduanya memiliki metode yang sama, yaitu:
+
+| Metode         | Fungsi                                |
+| -------------- | ------------------------------------- |
+| `setItem()`    | Menyimpan data                        |
+| `getItem()`    | Membaca atau mengambil data           |
+| `removeItem()` | Menghapus data berdasarkan nama key   |
+| `clear()`      | Menghapus seluruh data dalam storage  |
+| `key()`        | Mengambil nama key berdasarkan indeks |
+
+Untuk memahami penggunaannya, kita akan mempelajari setiap metode.
+
+## Menyimpan Data (setItem)
+
+Metode `setItem()` digunakan untuk menyimpan data ke dalam Local Storage atay Session Storage.
+
+Sintaks dasarnya:
+
+```javascript
+localStorage.setItem("key", "value");
+```
+
+Keterangan:
+
+- `localStorage` : Tempat penyimpanan data
+- `setItem()` : Metode untuk menyimpan data
+- `key` : Nama atau identitas data
+- `value` : Isi data yang disimpan
+
+Berikut contoh penggunaan Local Storage untuk menyimpan nama pengguna ataupun dalam Session Storage:
+
+```javascript
+localStorage.setItem("nama", "Ibnu Ahmad");
+sessionStorage.setItem("nama", "Ibnu Fauzi");
+```
+
+Kita dapat melihat hasil penyimpanan melalui Browser Developer Tools:
+
+1. Buka halaman web
+2. Tekan tombol `F12`
+3. Pilih tab Application (Chrome)
+4. Cari bagian Storage
+5. Pilih Local Storage atau Session Storage
+
+![Ilustrasi JavaScript](/images/javascript/jm-9.png)
+
+![Ilustrasi JavaScript](/images/javascript/jm-10.png)
+
+## Membaca Data (getItem)
+
+Metode `getItem()` digunakan untuk mengambil data yang sebelumnya telah disimpan.
+
+Sintaks dasarnya:
+
+```javascript
+localStorage.getItem("key");
+```
+
+Contohnya:
+
+```javascript
+// menyimpan data
+localStorage.setItem("nama", "Ibnu Ahmad Fauzi");
+
+// mengambil data
+const nama = localStorage.getItem("nama");
+
+// menampilkan data
+console.log(nama);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-11.png)
+
+Jika key yang diminta belum tersedia, `getItem()` akan mengembalikan nilai `null`.
+
+## Mengubah Data (setItem)
+
+Untuk mengubah data yang sudah tersimpan, kita tidak perlu menggunakan metode khusus. Cukup gunakan kembali `setItem()` dengan key yang sama dan value yang baru. Berikut contohnya:
+
+```javascript
+// menyimpan data
+localStorage.setItem("nama", "Ibnu Ahmad Fauzi");
+
+// mengambil data
+let nama = localStorage.getItem("nama");
+
+// menampilkan data
+console.log(nama);
+
+// mengubah data
+localStorage.setItem("nama", "Ibnu Fauzi (Baru)");
+
+// mengambil kembali data
+nama = localStorage.getItem("nama");
+
+// menampilkan data
+console.log(nama);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-12.png)
+
+## Menghapus Data (removeItem)
+
+Metode `removeItem()` digunakan untuk menghapus satu data berdasarkan nama key.
+
+Sintaks dasarnya:
+
+```javascript
+localStorage.removeItem("key");
+```
+
+Contohnya:
+
+```javascript
+// menyimpan data
+localStorage.setItem("nama", "Ibnu Ahmad Fauzi");
+
+// mengambil data
+let nama = localStorage.getItem("nama");
+
+// menampilkan data
+console.log(nama);
+
+// mengubah data
+localStorage.setItem("nama", "Ibnu Fauzi (Baru)");
+
+// mengambil kembali data
+nama = localStorage.getItem("nama");
+
+// menampilkan data
+console.log(nama);
+
+// menghapus data
+localStorage.removeItem("nama");
+
+// mengambil kembali data
+nama = localStorage.getItem("nama");
+
+// menampilkan data
+console.log(nama);
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-13.png)
+
+Seperti yang sudah dijelaskan sebelumnya, jika mengambil `key` yang sudah tidak ada maka menghasilkan nilai `null`.
+
+## Menghapus Seluruh Data (clear)
+
+Selain menghapus satu data, kita juga dapat menghapus seluruh data yang tersimpan menggunakan metode `clear()`. Berikut contohnya:
+
+```javascript
+localStorage.setItem("nama", "Ibnu");
+localStorage.setItem("email", "ibnu@gmail.com");
+localStorage.setItem("kelas", "XI RPL");
+
+// menghapus seluruh data
+localStorage.clear();
+```
+
+Setelah `clear()` dijalankan, seluruh data dalam Local Storage untuk origin tersebut akan dihapus. Metode ini menghapus semua data dalam storage yang sedang digunakan, bukan hanya miliki satu fitur aplikasi.
+
+## Menyimpan Data Berupa Object dan Array
+
+Salah satu hal penting dalam web storage API adalah Local Storage dan Session Storage hanya menyimpan data dalam bentuk string. Lalu bagaimana jika kita ingin menyimpan Object atau Array ?.
+
+JavaScript menyediakan dua metode untuk menangani kebutuhan tersebut:
+
+- `JSON.stringify()` : Mengubah Object atau Array menjadi string JSON
+- `JSON.parse()` : Mengubah string JSON kembali menjadi Object atau Array
+
+Contoh mengubah object menjadi string dan menyimpannya ke dalam Local Storage:
+
+```javascript
+const siswa = {
+  nama: "Ibnu Ahmad",
+  kelas: "XI RPL",
+  jurusan: "Pengembangan Perangkat Lunak dan Gim",
+};
+
+// Mengubah object menjadi JSON string
+const dataSiswa = JSON.stringify(siswa);
+
+// Menyimpan ke Local Storage
+localStorage.setItem("siswa", dataSiswa);
+
+// Menampilkan string Object
+console.log(localStorage.getItem("siswa"));
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-14.png)
+
+Jika mau mengubahnya kembali menjadi object, bisa lakukan seperti berikut ini:
+
+```javascript
+const siswa = {
+  nama: "Ibnu Ahmad",
+  kelas: "XI RPL",
+  jurusan: "Pengembangan Perangkat Lunak dan Gim",
+};
+
+// Mengubah object menjadi JSON string
+const dataSiswa = JSON.stringify(siswa);
+
+// Menyimpan ke Local Storage
+localStorage.setItem("siswa", dataSiswa);
+
+// Menampilkan string Object
+console.log(localStorage.getItem("siswa"));
+
+// Menampilkan object setelah parse()
+console.log(JSON.parse(localStorage.getItem("siswa")));
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-15.png)
+
+Itu juga bisa kita implementasikan ke data Array yang mau disimpan ke Local Storage.
+
+## Latihan Aplikasi Catatan Sederhana
+
+Sekarang kita akan membuat proyek sederhana untuk menggabungkan materi Web Storage API.
+
+Aplikasi yang kita buat memiliki fitur:
+
+1. Menambahkan catatan
+2. Menampilkan daftar catatan
+3. Menyimpan catatan ke Local Storage
+4. Memuat catatan ketika halaman dibuka kembali
+5. Menghapus catatan
+
+Berikut kode HTML dan CSS nya:
+
+```html
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Aplikasi Catatan</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 500px;
+        margin: 50px auto;
+      }
+
+      input {
+        width: 70%;
+        padding: 10px;
+      }
+
+      button {
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      li {
+        margin: 10px 0;
+      }
+
+      .hapus {
+        background: red;
+        color: white;
+        border: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Aplikasi Catatan</h2>
+
+    <input type="text" id="catatan" placeholder="Tulis catatan..." />
+
+    <button id="tambah">Tambah</button>
+
+    <ul id="daftar-catatan"></ul>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+Berikut kode JavaScript nya:
+
+```javascript
+// Mengambil elemen HTML
+const input = document.getElementById("catatan");
+const tombol = document.getElementById("tambah");
+const daftar = document.getElementById("daftar-catatan");
+
+// Mengambil data dari Local Storage
+let catatan = JSON.parse(localStorage.getItem("catatan")) || [];
+
+// Fungsi menampilkan catatan
+function tampilkanCatatan() {
+  daftar.innerHTML = "";
+
+  catatan.forEach(function (item, index) {
+    const li = document.createElement("li");
+
+    li.textContent = item + " ";
+
+    const tombolHapus = document.createElement("button");
+
+    tombolHapus.textContent = "Hapus";
+    tombolHapus.className = "hapus";
+
+    tombolHapus.addEventListener("click", function () {
+      catatan.splice(index, 1);
+
+      simpanCatatan();
+    });
+
+    li.appendChild(tombolHapus);
+
+    daftar.appendChild(li);
+  });
+}
+
+// Fungsi menyimpan catatan
+function simpanCatatan() {
+  localStorage.setItem("catatan", JSON.stringify(catatan));
+
+  tampilkanCatatan();
+}
+
+// Event menambahkan catatan
+tombol.addEventListener("click", function () {
+  const nilai = input.value.trim();
+
+  if (nilai === "") {
+    alert("Catatan tidak boleh kosong!");
+    return;
+  }
+
+  catatan.push(nilai);
+
+  input.value = "";
+
+  simpanCatatan();
+});
+
+// Menampilkan catatan ketika halaman dibuka
+tampilkanCatatan();
+```
+
+Berikut tampilan hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-16.png)
