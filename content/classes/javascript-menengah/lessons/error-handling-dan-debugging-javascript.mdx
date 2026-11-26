@@ -1,0 +1,324 @@
+---
+title: "Error Handling dan Debugging dalam JavaScript"
+description: "Belajar try...catch, throw, finally, membaca pesan error, dan debugging menggunakan Developer Tools"
+order: 9
+---
+
+## Pengertian Error Handling dan Debugging
+
+Dalam proses pengembangan aplikasi, terkadang kode JavaScript tidak berjalan ssuai dengan yang diharapkan. Hal ini dapat disebabkan oleh kesalahan penulisan kode, kesalahan logika, atau data yang tidak sesuai. Untuk mengatasi masalah tersebut, JavaScript menyediakan konsep **Error Handling dan Debugging**.
+
+**Error Handling** adalah proses menangani kesalahan (error) yang terjadi ketika program dijalankan agar aplikasi dapat memberikan respons yang tepat dan tidak langsung berhenti secara tidak terkendali.
+
+**Debugging** adalah proses mencari, memeriksa, dan memperbaiki kesalahan pada kode program agar aplikasi dapat berjalan sesuai dengan tujuan.
+
+Contoh kesalahan yang sering ditemukan:
+
+- Variabel belum didefinisikan
+- Kesalahan penulisan nama fungsi
+- Data yang dimasukkan tidak sesuai format
+- Kesalahan dalam memanggil elemen HTML
+- Kesalahan logika dalam perhitungan
+
+Error Handling dan Debugging sangat penting dalam pengembangan aplikasi web, karena membantu programmer menemukan masalah dan membuat aplikasi lebih stabil.
+
+## Mengenal Jenis-Jenis Error dalam JavaScript
+
+Sebelum mempelajari cara menangani error, kita perlu mengenal beberapa jenis kesalahan yang sering terjadi.
+
+| Jenis Error     | Pengertian                                             | Contoh                                        |
+| --------------- | ------------------------------------------------------ | --------------------------------------------- |
+| Syntax Error    | Kesalahan penulisan sintaks kode                       | Kurang tanda kurung atau kurung kurawal       |
+| Reference Error | Mengakses variabel yang tidak tersedia                 | Menggunakan variabel yang belum didefinisikan |
+| Type Error      | Operasi dilakukan pada tipe data yang tidak sesuai     | Memanggil fungsi dan nilai yang bukan fungsi  |
+| Range Error     | Nilai berada di luar rentang yang diperbolehkan        | Membuat array dengan panjang negatif          |
+| Logic Error     | Program berjalan tetapi menghasilkan output yang salah | Menggunakan operator matermatika yang keliru  |
+
+**Contoh Syntax Error:**
+
+```javascript
+console.log("Halo JavaScript"
+```
+
+Kode tersebut mengalami Syntax Error karena tanda kurung penutup tidak dituliskan.
+
+**Contoh Reference Error:**
+
+```javascript
+console.log(nama);
+```
+
+Jika variabel `nama` belum didefinisikan, JavaScript akan menghassilkan Reference Error.
+
+**Contoh Type Error:**
+
+```javascript
+const angka = 10;
+
+angka();
+```
+
+Kode tersebut menghasilkan Type Error karena variabel `angka` berisi angka, bukan fungsi yang dapat dipanggil.
+
+**Contoh Logic Error:**
+
+```javascript
+const angka1 = 10;
+const angka2 = 5;
+
+const hasil = angka1 - angka2;
+
+console.log(hasil);
+```
+
+Jika tujuan programmer adalah menjumlahkan kedua angka, penggunaan operator pengurangan merupakan kesalahan logika. Kode tetap berjalan, tetapi hasilnya tidak sesuai harapan.
+
+## Menggunakan try...catch
+
+`try...catch` merupaka struktur JavaScript yang digunakan untuk menangani error ketika program dijalankan. Struktur ini memungkinkan programmer menjalankan kode dan menangkap kesalahan jika terjadi masalah.
+
+**Sintaks dasar:**
+
+```javascript
+try {
+  // Kode yang berpotensi menghasilkan error
+} catch (error) {
+  // Kode untuk menangani error
+}
+```
+
+Penjelasan:
+
+- `try` : bagian yang berisi kode yang akan dijalankan
+- `catch` : bagian yang dijalankan jika terjadi error pada blok `try`
+- `error` : parameter yang berisi informasi mengenai kesalahan
+
+Contoh penggunaannya:
+
+```javascript
+try {
+  console.log(nama);
+} catch (error) {
+  console.log("Terjadi kesalahan!");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-17.png)
+
+Karena variabel `nama` belum didefinisikan, JavaScript akan menghasilkan Reference Error. Namun, error tersebut berhasil ditangkap oleh `catch`, sehingga program dapat menampilkan pesan kesalahan yang sudah ditentukan.
+
+Contoh menampilkan informasi error:
+
+```javascript
+try {
+  console.log(nama);
+} catch (error) {
+  console.log("Terjadi kesalahan!");
+  console.log(error);
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-18.png)
+
+Dengan menampilkan objek `error`, programmer dapat mengetahui jenis kesalahan yang terjadi.
+
+## Menggunakan throw
+
+`throw` digunakan untuk menghasilkan atau melempar error secara manual ketika suatu kondisi tertentu tidak terpenuhi. Dengan `throw`, programmer dapat menentukan sendiri kondisi yang dianggap sebagai kesalahan.
+
+Sintaks dasar:
+
+```javascript
+throw new Error("Pesan kesalahan");
+```
+
+Contoh:
+
+```javascript
+const umur = 15;
+
+if (umur < 17) {
+  throw new Error("Umur belum memenuhi syarat!");
+}
+
+console.log("Pendaftaran berhasil!");
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-19.png)
+
+Ketika kode dijalankan, JavaScript menghasilkan error karena nilai umur kurang dari 17. Kita juga dapat menggabungkan `throw` dengan `try...catch`. Berikut contohnya:
+
+```javascript
+try {
+  const umur = 15;
+
+  if (umur < 17) {
+    throw new Error("Umur belum memenuhi syarat!");
+  }
+
+  console.log("Pendaftaran berhasil!");
+} catch (error) {
+  console.log(error.message);
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-20.png)
+
+Penjelasan:
+
+1. JavaScript memeriksa variabel `umur`
+2. Jika umur kurang dari 17, `throw` menghasilkan error
+3. Error ditangkap oleh `catch`
+4. Pesan kesalahan ditampilkan menggunakan `error.message`
+
+## Menggunaka finally
+
+`finally` merupakan bagian dari struktur `try...catch` yang akan dijalankan setelah proses penanganan selesai, baik terjadi error maupun tidak.
+
+Sintaks dasarnya:
+
+```javascript
+try {
+  // Kode utama
+} catch (error) {
+  // Penanganan error
+} finally {
+  // Kode yang selalu dijalankan
+}
+```
+
+Contohnya:
+
+```javascript
+try {
+  console.log("Program sedang dijalankan");
+
+  const hasil = 10 / 2;
+
+  console.log(hasil);
+} catch (error) {
+  console.log("Terjadi kesalahan!");
+} finally {
+  console.log("Proses selesai");
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-21.png)
+
+Meskipun tidak error, bagian `finally` tetap dijalankan.
+
+Berikut tabel perbedaan fungsi masing-masing:
+
+| Struktur  | Fungsi                                            |
+| --------- | ------------------------------------------------- |
+| `try`     | Menjalankan kode utama                            |
+| `catch`   | Menangani error yang terjadi                      |
+| `throw`   | Menghasilkan error secara manual                  |
+| `finally` | Menjalankan kode setelah proses try-catch selesai |
+
+## Membaca Pesan Error
+
+Ketika terjadi kesalahan pada JavaScript, browser akan memberikan informasi mengenai error tersebut. Informasi ini dapat digunakan untuk mengetahui penyebab dan lokasi kesalahan.
+
+Contoh:
+
+```javascript
+try {
+  console.log(nama);
+} catch (error) {
+  console.log(error.name);
+  console.log(error.message);
+  console.log(error.stack);
+}
+```
+
+Hasilnya:
+
+![Ilustrasi JavaScript](/images/javascript/jm-22.png)
+
+JavaScript menyediakan beberapa properti penting dari objek Error.
+
+| Properti        | Fungsi                                            |
+| --------------- | ------------------------------------------------- |
+| `error.name`    | Menampilkan nama atau jenis error                 |
+| `error.message` | Menampilkan pesan kesalahan                       |
+| `error.stack`   | Menampilkan informasi jejak kode dan lokasi error |
+
+Contoh hasilnya seperti di atas.
+
+Untuk memahami pesan error, semisal kita menemukan pesan **ReferenceError: nama is not defined**:
+
+- `ReferenceError` : jenis kesalahan
+- `nama` : variabel yang bermasalah
+- `is not defined` : variabel tersebut belum didefinisikan
+
+Dari informasi tersebut, programmer dapat mencari bagian kode yang menggunakan variabel `nama` dan memperbaikinya.
+
+## Debugging Menggunakan Developer Tools
+
+**Developer Tools** adalah fitur bawaan browser yang digunakan untuk memeriksa, menganalisis, dan memperbaki aplikasi web.
+
+Developer Tools menyediakan beberapa fitur yang membantu proses debugging JavaScript. Untuk cara membuka DevTools sudah berkali-kali kita lakukan, sekaran kita akan bahas berbagai hal yang belum kita coba.
+
+**Menggunakan console.error()** : digunakan untuk menampilkan pesan kesalahan Console. Contohnya:
+
+```javascript
+console.error("Terjadi kesalahan pada aplikasi!");
+```
+
+Pesan akan ditampilkan dengan penanda visual error pada Console Browser:
+
+![Ilustrasi JavaScript](/images/javascript/jm-23.png)
+
+**Menggunakan console.warn()** : digunakan untuk menampilkan peringatan kepada programmer. Contohnya:
+
+```javascript
+console.warn("Data belum lengkap!");
+```
+
+Pesan tersebut berguna untuk memberikan informasi mengenai kondisi yang perlu diperhatikan:
+
+![Ilustrasi JavaScript](/images/javascript/jm-24.png)
+
+**Menggunakan debugger** : perintah JavaScript yang digunakan untuk menghentikan sementara eksekusi kode ketika Developer Tools terbuka. Contohnya:
+
+```javascript
+const angka1 = 10;
+const angka2 = 5;
+
+debugger;
+
+const hasil = angka1 + angka2;
+
+console.log(hasil);
+```
+
+Ketika program dijalankan dan Developer Tools terbuka, eksekusi akan berhenti pada baris `debugger`. Programer dapat memeriksa nilai variabel sebelum program dilanjutkan.
+
+![Ilustrasi JavaScript](/images/javascript/jm-25.png)
+
+**Menggunakan Breakpoints** : merupakan titik pemberhentian sementara pada baris kode tertentu. Dengan breakpoint, programmer dapat:
+
+- Menghentikan eksekusi pada baris tertentu
+- Memeriksa nilai variabel
+- Menjalankan kode baris demi baris
+- Menemukan bagian kode yang menyebabkan kesalahan
+
+Untuk menggunakannya:
+
+1. Buka Developer Tools
+2. Pilih tab Sources
+3. Buka file JavaScript yang ingin diperiksa
+4. Klik nomor baris untuk memasang breakpoint
+5. Jalankan kembali program
+6. Periksa nilai variabel pada bagian Scope
